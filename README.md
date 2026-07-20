@@ -8,7 +8,7 @@ folder containing its implementation, styles, tests, and usage notes.
 ## Status
 
 This project is in early development. Available components are `Button`,
-`Input`, `Card`, `Checkbox`, and `Textarea`.
+`Input`, `Card`, `Checkbox`, `Textarea`, and `Select`.
 
 ## Installation
 

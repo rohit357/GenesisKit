@@ -10,3 +10,5 @@ export { Checkbox } from "./components/Checkbox";
 export type { CheckboxProps, CheckboxSize } from "./components/Checkbox";
 export { Textarea } from "./components/Textarea";
 export type { TextareaProps, TextareaResize, TextareaSize } from "./components/Textarea";
+export { Select } from "./components/Select";
+export type { SelectProps, SelectSize } from "./components/Select";
