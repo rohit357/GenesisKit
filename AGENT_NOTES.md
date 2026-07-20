@@ -13,6 +13,18 @@ Repo: https://github.com/rohit357/GenesisKit
 
 - **Review cadence:** after every dev step, STOP + wait for user review. No batching.
 - **Component folder pattern (keep this, scale it):** each component = isolated folder with `X.tsx` + `X.types.ts` + `X.css` + `X.test.tsx` + `index.ts` + `README.md`.
+- **`main` must always remain releasable.** Never commit or push if any of these fail: tests, build, lint, format, GitHub Actions / CI. `npm run check` covers all local gates — run it before every commit.
+- **Git workflow (user runs git themselves; agent supplies commands):**
+
+  ```bash
+  git status
+  git add .
+  git diff --cached   # ALWAYS review staged diff before committing
+  git commit -m "<meaningful conventional commit>"
+  git push origin main
+  ```
+
+  Caution: `git add .` stages everything — repo has untracked user files (THEMING.md, src/theme.css, src/tokens.css) that must NOT be committed until user says so. Prefer explicit `git add <paths>`; if using `git add .`, the `git diff --cached` review is mandatory.
 - Full plan: see `ROADMAP.md`.
 
 ## Naming seam (known debt)
@@ -58,13 +70,14 @@ npm run check       # ALL of the above (incl format:check) — MUST match CI. Ru
 Button, Input, Card, Checkbox, Textarea, Select, Badge, Alert, Spinner,
 Avatar, Switch, RadioGroup, Tabs, Dialog.
 
-## Next milestones (from ROADMAP)
+## Next milestones (from ROADMAP — renumbered 2026-07-20 after plan merge)
 
 2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. ~~RadioGroup (fallback name + required)~~ DONE. Remaining: Select (placeholder/chevron), Card (heading level), Tabs (manual activation + keepMounted).
-3. Token v2 + real dark mode + new schemes (soft/sharp/glass) + `createTheme`.
-4. Shared internals (~~Portal, useFocusTrap~~ DONE, useControllableState next) → new components (forms, overlays).
-5. Storybook + docs + visual tests.
-6. Phase C/D components + release pipeline + v1.0.
+3. Consistency + release readiness: unify `oui-`/`gk-` prefix (mechanical sweep, BEFORE new components), `"use client"` strategy, publint/attw/`npm pack` review, Changesets bootstrap.
+4. Token v2 + real dark mode + new schemes (soft/sharp/glass) + `createTheme` + density modes.
+5. Shared internals (~~Portal, useFocusTrap~~ DONE; useControllableState, useDismiss, positioning next) + `new:component` generator → Phase A/B components.
+6. Storybook (doubles as public demo site) + docs + a11y CI + visual regression + `examples/next` + `examples/vite`.
+7. Phase C/D components + release pipeline hardening + README/marketing/launch → v1.0.
 
 ## Progress log (cont.)
 
@@ -83,4 +96,20 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - +2 tests (name auto-gen, required). 50 tests total.
 - Full `npm run check` passes (incl format + build).
 - NOT committed.
+
+### 2026-07-20 — Plan merge (docs only, no code)
+
+- User supplied external suggestion list; merged into ROADMAP.md + this file. No overwrite — additions only.
+- Already-covered suggestions (no change needed): Storybook w/ theme switching, docs site, CI, README badges/gallery, component generator, Changesets, phased components, a11y priority.
+- New in plan: Storybook doubles as public demo site (no separate demo app); a11y CI (vitest-axe / Storybook+axe) + bundle-size + export-hygiene as later CI additions; visual regression (Chromatic or Playwright screenshots) after Storybook; publint + @arethetypeswrong/cli + `npm pack --dry-run` for package readiness; `examples/next` + `examples/vite` apps; versioning discipline + explicit v1.0 criteria; density modes; extensibility note (hooks/utils/layout/blocks keep folder pattern).
+- **Order change (only one):** new milestone 3 "Consistency + release readiness" — prefix unification + `"use client"` + package checks + Changesets bootstrap — pulled AHEAD of token v2. Reason: prefix sweep is mechanical, cost grows with every new component/theme; token v2 touches all CSS anyway, cheaper after names settle. Everything else keeps original order (correctness/a11y still first).
+- Marketing/launch stays LAST (milestone 7) — nothing to market before docs + stable API.
+
+### 2026-07-20 — Plan merge round 2 (docs only, no code)
+
+- Added to ROADMAP: **Publish checklist** (8 steps: check → pack → publint → attw → verify exports/types → test tarball in examples/next + examples/vite → GitHub Release → publish) under §4.
+- Added: dedicated docs website (e.g. `docs.genesiskit.dev`) as long-term item — Storybook stays playground; docs site owns install/guides/theming/API ref/migrations/CLI docs.
+- Added: **Post-v1.0** section — `npx genesiskit add button` CLI (shadcn-style copy-in). Gated on stable APIs + unified prefix + docs site. NOT before v1.0.
+- Added to this file: repo rule "`main` always releasable" + git workflow with mandatory `git diff --cached` review (and `git add .` caution re: untracked user theme files).
+- No milestone order change this round.
 

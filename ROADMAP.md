@@ -78,23 +78,78 @@ the rebrand (`oui-` CSS classes vs `gk-` tokens).
 
 ## 4. Tooling, docs & GitHub presence
 
-- Storybook (every component × every theme) → GitHub Pages.
-- Docs site with live theme switcher and generated props tables.
-- GitHub Actions CI: typecheck + lint + test + build + a11y + bundle-size.
-- Changesets release automation.
-- ESLint + Prettier + Stylelint.
-- `.github` templates + a `npm run new:component` generator.
-- README glow-up: hero, badges, theme gallery, StackBlitz playground.
+- Storybook (every component × every theme, with a theme-switcher toolbar) →
+  GitHub Pages. This doubles as the public demo site — one deploy, no separate
+  demo app to maintain.
+- Docs site with live theme switcher and generated props tables. Long-term:
+  a dedicated documentation website (e.g. `docs.genesiskit.dev`) separate
+  from Storybook — Storybook stays the live component playground; the docs
+  site owns installation, guides, theming, API reference, migration guides,
+  and CLI documentation.
+- GitHub Actions CI: typecheck + lint + format-check + test + build
+  _(live — `.github/workflows/ci.yml`)_; later add a11y (vitest-axe or
+  Storybook test-runner + axe), bundle-size, and export-hygiene checks.
+- Visual regression testing once Storybook exists (Chromatic free tier, or
+  Playwright screenshot tests in CI as the zero-cost fallback).
+- Changesets release automation + versioning discipline: semver from v0.x,
+  every user-facing change gets a changeset, `CHANGELOG.md` generated,
+  npm publish via CI on tagged release. v1.0 criteria: prefix unified, a11y
+  audit list closed, token v2 shipped, docs live, zero known API breaks
+  pending.
+- npm package readiness: `publint` + `@arethetypeswrong/cli` + `npm pack
+  --dry-run` review; verify `exports` map, `files` whitelist, `sideEffects`
+  flag for CSS, README/LICENSE included.
+
+### Publish checklist (run before every npm release)
+
+1. `npm run check` — full local gate (typecheck, lint, format, test, build).
+2. `npm pack` — inspect the tarball contents.
+3. `publint` — package.json / exports correctness.
+4. `attw` (`@arethetypeswrong/cli`) — type-resolution across module systems.
+5. Verify exports & types manually (`exports` map, `d.ts` entry points).
+6. Test the packed tarball locally in Next.js (`examples/next`) and Vite
+   (`examples/vite`).
+7. Create a GitHub Release (tag + changelog notes).
+8. `npm publish`.
+- ESLint + Prettier _(live)_ + Stylelint.
+- `.github` templates + a `npm run new:component` generator that scaffolds
+  the standard folder (`X.tsx` + `X.types.ts` + `X.css` + `X.test.tsx` +
+  `index.ts` + `README.md`) and registers exports.
+- Example apps in `examples/` — `examples/next` (App Router, exercises
+  `"use client"` strategy) and `examples/vite` (plain React). Smoke-test
+  real-world usage of the built package.
+- README glow-up: hero, badges (CI, npm version, license, bundle size),
+  screenshots/GIFs of components per theme, theme gallery, StackBlitz
+  playground.
 
 ## 5. Execution order
 
-1. **Foundation sweep** — unify prefix, extract utils, add lint/CI,
-   `"use client"`, package.json metadata. _(in progress)_
-2. Fix the a11y audit list (Dialog, RadioGroup, Select, Card, Tabs).
-3. Token v2 + real dark mode + `soft`/`sharp` schemes + `createTheme`.
-4. Shared overlay internals → Phase A + B components.
-5. Storybook + docs + visual tests.
-6. Phase C/D + release pipeline + README/marketing → v1.0.
+1. **Foundation sweep** — extract utils, add lint/CI, package.json metadata.
+   _(done; leftovers → step 3: prefix unification, `"use client"`)_
+2. Fix the a11y audit list — Dialog _(done)_, RadioGroup _(done)_, Select,
+   Card, Tabs.
+3. **Consistency + release readiness** — unify `oui-`/`gk-` prefix (one
+   mechanical sweep across classes + tokens, before any new components),
+   `"use client"` strategy, npm package readiness checks (publint /
+   attw / pack review), Changesets bootstrap. Cheap now, expensive after
+   more components exist.
+4. Token v2 + real dark mode + `soft`/`sharp` schemes + `createTheme` +
+   density modes.
+5. Shared overlay internals (`Portal` + `useFocusTrap` done;
+   `useControllableState`, `useDismiss`, positioning next) +
+   `new:component` generator → Phase A + B components.
+6. Storybook (= demo site) + docs + a11y CI + visual tests +
+   `examples/next` + `examples/vite`.
+7. Phase C/D + release pipeline hardening + README/marketing/launch → v1.0.
+
+### Post-v1.0 (long-term, only after the library is stable)
+
+- **CLI** — `npx genesiskit add button` copies a component's folder into a
+  consumer app (shadcn-style). Depends on stable component APIs + unified
+  prefix + docs site for CLI documentation. Do not start before v1.0.
 
 Each step keeps the per-component folder convention — that convention is the
-thing to scale, not replace.
+thing to scale, not replace. Future extensibility rides on the same pattern:
+public hooks (`useToast`, `useControllableState`), a small utility layer
+(`src/utils`), layout primitives, then boilerplate blocks/templates — each
+still one isolated folder.
