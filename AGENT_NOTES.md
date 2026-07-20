@@ -72,7 +72,7 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 
 ## Next milestones (from ROADMAP — renumbered 2026-07-20 after plan merge)
 
-2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. ~~RadioGroup (fallback name + required)~~ DONE. ~~Select (placeholder/chevron)~~ DONE. Remaining: Card (heading level), Tabs (manual activation + keepMounted).
+2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. ~~RadioGroup (fallback name + required)~~ DONE. ~~Select (placeholder/chevron)~~ DONE. ~~Card (heading level + labelled section)~~ DONE. Remaining: Tabs (manual activation + keepMounted).
 3. Consistency + release readiness: unify `oui-`/`gk-` prefix (mechanical sweep, BEFORE new components), `"use client"` strategy, publint/attw/`npm pack` review, Changesets bootstrap.
 4. Token v2 + real dark mode + new schemes (soft/sharp/glass) + `createTheme` + density modes.
 5. Shared internals (~~Portal, useFocusTrap~~ DONE; useControllableState, useDismiss, positioning next) + `new:component` generator → Phase A/B components.
@@ -119,6 +119,15 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - Uncontrolled + placeholder + no defaultValue → component supplies `defaultValue=""` so placeholder is what renders first. Explicit `defaultValue`/`value` still win.
 - Custom chevron: `appearance: none` + inline-SVG `background-image` (slate #475569, right-aligned), extra right padding per size (sm/md/lg) so text never overlaps arrow. Cross-browser consistent (was native OS arrow).
 - Updated `placeholder` JSDoc. +2 tests (placeholder default-selected + unselectable; explicit defaultValue wins). 52 tests total.
+- Full `npm run check` passes.
+- NOT committed.
+
+### 2026-07-20 — Milestone 2 step 4: Card (DONE, verified green)
+
+- New `headingLevel` prop (2–6, default 2) → title renders as matching `h*`, cards fit page outline (nested cards no longer force h2).
+- New `as` prop (`div` | `section` | `article`, default `div`).
+- **aria-labelledby fix:** was always set on role-less div (no effect for AT, misleading). Now only wired when `as="section"`/`"article"` (elements with a role that accepts a name). Default div gets none.
+- Updated 1 test (div no longer has aria-labelledby), +2 tests (section region named by title; headingLevel renders h3). 54 tests total.
 - Full `npm run check` passes.
 - NOT committed.
 

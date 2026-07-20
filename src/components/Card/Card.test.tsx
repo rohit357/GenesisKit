@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { Card } from "./Card";
 
 describe("Card", () => {
-  it("renders a titled content card with accessible title wiring", () => {
+  it("renders a titled content card without stray aria wiring on a div", () => {
     render(
       <Card title="Account settings" description="Manage your profile.">
         <p>Profile details</p>
@@ -13,12 +13,33 @@ describe("Card", () => {
     );
 
     const card = screen.getByText("Profile details").closest(".oui-card");
-    expect(screen.getByRole("heading", { name: "Account settings" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Account settings" })).toBeInTheDocument();
     expect(screen.getByText("Manage your profile.")).toBeInTheDocument();
-    expect(card).toHaveAttribute("aria-labelledby");
-    expect(card?.getAttribute("aria-labelledby")).toBe(
+    // A role-less div gets no accessible name from aria-labelledby, so it is omitted.
+    expect(card).not.toHaveAttribute("aria-labelledby");
+  });
+
+  it("labels the region when rendered as a section", () => {
+    render(
+      <Card as="section" title="Account settings">
+        Profile details
+      </Card>
+    );
+
+    const region = screen.getByRole("region", { name: "Account settings" });
+    expect(region.getAttribute("aria-labelledby")).toBe(
       screen.getByRole("heading", { name: "Account settings" }).id
     );
+  });
+
+  it("supports a configurable heading level", () => {
+    render(
+      <Card title="Nested card" headingLevel={3}>
+        Content
+      </Card>
+    );
+
+    expect(screen.getByRole("heading", { level: 3, name: "Nested card" })).toBeInTheDocument();
   });
 
   it("supports header actions and footer content", () => {

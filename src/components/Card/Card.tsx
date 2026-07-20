@@ -10,6 +10,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       children,
       className,
       title,
+      headingLevel = 2,
+      as: Element = "div",
       description,
       headerAction,
       footer,
@@ -22,21 +24,25 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     const generatedTitleId = useId();
     const titleId = title ? `oui-card-title-${generatedTitleId}` : undefined;
     const hasHeader = Boolean(title || description || headerAction);
+    const Heading = `h${headingLevel}` as const;
+    // aria-labelledby only helps when the element has a role; a plain div
+    // exposes no accessible name, so only wire it for section/article.
+    const labelledBy = Element === "div" ? undefined : titleId;
 
     return (
-      <div
+      <Element
         ref={ref}
         className={cx("oui-card", `oui-card--${padding}`, `oui-card--${variant}`, className)}
-        aria-labelledby={titleId}
+        aria-labelledby={labelledBy}
         {...props}
       >
         {hasHeader && (
           <header className="oui-card__header">
             <div className="oui-card__heading">
               {title && (
-                <h2 className="oui-card__title" id={titleId}>
+                <Heading className="oui-card__title" id={titleId}>
                   {title}
-                </h2>
+                </Heading>
               )}
               {description && <div className="oui-card__description">{description}</div>}
             </div>
@@ -47,7 +53,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         <div className="oui-card__content">{children}</div>
 
         {footer && <footer className="oui-card__footer">{footer}</footer>}
-      </div>
+      </Element>
     );
   }
 );
