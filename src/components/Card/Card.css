@@ -1,0 +1,76 @@
+.oui-card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  box-sizing: border-box;
+  color: #172033;
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.oui-card--elevated {
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+}
+
+.oui-card--outlined {
+  border: 1px solid #cbd5e1;
+}
+
+.oui-card--sm {
+  padding: 1rem;
+}
+
+.oui-card--md {
+  padding: 1.5rem;
+}
+
+.oui-card--lg {
+  padding: 2rem;
+}
+
+.oui-card__header {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.oui-card__heading {
+  min-width: 0;
+}
+
+.oui-card__title {
+  color: #0f172a;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.oui-card__description {
+  color: #475569;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  margin-top: 0.375rem;
+}
+
+.oui-card__action {
+  flex: 0 0 auto;
+}
+
+.oui-card__content {
+  flex: 1;
+}
+
+.oui-card__header + .oui-card__content {
+  margin-top: 1.25rem;
+}
+
+.oui-card__footer {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+}
+

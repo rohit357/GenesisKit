@@ -7,8 +7,8 @@ folder containing its implementation, styles, tests, and usage notes.
 
 ## Status
 
-This project is in early development. Available components are `Button` and
-`Input`.
+This project is in early development. Available components are `Button`,
+`Input`, and `Card`.
 
 ## Installation
 
