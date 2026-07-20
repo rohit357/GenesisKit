@@ -7,7 +7,8 @@ folder containing its implementation, styles, tests, and usage notes.
 
 ## Status
 
-This project is in early development. The first component is `Button`.
+This project is in early development. Available components are `Button` and
+`Input`.
 
 ## Installation
 
@@ -49,4 +50,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 ## License
 
 MIT © open-ui-kit contributors
-
