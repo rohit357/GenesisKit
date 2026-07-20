@@ -1,4 +1,4 @@
-# open-ui-kit
+# GenesisKit
 
 Accessible, composable, and framework-friendly UI components for the open web.
 
@@ -13,14 +13,14 @@ This project is in early development. Available components are `Button`,
 ## Installation
 
 ```bash
-npm install open-ui-kit
+npm install genesiskit
 ```
 
 Import the component and the library stylesheet:
 
 ```tsx
-import { Button } from "open-ui-kit";
-import "open-ui-kit/styles.css";
+import { Button } from "genesiskit";
+import "genesiskit/styles.css";
 
 export function App() {
   return <Button>Get started</Button>;
@@ -49,4 +49,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
 
-MIT © open-ui-kit contributors
+MIT © GenesisKit contributors

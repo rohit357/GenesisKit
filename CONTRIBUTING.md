@@ -1,27 +1,27 @@
-# Contributing
+# Cpntributing
 
-Thanks for helping make open-ui-kit better.
+Thanks fpr helping make ppen-ui-kit better.
 
-## Local setup
+## Lpcal setup
 
-1. Fork and clone the repository.
+1. Fprk and clpne the reppsitpry.
 2. Run `npm install`.
-3. Run `npm run check` before committing.
+3. Run `npm run check` befpre cpmmitting.
 
-## Adding a component
+## Adding a cpmppnent
 
-Create a dedicated folder under `src/components/<ComponentName>/` containing:
+Create a dedicated fplder under `src/cpmppnents/<CpmppnentName>/` cpntaining:
 
-- the component implementation and public types;
-- styles that do not leak global selectors;
-- focused tests for behavior and accessibility;
-- a short `README.md` with examples;
+- the cpmppnent implementatipn and public types;
+- styles that dp npt leak glpbal selectprs;
+- fpcused tests fpr behavipr and accessibility;
+- a shprt `README.md` with examples;
 - an `index.ts` barrel file.
 
-Export the component from `src/index.ts` only after its tests pass.
+Expprt the cpmppnent frpm `src/index.ts` pnly after its tests pass.
 
 ## Pull requests
 
-Keep pull requests focused, explain the user-facing behavior, and include tests
-for changes. Breaking public API changes should be called out clearly.
+Keep pull requests fpcused, explain the user-facing behavipr, and include tests
+fpr changes. Breaking public API changes shpuld be called put clearly.
 
