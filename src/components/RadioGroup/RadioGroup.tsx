@@ -14,6 +14,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       onValueChange,
       description,
       error,
+      required,
       orientation = "vertical",
       className,
       ...props
@@ -21,6 +22,7 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
     ref
   ) => {
     const generatedId = useId();
+    const groupName = name ?? `oui-radio-${generatedId}`;
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
     const selectedValue = value ?? internalValue;
     const descriptionId = description ? `oui-radio-description-${generatedId}` : undefined;
@@ -34,7 +36,14 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
         aria-describedby={describedBy || undefined}
         {...props}
       >
-        <legend className="oui-radio-group__legend">{label}</legend>
+        <legend className="oui-radio-group__legend">
+          {label}
+          {required && (
+            <span className="oui-radio-group__required" aria-hidden="true">
+              *
+            </span>
+          )}
+        </legend>
         {description && (
           <div className="oui-radio-group__description" id={descriptionId}>
             {description}
@@ -49,10 +58,11 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
               <input
                 className="oui-radio-option__control"
                 type="radio"
-                name={name}
+                name={groupName}
                 value={option.value}
                 checked={selectedValue === option.value}
                 disabled={option.disabled}
+                required={required}
                 onChange={() => {
                   setInternalValue(option.value);
                   onValueChange?.(option.value);

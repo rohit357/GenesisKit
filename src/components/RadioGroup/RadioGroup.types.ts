@@ -13,11 +13,14 @@ export interface RadioGroupProps extends Omit<
 > {
   label: ReactNode;
   options: RadioOption[];
-  name: string;
+  /** Shared radio group name. Auto-generated if omitted. */
+  name?: string;
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
   description?: ReactNode;
   error?: ReactNode;
+  /** Marks the group required and shows a required indicator. */
+  required?: boolean;
   orientation?: "vertical" | "horizontal";
 }

@@ -47,4 +47,18 @@ describe("RadioGroup", () => {
     expect(group).toHaveAttribute("aria-describedby");
     expect(screen.getByRole("alert")).toHaveTextContent("A plan is required.");
   });
+
+  it("auto-generates a shared name when none is given", () => {
+    render(<RadioGroup label="Size" options={options} />);
+    const radios = screen.getAllByRole("radio") as HTMLInputElement[];
+    expect(radios[0].name).toBeTruthy();
+    expect(radios[0].name).toBe(radios[1].name);
+  });
+
+  it("marks radios required when required is set", () => {
+    render(<RadioGroup label="Size" options={options} required />);
+    for (const radio of screen.getAllByRole("radio")) {
+      expect(radio).toBeRequired();
+    }
+  });
 });

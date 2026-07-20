@@ -28,10 +28,12 @@ Rebrand OpenUI → GenesisKit left split:
 npm run typecheck   # tsc --noEmit
 npm run lint        # eslint .
 npm run format:check
-npm run test        # vitest run (46 tests)
+npm run test        # vitest run
 npm run build       # tsup
-npm run check       # all of the above
+npm run check       # ALL of the above (incl format:check) — MUST match CI. Run before every commit.
 ```
+
+**CI parity rule:** `npm run check` now includes `format:check`, so local green == CI green. Always run `npm run check` (not partial checks) before saying done. CI #2 went red because format:check was skipped locally — fixed by adding it to the check chain.
 
 ## Progress log
 
@@ -58,7 +60,7 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 
 ## Next milestones (from ROADMAP)
 
-2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. Remaining: Select (placeholder/chevron), Card (heading level), Tabs (manual activation + keepMounted), RadioGroup (fallback name + required).
+2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. ~~RadioGroup (fallback name + required)~~ DONE. Remaining: Select (placeholder/chevron), Card (heading level), Tabs (manual activation + keepMounted).
 3. Token v2 + real dark mode + new schemes (soft/sharp/glass) + `createTheme`.
 4. Shared internals (~~Portal, useFocusTrap~~ DONE, useControllableState next) → new components (forms, overlays).
 5. Storybook + docs + visual tests.
@@ -72,5 +74,13 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - `Dialog.tsx`: renders via Portal, uses useFocusTrap. Props + BEM classes unchanged → CSS + old tests intact. Kept Escape-to-close + close button + not-rendered-when-closed.
 - Added 2 tests: scroll-lock toggle, focus-into-dialog + return-to-trigger. 48 tests total.
 - **Portal design note:** renders immediately when `document` exists (no mount-gate), else null. Consumers gate on client `open` flag → mounts post-hydration. Earlier mount-gate caused ref-null-on-first-effect bug (trap never armed). Do NOT re-add useEffect mount gate.
+- NOT committed.
+
+### 2026-07-20 — CI gap fix + Milestone 2 step 2: RadioGroup (DONE, verified green)
+
+- **CI #2 red cause:** `format:check` skipped locally, CI runs it. Fix: added `npm run format:check` to `check` script chain. Now local `npm run check` == CI exact.
+- RadioGroup: `name` now optional → auto-gen `oui-radio-${useId}` fallback (radios never join page-global group). Added `required` prop → sets `required` on all radios + shows `*` indicator on legend (`.oui-radio-group__required`, danger color).
+- +2 tests (name auto-gen, required). 50 tests total.
+- Full `npm run check` passes (incl format + build).
 - NOT committed.
 
