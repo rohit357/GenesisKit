@@ -79,9 +79,7 @@ describe("Dialog", () => {
     const trigger = screen.getByRole("button", { name: "Open" });
     trigger.focus();
     await user.click(trigger);
-    expect(screen.getByRole("dialog")).toContainElement(
-      document.activeElement as HTMLElement
-    );
+    expect(screen.getByRole("dialog")).toContainElement(document.activeElement as HTMLElement);
     await user.click(screen.getByRole("button", { name: "Close dialog" }));
     expect(trigger).toHaveFocus();
   });
