@@ -1,0 +1,102 @@
+.oui-button {
+  --oui-button-bg: #2563eb;
+  --oui-button-fg: #ffffff;
+  --oui-button-border: transparent;
+  --oui-button-hover-bg: #1d4ed8;
+  --oui-button-focus-ring: rgb(37 99 235 / 35%);
+  align-items: center;
+  background: var(--oui-button-bg);
+  border: 1px solid var(--oui-button-border);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: var(--oui-button-fg);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-weight: 600;
+  gap: 0.5rem;
+  justify-content: center;
+  line-height: 1.25;
+  min-width: 5.5rem;
+  position: relative;
+  transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease,
+    color 150ms ease;
+}
+
+.oui-button:hover:not(:disabled) {
+  background: var(--oui-button-hover-bg);
+}
+
+.oui-button:focus-visible {
+  outline: 3px solid var(--oui-button-focus-ring);
+  outline-offset: 2px;
+}
+
+.oui-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.oui-button--sm {
+  font-size: 0.8125rem;
+  min-height: 2rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.oui-button--md {
+  font-size: 0.9375rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.oui-button--lg {
+  font-size: 1rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.oui-button--secondary {
+  --oui-button-bg: #ffffff;
+  --oui-button-fg: #1d4ed8;
+  --oui-button-border: #93c5fd;
+  --oui-button-hover-bg: #eff6ff;
+}
+
+.oui-button--ghost {
+  --oui-button-bg: transparent;
+  --oui-button-fg: #1d4ed8;
+  --oui-button-hover-bg: #eff6ff;
+}
+
+.oui-button--danger {
+  --oui-button-bg: #dc2626;
+  --oui-button-hover-bg: #b91c1c;
+}
+
+.oui-button__spinner {
+  animation: oui-button-spin 700ms linear infinite;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  height: var(--oui-button-loading-width);
+  width: var(--oui-button-loading-width);
+}
+
+.oui-button__label--loading {
+  opacity: 0.75;
+}
+
+@keyframes oui-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oui-button,
+  .oui-button__spinner {
+    animation-duration: 0.001ms;
+    transition-duration: 0.001ms;
+  }
+}
+
