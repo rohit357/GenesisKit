@@ -14,4 +14,3 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
   onValueChange?: (value: string) => void;
   orientation?: "horizontal" | "vertical";
 }
-

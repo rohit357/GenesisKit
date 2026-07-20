@@ -13,4 +13,3 @@ describe("Spinner", () => {
     expect(screen.getByTestId("spinner")).toHaveClass("oui-spinner--lg");
   });
 });
-

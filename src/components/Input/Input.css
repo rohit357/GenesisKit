@@ -31,7 +31,9 @@
   font: inherit;
   line-height: 1.25;
   outline: none;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
   width: 100%;
 }
 
@@ -97,4 +99,3 @@
     transition-duration: 0.001ms;
   }
 }
-

@@ -7,4 +7,3 @@ export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   description?: ReactNode;
   size?: SwitchSize;
 }
-

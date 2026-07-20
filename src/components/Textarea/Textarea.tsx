@@ -1,10 +1,8 @@
 import { forwardRef, useId } from "react";
 
 import type { TextareaProps } from "./Textarea.types";
+import { cx } from "../../utils/cx";
 import "./Textarea.css";
-
-const cx = (...classes: Array<string | false | undefined>) =>
-  classes.filter(Boolean).join(" ");
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
@@ -28,9 +26,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const textareaId = id ?? `oui-textarea-${generatedId}`;
     const descriptionId = description ? `${textareaId}-description` : undefined;
     const errorId = error ? `${textareaId}-error` : undefined;
-    const describedBy = [ariaDescribedBy, descriptionId, errorId]
-      .filter(Boolean)
-      .join(" ");
+    const describedBy = [ariaDescribedBy, descriptionId, errorId].filter(Boolean).join(" ");
 
     return (
       <div className={cx("oui-textarea-field", fullWidth && "oui-textarea-field--full-width")}>
@@ -77,4 +73,3 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 );
 
 Textarea.displayName = "Textarea";
-

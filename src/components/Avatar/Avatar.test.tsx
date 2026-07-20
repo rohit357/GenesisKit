@@ -20,4 +20,3 @@ describe("Avatar", () => {
     expect(screen.getByTestId("avatar")).toHaveClass("oui-avatar--lg", "oui-avatar--square");
   });
 });
-

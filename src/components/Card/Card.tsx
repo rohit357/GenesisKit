@@ -1,10 +1,8 @@
 import { forwardRef, useId } from "react";
 
 import type { CardProps } from "./Card.types";
+import { cx } from "../../utils/cx";
 import "./Card.css";
-
-const cx = (...classes: Array<string | false | undefined>) =>
-  classes.filter(Boolean).join(" ");
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   (
@@ -28,12 +26,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={cx(
-          "oui-card",
-          `oui-card--${padding}`,
-          `oui-card--${variant}`,
-          className
-        )}
+        className={cx("oui-card", `oui-card--${padding}`, `oui-card--${variant}`, className)}
         aria-labelledby={titleId}
         {...props}
       >
@@ -60,4 +53,3 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 
 Card.displayName = "Card";
-

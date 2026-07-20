@@ -17,9 +17,12 @@ describe("Alert", () => {
   it("supports dismissing", async () => {
     const user = userEvent.setup();
     const onDismiss = vi.fn();
-    render(<Alert dismissible onDismiss={onDismiss}>Notice</Alert>);
+    render(
+      <Alert dismissible onDismiss={onDismiss}>
+        Notice
+      </Alert>
+    );
     await user.click(screen.getByRole("button", { name: "Dismiss alert" }));
     expect(onDismiss).toHaveBeenCalledOnce();
   });
 });
-

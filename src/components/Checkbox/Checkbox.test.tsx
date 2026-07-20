@@ -55,4 +55,3 @@ describe("Checkbox", () => {
     expect(onChange).toHaveBeenCalledOnce();
   });
 });
-

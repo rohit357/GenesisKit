@@ -10,4 +10,3 @@ export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"
   onDismiss?: () => void;
   dismissLabel?: string;
 }
-

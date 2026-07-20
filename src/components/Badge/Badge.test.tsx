@@ -9,8 +9,11 @@ describe("Badge", () => {
   });
 
   it("supports visual variants, sizes, and attributes", () => {
-    render(<Badge variant="success" size="sm" title="Complete">Done</Badge>);
+    render(
+      <Badge variant="success" size="sm" title="Complete">
+        Done
+      </Badge>
+    );
     expect(screen.getByTitle("Complete")).toHaveClass("oui-badge--success", "oui-badge--sm");
   });
 });
-

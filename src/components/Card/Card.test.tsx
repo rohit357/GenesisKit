@@ -23,7 +23,11 @@ describe("Card", () => {
 
   it("supports header actions and footer content", () => {
     render(
-      <Card title="Projects" headerAction={<button type="button">Add project</button>} footer="3 projects">
+      <Card
+        title="Projects"
+        headerAction={<button type="button">Add project</button>}
+        footer="3 projects"
+      >
         Project list
       </Card>
     );

@@ -74,4 +74,3 @@ describe("Select", () => {
     expect(screen.getByTestId("language-select")).toBeDisabled();
   });
 });
-

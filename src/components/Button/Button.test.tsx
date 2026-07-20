@@ -41,4 +41,3 @@ describe("Button", () => {
     expect(button.querySelector(".oui-button__spinner")).toBeInTheDocument();
   });
 });
-

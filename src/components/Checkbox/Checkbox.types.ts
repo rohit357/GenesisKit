@@ -2,8 +2,10 @@ import type { InputHTMLAttributes, ReactNode } from "react";
 
 export type CheckboxSize = "sm" | "md";
 
-export interface CheckboxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
+export interface CheckboxProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "size" | "type"
+> {
   /** Visible label associated with the checkbox. */
   label: ReactNode;
   /** Supporting content shown below the checkbox label. */
@@ -15,4 +17,3 @@ export interface CheckboxProps
   /** Controls the checkbox and label sizing. */
   size?: CheckboxSize;
 }
-

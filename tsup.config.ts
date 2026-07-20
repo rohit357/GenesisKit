@@ -10,4 +10,3 @@ export default defineConfig({
   minify: false,
   external: ["react", "react-dom"]
 });
-

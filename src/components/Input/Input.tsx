@@ -1,9 +1,7 @@
 import { forwardRef, useId } from "react";
 import type { InputProps } from "./Input.types";
+import { cx } from "../../utils/cx";
 import "./Input.css";
-
-const cx = (...classes: Array<string | false | undefined>) =>
-  classes.filter(Boolean).join(" ");
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
@@ -25,9 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputId = id ?? `oui-input-${generatedId}`;
     const descriptionId = description ? `${inputId}-description` : undefined;
     const errorId = error ? `${inputId}-error` : undefined;
-    const describedBy = [ariaDescribedBy, descriptionId, errorId]
-      .filter(Boolean)
-      .join(" ");
+    const describedBy = [ariaDescribedBy, descriptionId, errorId].filter(Boolean).join(" ");
 
     return (
       <div className={cx("oui-field", fullWidth && "oui-field--full-width", className)}>

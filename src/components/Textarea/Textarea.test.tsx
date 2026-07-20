@@ -34,15 +34,7 @@ describe("Textarea", () => {
   it("supports custom rows, size, resize, required state, and refs", () => {
     const ref = createRef<HTMLTextAreaElement>();
     render(
-      <Textarea
-        id="bio"
-        label="Biography"
-        size="lg"
-        resize="none"
-        rows={6}
-        required
-        ref={ref}
-      />
+      <Textarea id="bio" label="Biography" size="lg" resize="none" rows={6} required ref={ref} />
     );
 
     const textarea = screen.getByRole("textbox", { name: /Biography/ });

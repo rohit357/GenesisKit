@@ -10,4 +10,3 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   size?: AvatarSize;
   shape?: AvatarShape;
 }
-

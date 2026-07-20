@@ -11,4 +11,3 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Shows a progress state and prevents interaction. */
   loading?: boolean;
 }
-

@@ -35,4 +35,3 @@ describe("Tabs", () => {
     expect(screen.getByRole("tab", { name: "Disabled" })).toBeDisabled();
   });
 });
-

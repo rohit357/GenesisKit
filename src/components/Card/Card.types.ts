@@ -17,4 +17,3 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, "title">
   /** Controls the card's surface treatment. */
   variant?: CardVariant;
 }
-

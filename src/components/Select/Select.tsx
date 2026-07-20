@@ -1,10 +1,8 @@
 import { forwardRef, useId } from "react";
 
 import type { SelectProps } from "./Select.types";
+import { cx } from "../../utils/cx";
 import "./Select.css";
-
-const cx = (...classes: Array<string | false | undefined>) =>
-  classes.filter(Boolean).join(" ");
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
@@ -28,9 +26,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const selectId = id ?? `oui-select-${generatedId}`;
     const descriptionId = description ? `${selectId}-description` : undefined;
     const errorId = error ? `${selectId}-error` : undefined;
-    const describedBy = [ariaDescribedBy, descriptionId, errorId]
-      .filter(Boolean)
-      .join(" ");
+    const describedBy = [ariaDescribedBy, descriptionId, errorId].filter(Boolean).join(" ");
 
     return (
       <div className={cx("oui-select-field", fullWidth && "oui-select-field--full-width")}>
@@ -46,7 +42,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           id={selectId}
-          className={cx("oui-select", `oui-select--${size}`, Boolean(error) && "oui-select--error", className)}
+          className={cx(
+            "oui-select",
+            `oui-select--${size}`,
+            Boolean(error) && "oui-select--error",
+            className
+          )}
           required={required}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy || undefined}
@@ -77,4 +78,3 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 );
 
 Select.displayName = "Select";
-

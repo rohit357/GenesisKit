@@ -10,7 +10,9 @@ const options = [
 
 describe("RadioGroup", () => {
   it("renders a labeled group and selected option", () => {
-    render(<RadioGroup label="Billing cycle" name="billing" options={options} defaultValue="monthly" />);
+    render(
+      <RadioGroup label="Billing cycle" name="billing" options={options} defaultValue="monthly" />
+    );
     expect(screen.getByRole("group", { name: "Billing cycle" })).toBeInTheDocument();
     expect(screen.getByRole("radio", { name: "Monthly" })).toBeChecked();
   });
@@ -18,17 +20,31 @@ describe("RadioGroup", () => {
   it("changes selection and notifies consumers", async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
-    render(<RadioGroup label="Billing cycle" name="billing" options={options} onValueChange={onValueChange} />);
+    render(
+      <RadioGroup
+        label="Billing cycle"
+        name="billing"
+        options={options}
+        onValueChange={onValueChange}
+      />
+    );
     await user.click(screen.getByRole("radio", { name: /Yearly/ }));
     expect(screen.getByRole("radio", { name: /Yearly/ })).toBeChecked();
     expect(onValueChange).toHaveBeenCalledWith("yearly");
   });
 
   it("connects descriptions and errors", () => {
-    render(<RadioGroup label="Plan" name="plan" options={options} description="Choose one." error="A plan is required." />);
+    render(
+      <RadioGroup
+        label="Plan"
+        name="plan"
+        options={options}
+        description="Choose one."
+        error="A plan is required."
+      />
+    );
     const group = screen.getByRole("group", { name: "Plan" });
     expect(group).toHaveAttribute("aria-describedby");
     expect(screen.getByRole("alert")).toHaveTextContent("A plan is required.");
   });
 });
-

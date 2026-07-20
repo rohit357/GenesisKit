@@ -2,10 +2,8 @@ import { forwardRef, useCallback, useEffect, useId, useRef } from "react";
 import type { InputHTMLAttributes } from "react";
 
 import type { CheckboxProps } from "./Checkbox.types";
+import { cx } from "../../utils/cx";
 import "./Checkbox.css";
-
-const cx = (...classes: Array<string | false | undefined>) =>
-  classes.filter(Boolean).join(" ");
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
@@ -28,9 +26,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const descriptionId = description ? `${inputId}-description` : undefined;
     const errorId = error ? `${inputId}-error` : undefined;
-    const describedBy = [ariaDescribedBy, descriptionId, errorId]
-      .filter(Boolean)
-      .join(" ");
+    const describedBy = [ariaDescribedBy, descriptionId, errorId].filter(Boolean).join(" ");
 
     const setInputRef = useCallback(
       (node: HTMLInputElement | null) => {
@@ -91,4 +87,3 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 );
 
 Checkbox.displayName = "Checkbox";
-

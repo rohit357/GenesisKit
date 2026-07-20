@@ -1,8 +1,7 @@
 import { forwardRef, useState } from "react";
 import type { AvatarProps } from "./Avatar.types";
 import "./Avatar.css";
-
-const cx = (...classes: Array<string | false | undefined>) => classes.filter(Boolean).join(" ");
+import { cx } from "../../utils/cx";
 
 const getInitials = (name: string) => {
   const words = name.trim().split(/\s+/).filter(Boolean);
@@ -16,12 +15,21 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
     const [imageFailed, setImageFailed] = useState(false);
     const label = alt ?? name;
     return (
-      <span ref={ref} className={cx("oui-avatar", `oui-avatar--${size}`, `oui-avatar--${shape}`, className)} role="img" aria-label={label} {...props}>
-        {src && !imageFailed ? <img src={src} alt="" aria-hidden="true" onError={() => setImageFailed(true)} /> : <span aria-hidden="true">{getInitials(name)}</span>}
+      <span
+        ref={ref}
+        className={cx("oui-avatar", `oui-avatar--${size}`, `oui-avatar--${shape}`, className)}
+        role="img"
+        aria-label={label}
+        {...props}
+      >
+        {src && !imageFailed ? (
+          <img src={src} alt="" aria-hidden="true" onError={() => setImageFailed(true)} />
+        ) : (
+          <span aria-hidden="true">{getInitials(name)}</span>
+        )}
       </span>
     );
   }
 );
 
 Avatar.displayName = "Avatar";
-

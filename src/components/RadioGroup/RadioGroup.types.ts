@@ -7,7 +7,10 @@ export interface RadioOption {
   disabled?: boolean;
 }
 
-export interface RadioGroupProps extends Omit<FieldsetHTMLAttributes<HTMLFieldSetElement>, "onChange"> {
+export interface RadioGroupProps extends Omit<
+  FieldsetHTMLAttributes<HTMLFieldSetElement>,
+  "onChange"
+> {
   label: ReactNode;
   options: RadioOption[];
   name: string;
@@ -18,4 +21,3 @@ export interface RadioGroupProps extends Omit<FieldsetHTMLAttributes<HTMLFieldSe
   error?: ReactNode;
   orientation?: "vertical" | "horizontal";
 }
-

@@ -2,10 +2,8 @@ import type { CSSProperties } from "react";
 import { forwardRef } from "react";
 
 import type { ButtonProps } from "./Button.types";
+import { cx } from "../../utils/cx";
 import "./Button.css";
-
-const cx = (...classes: Array<string | false | undefined>) =>
-  classes.filter(Boolean).join(" ");
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -47,4 +45,3 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
-

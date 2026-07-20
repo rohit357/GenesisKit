@@ -3,8 +3,7 @@ import type { ReactNode, TextareaHTMLAttributes } from "react";
 export type TextareaSize = "sm" | "md" | "lg";
 export type TextareaResize = "none" | "vertical" | "horizontal" | "both";
 
-export interface TextareaProps
-  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "rows"> {
+export interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "rows"> {
   /** Visible label associated with the textarea. */
   label: ReactNode;
   /** Supporting content shown below the textarea. */
@@ -20,4 +19,3 @@ export interface TextareaProps
   /** Number of visible text lines. */
   rows?: number;
 }
-

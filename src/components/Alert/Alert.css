@@ -1,13 +1,70 @@
-.oui-alert { align-items: flex-start; animation: oui-alert-enter 220ms ease-out both; border: 1px solid; border-radius: 0.75rem; display: flex; gap: 1rem; justify-content: space-between; line-height: 1.45; padding: 0.875rem 1rem; }
-.oui-alert__content { min-width: 0; }
-.oui-alert__title { font-weight: 800; margin-bottom: 0.125rem; }
-.oui-alert__message { font-size: 0.875rem; }
-.oui-alert__dismiss { background: transparent; border: 0; color: inherit; cursor: pointer; font: inherit; font-size: 1.25rem; line-height: 1; padding: 0.125rem; }
-.oui-alert__dismiss:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
-.oui-alert--info { background: #eff6ff; border-color: #93c5fd; color: #1e3a8a; }
-.oui-alert--success { background: #f0fdf4; border-color: #86efac; color: #166534; }
-.oui-alert--warning { background: #fffbeb; border-color: #fcd34d; color: #92400e; }
-.oui-alert--error { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
-@keyframes oui-alert-enter { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-@media (prefers-reduced-motion: reduce) { .oui-alert { animation: none; } }
-
+.oui-alert {
+  align-items: flex-start;
+  animation: oui-alert-enter 220ms ease-out both;
+  border: 1px solid;
+  border-radius: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  line-height: 1.45;
+  padding: 0.875rem 1rem;
+}
+.oui-alert__content {
+  min-width: 0;
+}
+.oui-alert__title {
+  font-weight: 800;
+  margin-bottom: 0.125rem;
+}
+.oui-alert__message {
+  font-size: 0.875rem;
+}
+.oui-alert__dismiss {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.125rem;
+}
+.oui-alert__dismiss:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+.oui-alert--info {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #1e3a8a;
+}
+.oui-alert--success {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #166534;
+}
+.oui-alert--warning {
+  background: #fffbeb;
+  border-color: #fcd34d;
+  color: #92400e;
+}
+.oui-alert--error {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+@keyframes oui-alert-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oui-alert {
+    animation: none;
+  }
+}

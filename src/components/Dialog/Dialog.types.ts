@@ -9,4 +9,3 @@ export interface DialogProps extends Omit<HTMLAttributes<HTMLDivElement>, "title
   closeLabel?: string;
   closeOnOverlayClick?: boolean;
 }
-

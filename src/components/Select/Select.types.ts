@@ -2,8 +2,7 @@ import type { ReactNode, SelectHTMLAttributes } from "react";
 
 export type SelectSize = "sm" | "md" | "lg";
 
-export interface SelectProps
-  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
+export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   /** Visible label associated with the select. */
   label: ReactNode;
   /** Supporting content shown below the select. */
@@ -17,4 +16,3 @@ export interface SelectProps
   /** Makes the field span the available width. */
   fullWidth?: boolean;
 }
-

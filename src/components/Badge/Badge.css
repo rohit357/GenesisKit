@@ -1,12 +1,64 @@
-.oui-badge { align-items: center; border: 1px solid transparent; border-radius: 999px; display: inline-flex; font-weight: 700; justify-content: center; letter-spacing: 0.01em; line-height: 1; white-space: nowrap; }
-.oui-badge--sm { font-size: 0.6875rem; min-height: 1.25rem; padding: 0.25rem 0.5rem; }
-.oui-badge--md { font-size: 0.75rem; min-height: 1.5rem; padding: 0.3125rem 0.625rem; }
-.oui-badge--neutral { background: #f1f5f9; border-color: #e2e8f0; color: #334155; }
-.oui-badge--info { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
-.oui-badge--success { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
-.oui-badge--warning { background: #fffbeb; border-color: #fde68a; color: #92400e; }
-.oui-badge--danger { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
-.oui-badge { animation: oui-badge-enter 180ms ease-out both; }
-@keyframes oui-badge-enter { from { opacity: 0; transform: translateY(-2px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@media (prefers-reduced-motion: reduce) { .oui-badge { animation: none; } }
-
+.oui-badge {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  display: inline-flex;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.oui-badge--sm {
+  font-size: 0.6875rem;
+  min-height: 1.25rem;
+  padding: 0.25rem 0.5rem;
+}
+.oui-badge--md {
+  font-size: 0.75rem;
+  min-height: 1.5rem;
+  padding: 0.3125rem 0.625rem;
+}
+.oui-badge--neutral {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+.oui-badge--info {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+.oui-badge--success {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+.oui-badge--warning {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+.oui-badge--danger {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+.oui-badge {
+  animation: oui-badge-enter 180ms ease-out both;
+}
+@keyframes oui-badge-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-2px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oui-badge {
+    animation: none;
+  }
+}

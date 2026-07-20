@@ -2,8 +2,7 @@ import type { InputHTMLAttributes, ReactNode } from "react";
 
 export type InputSize = "sm" | "md" | "lg";
 
-export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /** Visible label associated with the input. */
   label: ReactNode;
   /** Supporting content shown below the input. */
@@ -15,4 +14,3 @@ export interface InputProps
   /** Makes the field span the available width. */
   fullWidth?: boolean;
 }
-
