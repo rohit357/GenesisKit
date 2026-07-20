@@ -1,0 +1,88 @@
+/*
+ * GenesisKit design tokens.
+ * Apply a theme class to any container to scope a different visual scheme:
+ * <div className="gk-theme-midnight">…</div>
+ */
+:root,
+.gk-theme-genesis {
+  --gk-font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --gk-color-canvas: #f8fafc;
+  --gk-color-surface: #ffffff;
+  --gk-color-surface-subtle: #f1f5f9;
+  --gk-color-text: #172033;
+  --gk-color-heading: #0f172a;
+  --gk-color-muted: #475569;
+  --gk-color-placeholder: #64748b;
+  --gk-color-border: #cbd5e1;
+  --gk-color-border-subtle: #e2e8f0;
+  --gk-color-primary: #2563eb;
+  --gk-color-primary-hover: #1d4ed8;
+  --gk-color-primary-soft: #eff6ff;
+  --gk-color-primary-border: #93c5fd;
+  --gk-color-primary-foreground: #ffffff;
+  --gk-color-success: #166534;
+  --gk-color-success-soft: #f0fdf4;
+  --gk-color-success-border: #86efac;
+  --gk-color-warning: #92400e;
+  --gk-color-warning-soft: #fffbeb;
+  --gk-color-warning-border: #fcd34d;
+  --gk-color-danger: #b91c1c;
+  --gk-color-danger-strong: #991b1b;
+  --gk-color-danger-soft: #fef2f2;
+  --gk-color-danger-border: #fca5a5;
+  --gk-focus-ring: rgb(37 99 235 / 32%);
+  --gk-overlay: rgb(15 23 42 / 55%);
+  --gk-shadow-sm: 0 1px 2px rgb(15 23 42 / 8%);
+  --gk-shadow-md: 0 8px 24px rgb(15 23 42 / 8%);
+  --gk-shadow-lg: 0 24px 60px rgb(15 23 42 / 22%);
+  --gk-radius-sm: 0.5rem;
+  --gk-radius-md: 0.75rem;
+  --gk-radius-lg: 0.875rem;
+  --gk-radius-full: 999px;
+  --gk-motion-fast: 150ms;
+  --gk-motion-enter: 200ms;
+  --gk-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.gk-theme-midnight {
+  --gk-color-canvas: #0b1120;
+  --gk-color-surface: #111827;
+  --gk-color-surface-subtle: #1e293b;
+  --gk-color-text: #e2e8f0;
+  --gk-color-heading: #f8fafc;
+  --gk-color-muted: #94a3b8;
+  --gk-color-placeholder: #94a3b8;
+  --gk-color-border: #475569;
+  --gk-color-border-subtle: #334155;
+  --gk-color-primary: #60a5fa;
+  --gk-color-primary-hover: #93c5fd;
+  --gk-color-primary-soft: #172554;
+  --gk-color-primary-border: #2563eb;
+  --gk-color-primary-foreground: #0f172a;
+  --gk-focus-ring: rgb(96 165 250 / 42%);
+  --gk-overlay: rgb(2 6 23 / 74%);
+}
+
+.gk-theme-emerald {
+  --gk-color-primary: #059669;
+  --gk-color-primary-hover: #047857;
+  --gk-color-primary-soft: #ecfdf5;
+  --gk-color-primary-border: #6ee7b7;
+  --gk-focus-ring: rgb(5 150 105 / 30%);
+}
+
+.gk-theme-rose {
+  --gk-color-primary: #e11d48;
+  --gk-color-primary-hover: #be123c;
+  --gk-color-primary-soft: #fff1f2;
+  --gk-color-primary-border: #fda4af;
+  --gk-focus-ring: rgb(225 29 72 / 30%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --gk-motion-fast: 0.001ms;
+    --gk-motion-enter: 0.001ms;
+  }
+}

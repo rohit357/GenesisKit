@@ -58,8 +58,19 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 
 ## Next milestones (from ROADMAP)
 
-2. A11y audit fixes: Dialog (portal/focus-trap/scroll-lock), Select (placeholder/chevron), Card (heading level), Tabs (manual activation + keepMounted), RadioGroup (fallback name + required).
+2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. Remaining: Select (placeholder/chevron), Card (heading level), Tabs (manual activation + keepMounted), RadioGroup (fallback name + required).
 3. Token v2 + real dark mode + new schemes (soft/sharp/glass) + `createTheme`.
-4. Shared internals (Portal, useFocusTrap, useControllableState) → new components (forms, overlays).
+4. Shared internals (~~Portal, useFocusTrap~~ DONE, useControllableState next) → new components (forms, overlays).
 5. Storybook + docs + visual tests.
 6. Phase C/D components + release pipeline + v1.0.
+
+## Progress log (cont.)
+
+### 2026-07-20 — Milestone 2 step 1: Dialog rebuild (DONE, verified green)
+
+- New shared internals: `src/utils/Portal.tsx` (SSR-safe createPortal wrapper), `src/utils/useFocusTrap.ts` (Tab trap + body scroll-lock + return-focus). Exported from `src/utils/index.ts`.
+- `Dialog.tsx`: renders via Portal, uses useFocusTrap. Props + BEM classes unchanged → CSS + old tests intact. Kept Escape-to-close + close button + not-rendered-when-closed.
+- Added 2 tests: scroll-lock toggle, focus-into-dialog + return-to-trigger. 48 tests total.
+- **Portal design note:** renders immediately when `document` exists (no mount-gate), else null. Consumers gate on client `open` flag → mounts post-hydration. Earlier mount-gate caused ref-null-on-first-effect bug (trap never armed). Do NOT re-add useEffect mount gate.
+- NOT committed.
+

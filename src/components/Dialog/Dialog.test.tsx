@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { useState } from "react";
 import { Dialog } from "./Dialog";
 
 describe("Dialog", () => {
@@ -44,5 +45,44 @@ describe("Dialog", () => {
       </Dialog>
     );
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("locks body scroll while open and restores on close", () => {
+    const { rerender } = render(
+      <Dialog open title="Locked" onClose={vi.fn()}>
+        Content
+      </Dialog>
+    );
+    expect(document.body.style.overflow).toBe("hidden");
+    rerender(
+      <Dialog open={false} title="Locked" onClose={vi.fn()}>
+        Content
+      </Dialog>
+    );
+    expect(document.body.style.overflow).not.toBe("hidden");
+  });
+
+  it("moves focus into the dialog and returns it to the trigger on close", async () => {
+    const user = userEvent.setup();
+    function Harness() {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <button onClick={() => setOpen(true)}>Open</button>
+          <Dialog open={open} title="Trap" onClose={() => setOpen(false)}>
+            Content
+          </Dialog>
+        </>
+      );
+    }
+    render(<Harness />);
+    const trigger = screen.getByRole("button", { name: "Open" });
+    trigger.focus();
+    await user.click(trigger);
+    expect(screen.getByRole("dialog")).toContainElement(
+      document.activeElement as HTMLElement
+    );
+    await user.click(screen.getByRole("button", { name: "Close dialog" }));
+    expect(trigger).toHaveFocus();
   });
 });

@@ -1,8 +1,19 @@
 import { forwardRef, useEffect, useId, useRef } from "react";
-import type { KeyboardEvent } from "react";
+import type { ForwardedRef } from "react";
 import type { DialogProps } from "./Dialog.types";
 import "./Dialog.css";
 import { cx } from "../../utils/cx";
+import { Portal } from "../../utils/Portal";
+import { useFocusTrap } from "../../utils/useFocusTrap";
+
+const mergeRefs =
+  <T,>(...refs: Array<ForwardedRef<T> | undefined>) =>
+  (node: T) => {
+    for (const ref of refs) {
+      if (typeof ref === "function") ref(node);
+      else if (ref) ref.current = node;
+    }
+  };
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
   (
@@ -23,66 +34,65 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const generatedId = useId();
     const titleId = `oui-dialog-title-${generatedId}`;
     const descriptionId = description ? `oui-dialog-description-${generatedId}` : undefined;
-    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const dialogRef = useRef<HTMLDivElement>(null);
+
+    useFocusTrap(dialogRef, open);
 
     useEffect(() => {
       if (!open) return;
-      const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      const onKeyDown = (event: KeyboardEvent) => {
         if (event.key === "Escape") onClose();
       };
       document.addEventListener("keydown", onKeyDown);
-      closeButtonRef.current?.focus();
       return () => document.removeEventListener("keydown", onKeyDown);
     }, [open, onClose]);
 
     if (!open) return null;
 
-    const handleOverlayKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "Escape") onClose();
-    };
     return (
-      <div
-        className="oui-dialog__backdrop"
-        role="presentation"
-        onMouseDown={(event) => {
-          if (closeOnOverlayClick && event.target === event.currentTarget) onClose();
-        }}
-        onKeyDown={handleOverlayKeyDown}
-      >
+      <Portal>
         <div
-          ref={forwardedRef}
-          className={cx("oui-dialog", className)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby={titleId}
-          aria-describedby={descriptionId}
-          {...props}
+          className="oui-dialog__backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (closeOnOverlayClick && event.target === event.currentTarget) onClose();
+          }}
         >
-          <div className="oui-dialog__header">
-            <div className="oui-dialog__heading">
-              <h2 className="oui-dialog__title" id={titleId}>
-                {title}
-              </h2>
-              {description && (
-                <div className="oui-dialog__description" id={descriptionId}>
-                  {description}
-                </div>
-              )}
+          <div
+            ref={mergeRefs(dialogRef, forwardedRef)}
+            className={cx("oui-dialog", className)}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            aria-describedby={descriptionId}
+            tabIndex={-1}
+            {...props}
+          >
+            <div className="oui-dialog__header">
+              <div className="oui-dialog__heading">
+                <h2 className="oui-dialog__title" id={titleId}>
+                  {title}
+                </h2>
+                {description && (
+                  <div className="oui-dialog__description" id={descriptionId}>
+                    {description}
+                  </div>
+                )}
+              </div>
+              <button
+                className="oui-dialog__close"
+                type="button"
+                aria-label={closeLabel}
+                onClick={onClose}
+              >
+                <span aria-hidden="true">×</span>
+              </button>
             </div>
-            <button
-              ref={closeButtonRef}
-              className="oui-dialog__close"
-              type="button"
-              aria-label={closeLabel}
-              onClick={onClose}
-            >
-              <span aria-hidden="true">×</span>
-            </button>
+            <div className="oui-dialog__content">{children}</div>
+            {footer && <div className="oui-dialog__footer">{footer}</div>}
           </div>
-          <div className="oui-dialog__content">{children}</div>
-          {footer && <div className="oui-dialog__footer">{footer}</div>}
         </div>
-      </div>
+      </Portal>
     );
   }
 );
