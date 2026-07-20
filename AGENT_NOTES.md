@@ -72,7 +72,7 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 
 ## Next milestones (from ROADMAP — renumbered 2026-07-20 after plan merge)
 
-2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. ~~RadioGroup (fallback name + required)~~ DONE. ~~Select (placeholder/chevron)~~ DONE. ~~Card (heading level + labelled section)~~ DONE. Remaining: Tabs (manual activation + keepMounted).
+2. ~~A11y audit fixes~~ **MILESTONE 2 COMPLETE**: Dialog, RadioGroup, Select, Card, Tabs all done.
 3. Consistency + release readiness: unify `oui-`/`gk-` prefix (mechanical sweep, BEFORE new components), `"use client"` strategy, publint/attw/`npm pack` review, Changesets bootstrap.
 4. Token v2 + real dark mode + new schemes (soft/sharp/glass) + `createTheme` + density modes.
 5. Shared internals (~~Portal, useFocusTrap~~ DONE; useControllableState, useDismiss, positioning next) + `new:component` generator → Phase A/B components.
@@ -130,4 +130,14 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - Updated 1 test (div no longer has aria-labelledby), +2 tests (section region named by title; headingLevel renders h3). 54 tests total.
 - Full `npm run check` passes.
 - NOT committed.
+
+### 2026-07-20 — Milestone 2 step 5: Tabs (DONE, verified green) — MILESTONE 2 COMPLETE
+
+- New `activationMode` prop (`automatic` | `manual`, default automatic). Manual: arrows/Home/End only move focus; Enter/Space (native button behavior) selects. Matches WAI-ARIA tabs pattern.
+- New `keepMounted` prop (default false). True → all panels render, inactive get `hidden` attr → form state survives tab switches. False → only active panel in DOM (old behavior).
+- Panel markup now maps over items (each panel own id/aria-labelledby pair); default still renders one panel only.
+- +3 tests (manual focus-vs-select, keepMounted hidden panels, default unmount). 57 tests total.
+- Full `npm run check` passes.
+- NOT committed.
+- **Milestone 2 done → next per plan: Milestone 3 consistency + release readiness (prefix unification first).**
 

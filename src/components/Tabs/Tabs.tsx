@@ -6,7 +6,17 @@ import { cx } from "../../utils/cx";
 
 export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
   (
-    { items, value, defaultValue, onValueChange, orientation = "horizontal", className, ...props },
+    {
+      items,
+      value,
+      defaultValue,
+      onValueChange,
+      orientation = "horizontal",
+      activationMode = "automatic",
+      keepMounted = false,
+      className,
+      ...props
+    },
     ref
   ) => {
     const generatedId = useId();
@@ -42,15 +52,18 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
                   enabled.length
               ];
       if (target) {
-        selectTab(target.item.value);
+        if (activationMode === "automatic") {
+          selectTab(target.item.value);
+        }
         tabRefs.current[target.itemIndex]?.focus();
       }
     };
 
     if (!activeItem) return null;
 
-    const activeTabId = `oui-tab-${generatedId}-${activeItem.value}`;
-    const activePanelId = `oui-tabpanel-${generatedId}-${activeItem.value}`;
+    const renderedItems = keepMounted
+      ? items
+      : items.filter((item) => item.value === activeItem.value);
 
     return (
       <div ref={ref} className={cx("oui-tabs", `oui-tabs--${orientation}`, className)} {...props}>
@@ -83,15 +96,22 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
             );
           })}
         </div>
-        <div
-          className="oui-tabs__panel"
-          role="tabpanel"
-          id={activePanelId}
-          aria-labelledby={activeTabId}
-          tabIndex={0}
-        >
-          {activeItem.content}
-        </div>
+        {renderedItems.map((item) => {
+          const isActive = item.value === activeItem.value;
+          return (
+            <div
+              key={item.value}
+              className="oui-tabs__panel"
+              role="tabpanel"
+              id={`oui-tabpanel-${generatedId}-${item.value}`}
+              aria-labelledby={`oui-tab-${generatedId}-${item.value}`}
+              tabIndex={0}
+              hidden={!isActive}
+            >
+              {item.content}
+            </div>
+          );
+        })}
       </div>
     );
   }

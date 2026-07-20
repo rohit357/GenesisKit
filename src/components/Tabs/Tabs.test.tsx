@@ -34,4 +34,35 @@ describe("Tabs", () => {
     expect(screen.getByRole("tab", { name: "Activity" })).toHaveAttribute("aria-selected", "true");
     expect(screen.getByRole("tab", { name: "Disabled" })).toBeDisabled();
   });
+
+  it("only moves focus on arrows in manual activation mode until Enter", async () => {
+    const user = userEvent.setup();
+    render(<Tabs items={items} activationMode="manual" />);
+    await user.click(screen.getByRole("tab", { name: "Overview" }));
+    await user.keyboard("{ArrowRight}");
+    const activity = screen.getByRole("tab", { name: "Activity" });
+    expect(activity).toHaveFocus();
+    expect(activity).toHaveAttribute("aria-selected", "false");
+    expect(screen.getByRole("tabpanel")).toHaveTextContent("Overview content");
+    await user.keyboard("{Enter}");
+    expect(activity).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tabpanel")).toHaveTextContent("Activity content");
+  });
+
+  it("keeps inactive panels mounted but hidden with keepMounted", async () => {
+    const user = userEvent.setup();
+    render(<Tabs items={items} keepMounted />);
+    const panels = screen.getAllByRole("tabpanel", { hidden: true });
+    expect(panels).toHaveLength(3);
+    expect(screen.getByText("Activity content")).not.toBeVisible();
+    await user.click(screen.getByRole("tab", { name: "Activity" }));
+    expect(screen.getByText("Activity content")).toBeVisible();
+    expect(screen.getByText("Overview content")).not.toBeVisible();
+  });
+
+  it("unmounts inactive panels by default", () => {
+    render(<Tabs items={items} />);
+    expect(screen.getAllByRole("tabpanel")).toHaveLength(1);
+    expect(screen.queryByText("Activity content")).not.toBeInTheDocument();
+  });
 });
