@@ -12,7 +12,7 @@ describe("Card", () => {
       </Card>
     );
 
-    const card = screen.getByText("Profile details").closest(".oui-card");
+    const card = screen.getByText("Profile details").closest(".gk-card");
     expect(screen.getByRole("heading", { level: 2, name: "Account settings" })).toBeInTheDocument();
     expect(screen.getByText("Manage your profile.")).toBeInTheDocument();
     // A role-less div gets no accessible name from aria-labelledby, so it is omitted.
@@ -73,7 +73,7 @@ describe("Card", () => {
     );
 
     const card = screen.getByTestId("settings-card");
-    expect(card).toHaveClass("oui-card--lg", "oui-card--outlined", "custom-card");
+    expect(card).toHaveClass("gk-card--lg", "gk-card--outlined", "custom-card");
     expect(ref.current).toBe(card);
   });
 

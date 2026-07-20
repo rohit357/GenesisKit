@@ -66,11 +66,11 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       : items.filter((item) => item.value === activeItem.value);
 
     return (
-      <div ref={ref} className={cx("oui-tabs", `oui-tabs--${orientation}`, className)} {...props}>
-        <div className="oui-tabs__list" role="tablist" aria-orientation={orientation}>
+      <div ref={ref} className={cx("gk-tabs", `gk-tabs--${orientation}`, className)} {...props}>
+        <div className="gk-tabs__list" role="tablist" aria-orientation={orientation}>
           {items.map((item, index) => {
-            const tabId = `oui-tab-${generatedId}-${item.value}`;
-            const panelId = `oui-tabpanel-${generatedId}-${item.value}`;
+            const tabId = `gk-tab-${generatedId}-${item.value}`;
+            const panelId = `gk-tabpanel-${generatedId}-${item.value}`;
             return (
               <button
                 key={item.value}
@@ -78,8 +78,8 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
                   tabRefs.current[index] = node;
                 }}
                 className={cx(
-                  "oui-tabs__tab",
-                  item.value === activeItem.value && "oui-tabs__tab--active"
+                  "gk-tabs__tab",
+                  item.value === activeItem.value && "gk-tabs__tab--active"
                 )}
                 type="button"
                 role="tab"
@@ -101,10 +101,10 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
           return (
             <div
               key={item.value}
-              className="oui-tabs__panel"
+              className="gk-tabs__panel"
               role="tabpanel"
-              id={`oui-tabpanel-${generatedId}-${item.value}`}
-              aria-labelledby={`oui-tab-${generatedId}-${item.value}`}
+              id={`gk-tabpanel-${generatedId}-${item.value}`}
+              aria-labelledby={`gk-tab-${generatedId}-${item.value}`}
               tabIndex={0}
               hidden={!isActive}
             >

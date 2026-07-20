@@ -17,7 +17,7 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
     return (
       <span
         ref={ref}
-        className={cx("oui-avatar", `oui-avatar--${size}`, `oui-avatar--${shape}`, className)}
+        className={cx("gk-avatar", `gk-avatar--${size}`, `gk-avatar--${shape}`, className)}
         role="img"
         aria-label={label}
         {...props}

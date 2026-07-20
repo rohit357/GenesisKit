@@ -1,28 +1,28 @@
-.oui-textarea-field {
+.gk-textarea-field {
   color: #172033;
   display: grid;
   gap: 0.375rem;
   max-width: 32rem;
 }
 
-.oui-textarea-field--full-width {
+.gk-textarea-field--full-width {
   max-width: none;
   width: 100%;
 }
 
-.oui-textarea-field__label {
+.gk-textarea-field__label {
   color: #172033;
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.25;
 }
 
-.oui-textarea-field__required {
+.gk-textarea-field__required {
   color: #b91c1c;
   margin-left: 0.25rem;
 }
 
-.oui-textarea {
+.gk-textarea {
   background: #ffffff;
   border: 1px solid #94a3b8;
   border-radius: 0.5rem;
@@ -38,80 +38,80 @@
   width: 100%;
 }
 
-.oui-textarea::placeholder {
+.gk-textarea::placeholder {
   color: #64748b;
 }
 
-.oui-textarea:focus {
+.gk-textarea:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgb(37 99 235 / 20%);
 }
 
-.oui-textarea:disabled {
+.gk-textarea:disabled {
   background: #f1f5f9;
   cursor: not-allowed;
   opacity: 0.7;
 }
 
-.oui-textarea--sm {
+.gk-textarea--sm {
   font-size: 0.8125rem;
   min-height: 4.5rem;
   padding: 0.375rem 0.625rem;
 }
 
-.oui-textarea--md {
+.gk-textarea--md {
   font-size: 0.9375rem;
   padding: 0.5rem 0.75rem;
 }
 
-.oui-textarea--lg {
+.gk-textarea--lg {
   font-size: 1rem;
   min-height: 6rem;
   padding: 0.75rem 0.875rem;
 }
 
-.oui-textarea--resize-none {
+.gk-textarea--resize-none {
   resize: none;
 }
 
-.oui-textarea--resize-vertical {
+.gk-textarea--resize-vertical {
   resize: vertical;
 }
 
-.oui-textarea--resize-horizontal {
+.gk-textarea--resize-horizontal {
   resize: horizontal;
 }
 
-.oui-textarea--resize-both {
+.gk-textarea--resize-both {
   resize: both;
 }
 
-.oui-textarea--error {
+.gk-textarea--error {
   border-color: #dc2626;
 }
 
-.oui-textarea--error:focus {
+.gk-textarea--error:focus {
   border-color: #b91c1c;
   box-shadow: 0 0 0 3px rgb(220 38 38 / 18%);
 }
 
-.oui-textarea-field__description,
-.oui-textarea-field__error {
+.gk-textarea-field__description,
+.gk-textarea-field__error {
   font-size: 0.8125rem;
   line-height: 1.4;
 }
 
-.oui-textarea-field__description {
+.gk-textarea-field__description {
   color: #475569;
 }
 
-.oui-textarea-field__error {
+.gk-textarea-field__error {
   color: #b91c1c;
   font-weight: 500;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .oui-textarea {
+  .gk-textarea {
     transition-duration: 0.001ms;
   }
 }

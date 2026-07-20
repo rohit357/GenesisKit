@@ -23,17 +23,17 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     ref
   ) => {
     const generatedId = useId();
-    const textareaId = id ?? `oui-textarea-${generatedId}`;
+    const textareaId = id ?? `gk-textarea-${generatedId}`;
     const descriptionId = description ? `${textareaId}-description` : undefined;
     const errorId = error ? `${textareaId}-error` : undefined;
     const describedBy = [ariaDescribedBy, descriptionId, errorId].filter(Boolean).join(" ");
 
     return (
-      <div className={cx("oui-textarea-field", fullWidth && "oui-textarea-field--full-width")}>
-        <label className="oui-textarea-field__label" htmlFor={textareaId}>
+      <div className={cx("gk-textarea-field", fullWidth && "gk-textarea-field--full-width")}>
+        <label className="gk-textarea-field__label" htmlFor={textareaId}>
           {label}
           {required && (
-            <span className="oui-textarea-field__required" aria-hidden="true">
+            <span className="gk-textarea-field__required" aria-hidden="true">
               *
             </span>
           )}
@@ -43,10 +43,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={textareaId}
           className={cx(
-            "oui-textarea",
-            `oui-textarea--${size}`,
-            `oui-textarea--resize-${resize}`,
-            Boolean(error) && "oui-textarea--error",
+            "gk-textarea",
+            `gk-textarea--${size}`,
+            `gk-textarea--resize-${resize}`,
+            Boolean(error) && "gk-textarea--error",
             className
           )}
           rows={rows}
@@ -57,13 +57,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         />
 
         {description && (
-          <div className="oui-textarea-field__description" id={descriptionId}>
+          <div className="gk-textarea-field__description" id={descriptionId}>
             {description}
           </div>
         )}
 
         {error && (
-          <div className="oui-textarea-field__error" id={errorId} role="alert">
+          <div className="gk-textarea-field__error" id={errorId} role="alert">
             {error}
           </div>
         )}

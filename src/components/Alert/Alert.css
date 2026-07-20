@@ -1,6 +1,6 @@
-.oui-alert {
+.gk-alert {
   align-items: flex-start;
-  animation: oui-alert-enter 220ms ease-out both;
+  animation: gk-alert-enter 220ms ease-out both;
   border: 1px solid;
   border-radius: 0.75rem;
   display: flex;
@@ -9,17 +9,17 @@
   line-height: 1.45;
   padding: 0.875rem 1rem;
 }
-.oui-alert__content {
+.gk-alert__content {
   min-width: 0;
 }
-.oui-alert__title {
+.gk-alert__title {
   font-weight: 800;
   margin-bottom: 0.125rem;
 }
-.oui-alert__message {
+.gk-alert__message {
   font-size: 0.875rem;
 }
-.oui-alert__dismiss {
+.gk-alert__dismiss {
   background: transparent;
   border: 0;
   color: inherit;
@@ -29,31 +29,31 @@
   line-height: 1;
   padding: 0.125rem;
 }
-.oui-alert__dismiss:focus-visible {
+.gk-alert__dismiss:focus-visible {
   outline: 3px solid currentColor;
   outline-offset: 2px;
 }
-.oui-alert--info {
+.gk-alert--info {
   background: #eff6ff;
   border-color: #93c5fd;
   color: #1e3a8a;
 }
-.oui-alert--success {
+.gk-alert--success {
   background: #f0fdf4;
   border-color: #86efac;
   color: #166534;
 }
-.oui-alert--warning {
+.gk-alert--warning {
   background: #fffbeb;
   border-color: #fcd34d;
   color: #92400e;
 }
-.oui-alert--error {
+.gk-alert--error {
   background: #fef2f2;
   border-color: #fca5a5;
   color: #991b1b;
 }
-@keyframes oui-alert-enter {
+@keyframes gk-alert-enter {
   from {
     opacity: 0;
     transform: translateY(-4px);
@@ -64,7 +64,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .oui-alert {
+  .gk-alert {
     animation: none;
   }
 }

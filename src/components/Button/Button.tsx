@@ -19,16 +19,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const loadingStyle = { "--oui-button-loading-width": "1em" } as CSSProperties;
+    const loadingStyle = { "--gk-button-loading-width": "1em" } as CSSProperties;
 
     return (
       <button
         ref={ref}
         className={cx(
-          "oui-button",
-          `oui-button--${variant}`,
-          `oui-button--${size}`,
-          loading && "oui-button--loading",
+          "gk-button",
+          `gk-button--${variant}`,
+          `gk-button--${size}`,
+          loading && "gk-button--loading",
           className
         )}
         type="button"
@@ -37,8 +37,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         style={loading ? { ...loadingStyle, ...style } : style}
         {...props}
       >
-        {loading && <span className="oui-button__spinner" aria-hidden="true" />}
-        <span className={cx(loading && "oui-button__label--loading")}>{children}</span>
+        {loading && <span className="gk-button__spinner" aria-hidden="true" />}
+        <span className={cx(loading && "gk-button__label--loading")}>{children}</span>
       </button>
     );
   }

@@ -15,7 +15,7 @@ describe("Select", () => {
     );
 
     const select = screen.getByRole("combobox", { name: "Country" });
-    expect(select).toHaveClass("oui-select--md");
+    expect(select).toHaveClass("gk-select--md");
     const placeholderOption = screen.getByText("Choose a country");
     expect(placeholderOption).toBeDisabled();
     expect(placeholderOption).toHaveAttribute("hidden");
@@ -87,7 +87,7 @@ describe("Select", () => {
     const select = screen.getByRole("combobox", { name: "Theme" });
     await user.selectOptions(select, "dark");
 
-    expect(select).toHaveClass("oui-select--lg");
+    expect(select).toHaveClass("gk-select--lg");
     expect(select).toHaveValue("dark");
     expect(onChange).toHaveBeenCalledOnce();
     expect(ref.current).toBe(select);

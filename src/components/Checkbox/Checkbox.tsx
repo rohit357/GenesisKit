@@ -22,7 +22,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     forwardedRef
   ) => {
     const generatedId = useId();
-    const inputId = id ?? `oui-checkbox-${generatedId}`;
+    const inputId = id ?? `gk-checkbox-${generatedId}`;
     const inputRef = useRef<HTMLInputElement>(null);
     const descriptionId = description ? `${inputId}-description` : undefined;
     const errorId = error ? `${inputId}-error` : undefined;
@@ -48,22 +48,22 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }, [indeterminate]);
 
     return (
-      <div className={cx("oui-checkbox-field", `oui-checkbox-field--${size}`, className)}>
-        <label className="oui-checkbox">
+      <div className={cx("gk-checkbox-field", `gk-checkbox-field--${size}`, className)}>
+        <label className="gk-checkbox">
           <input
             ref={setInputRef}
             id={inputId}
-            className="oui-checkbox__control"
+            className="gk-checkbox__control"
             type="checkbox"
             required={required}
             aria-invalid={error ? true : undefined}
             aria-describedby={describedBy || undefined}
             {...(props as InputHTMLAttributes<HTMLInputElement>)}
           />
-          <span className="oui-checkbox__label">
+          <span className="gk-checkbox__label">
             {label}
             {required && (
-              <span className="oui-checkbox__required" aria-hidden="true">
+              <span className="gk-checkbox__required" aria-hidden="true">
                 *
               </span>
             )}
@@ -71,13 +71,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         </label>
 
         {description && (
-          <div className="oui-checkbox__description" id={descriptionId}>
+          <div className="gk-checkbox__description" id={descriptionId}>
             {description}
           </div>
         )}
 
         {error && (
-          <div className="oui-checkbox__error" id={errorId} role="alert">
+          <div className="gk-checkbox__error" id={errorId} role="alert">
             {error}
           </div>
         )}

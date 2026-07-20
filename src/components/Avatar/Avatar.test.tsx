@@ -17,6 +17,6 @@ describe("Avatar", () => {
 
   it("supports size and shape", () => {
     render(<Avatar name="A" size="lg" shape="square" data-testid="avatar" />);
-    expect(screen.getByTestId("avatar")).toHaveClass("oui-avatar--lg", "oui-avatar--square");
+    expect(screen.getByTestId("avatar")).toHaveClass("gk-avatar--lg", "gk-avatar--square");
   });
 });

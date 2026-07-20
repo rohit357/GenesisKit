@@ -22,41 +22,41 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
     ref
   ) => {
     const generatedId = useId();
-    const groupName = name ?? `oui-radio-${generatedId}`;
+    const groupName = name ?? `gk-radio-${generatedId}`;
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
     const selectedValue = value ?? internalValue;
-    const descriptionId = description ? `oui-radio-description-${generatedId}` : undefined;
-    const errorId = error ? `oui-radio-error-${generatedId}` : undefined;
+    const descriptionId = description ? `gk-radio-description-${generatedId}` : undefined;
+    const errorId = error ? `gk-radio-error-${generatedId}` : undefined;
     const describedBy = [descriptionId, errorId].filter(Boolean).join(" ");
 
     return (
       <fieldset
         ref={ref}
-        className={cx("oui-radio-group", `oui-radio-group--${orientation}`, className)}
+        className={cx("gk-radio-group", `gk-radio-group--${orientation}`, className)}
         aria-describedby={describedBy || undefined}
         {...props}
       >
-        <legend className="oui-radio-group__legend">
+        <legend className="gk-radio-group__legend">
           {label}
           {required && (
-            <span className="oui-radio-group__required" aria-hidden="true">
+            <span className="gk-radio-group__required" aria-hidden="true">
               *
             </span>
           )}
         </legend>
         {description && (
-          <div className="oui-radio-group__description" id={descriptionId}>
+          <div className="gk-radio-group__description" id={descriptionId}>
             {description}
           </div>
         )}
-        <div className="oui-radio-group__options">
+        <div className="gk-radio-group__options">
           {options.map((option) => (
             <label
-              className={cx("oui-radio-option", option.disabled && "oui-radio-option--disabled")}
+              className={cx("gk-radio-option", option.disabled && "gk-radio-option--disabled")}
               key={option.value}
             >
               <input
-                className="oui-radio-option__control"
+                className="gk-radio-option__control"
                 type="radio"
                 name={groupName}
                 value={option.value}
@@ -68,17 +68,17 @@ export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
                   onValueChange?.(option.value);
                 }}
               />
-              <span className="oui-radio-option__copy">
-                <span className="oui-radio-option__label">{option.label}</span>
+              <span className="gk-radio-option__copy">
+                <span className="gk-radio-option__label">{option.label}</span>
                 {option.description && (
-                  <span className="oui-radio-option__description">{option.description}</span>
+                  <span className="gk-radio-option__description">{option.description}</span>
                 )}
               </span>
             </label>
           ))}
         </div>
         {error && (
-          <div className="oui-radio-group__error" id={errorId} role="alert">
+          <div className="gk-radio-group__error" id={errorId} role="alert">
             {error}
           </div>
         )}

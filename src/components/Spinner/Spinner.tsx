@@ -7,12 +7,12 @@ export const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(
   ({ size = "md", label = "Loading", className, ...props }, ref) => (
     <span
       ref={ref}
-      className={cx("oui-spinner", `oui-spinner--${size}`, className)}
+      className={cx("gk-spinner", `gk-spinner--${size}`, className)}
       role="status"
       aria-label={label}
       {...props}
     >
-      <span className="oui-spinner__circle" aria-hidden="true" />
+      <span className="gk-spinner__circle" aria-hidden="true" />
     </span>
   )
 );

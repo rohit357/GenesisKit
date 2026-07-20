@@ -21,8 +21,8 @@ describe("Switch", () => {
   it("supports disabled state and sizes", () => {
     render(<Switch label="Automatic updates" size="sm" disabled />);
     expect(screen.getByRole("switch", { name: "Automatic updates" })).toBeDisabled();
-    expect(screen.getByText("Automatic updates").closest(".oui-switch-field")).toHaveClass(
-      "oui-switch-field--sm"
+    expect(screen.getByText("Automatic updates").closest(".gk-switch-field")).toHaveClass(
+      "gk-switch-field--sm"
     );
   });
 });

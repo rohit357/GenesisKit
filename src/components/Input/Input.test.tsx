@@ -9,7 +9,7 @@ describe("Input", () => {
   it("associates the visible label with the input", () => {
     render(<Input label="Email address" />);
 
-    expect(screen.getByLabelText("Email address")).toHaveClass("oui-input--md");
+    expect(screen.getByLabelText("Email address")).toHaveClass("gk-input--md");
   });
 
   it("connects description and error content for assistive technology", () => {
@@ -35,7 +35,7 @@ describe("Input", () => {
 
     const input = screen.getByRole("textbox", { name: /Account name/ });
     expect(input).toHaveAttribute("id", "account-name");
-    expect(input).toHaveClass("oui-input--lg");
+    expect(input).toHaveClass("gk-input--lg");
     expect(input).toBeRequired();
     expect(screen.getByText("*")).toBeInTheDocument();
   });

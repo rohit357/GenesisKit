@@ -5,7 +5,7 @@ import { Badge } from "./Badge";
 describe("Badge", () => {
   it("renders content and defaults", () => {
     render(<Badge>New</Badge>);
-    expect(screen.getByText("New")).toHaveClass("oui-badge--neutral", "oui-badge--md");
+    expect(screen.getByText("New")).toHaveClass("gk-badge--neutral", "gk-badge--md");
   });
 
   it("supports visual variants, sizes, and attributes", () => {
@@ -14,6 +14,6 @@ describe("Badge", () => {
         Done
       </Badge>
     );
-    expect(screen.getByTitle("Complete")).toHaveClass("oui-badge--success", "oui-badge--sm");
+    expect(screen.getByTitle("Complete")).toHaveClass("gk-badge--success", "gk-badge--sm");
   });
 });

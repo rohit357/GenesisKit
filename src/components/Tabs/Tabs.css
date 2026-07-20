@@ -1,23 +1,23 @@
-.oui-tabs {
+.gk-tabs {
   color: #172033;
   display: grid;
   gap: 1rem;
 }
-.oui-tabs__list {
+.gk-tabs__list {
   border-bottom: 1px solid #e2e8f0;
   display: flex;
   gap: 0.25rem;
 }
-.oui-tabs--vertical {
+.gk-tabs--vertical {
   grid-template-columns: auto 1fr;
 }
-.oui-tabs--vertical .oui-tabs__list {
+.gk-tabs--vertical .gk-tabs__list {
   border-bottom: 0;
   border-right: 1px solid #e2e8f0;
   flex-direction: column;
   padding-right: 0.5rem;
 }
-.oui-tabs__tab {
+.gk-tabs__tab {
   background: transparent;
   border: 0;
   border-bottom: 2px solid transparent;
@@ -32,41 +32,41 @@
     border-color 150ms ease,
     background-color 150ms ease;
 }
-.oui-tabs__tab:hover:not(:disabled) {
+.gk-tabs__tab:hover:not(:disabled) {
   background: #f8fafc;
   color: #1d4ed8;
 }
-.oui-tabs__tab--active {
+.gk-tabs__tab--active {
   border-color: #2563eb;
   color: #1d4ed8;
 }
-.oui-tabs__tab:focus-visible {
+.gk-tabs__tab:focus-visible {
   outline: 3px solid rgb(37 99 235 / 30%);
   outline-offset: -2px;
 }
-.oui-tabs__tab:disabled {
+.gk-tabs__tab:disabled {
   cursor: not-allowed;
   opacity: 0.45;
 }
-.oui-tabs--vertical .oui-tabs__tab {
+.gk-tabs--vertical .gk-tabs__tab {
   border-bottom: 0;
   border-right: 2px solid transparent;
   text-align: left;
 }
-.oui-tabs--vertical .oui-tabs__tab--active {
+.gk-tabs--vertical .gk-tabs__tab--active {
   border-right-color: #2563eb;
 }
-.oui-tabs__panel {
-  animation: oui-tabs-panel-enter 180ms ease-out both;
+.gk-tabs__panel {
+  animation: gk-tabs-panel-enter 180ms ease-out both;
   line-height: 1.5;
   min-width: 0;
   outline: none;
 }
-.oui-tabs__panel:focus-visible {
+.gk-tabs__panel:focus-visible {
   outline: 3px solid rgb(37 99 235 / 30%);
   outline-offset: 3px;
 }
-@keyframes oui-tabs-panel-enter {
+@keyframes gk-tabs-panel-enter {
   from {
     opacity: 0;
     transform: translateY(4px);
@@ -77,8 +77,8 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .oui-tabs__tab,
-  .oui-tabs__panel {
+  .gk-tabs__tab,
+  .gk-tabs__panel {
     animation: none;
     transition-duration: 0.001ms;
   }

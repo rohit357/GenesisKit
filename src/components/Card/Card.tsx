@@ -22,7 +22,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     ref
   ) => {
     const generatedTitleId = useId();
-    const titleId = title ? `oui-card-title-${generatedTitleId}` : undefined;
+    const titleId = title ? `gk-card-title-${generatedTitleId}` : undefined;
     const hasHeader = Boolean(title || description || headerAction);
     const Heading = `h${headingLevel}` as const;
     // aria-labelledby only helps when the element has a role; a plain div
@@ -32,27 +32,27 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <Element
         ref={ref}
-        className={cx("oui-card", `oui-card--${padding}`, `oui-card--${variant}`, className)}
+        className={cx("gk-card", `gk-card--${padding}`, `gk-card--${variant}`, className)}
         aria-labelledby={labelledBy}
         {...props}
       >
         {hasHeader && (
-          <header className="oui-card__header">
-            <div className="oui-card__heading">
+          <header className="gk-card__header">
+            <div className="gk-card__heading">
               {title && (
-                <Heading className="oui-card__title" id={titleId}>
+                <Heading className="gk-card__title" id={titleId}>
                   {title}
                 </Heading>
               )}
-              {description && <div className="oui-card__description">{description}</div>}
+              {description && <div className="gk-card__description">{description}</div>}
             </div>
-            {headerAction && <div className="oui-card__action">{headerAction}</div>}
+            {headerAction && <div className="gk-card__action">{headerAction}</div>}
           </header>
         )}
 
-        <div className="oui-card__content">{children}</div>
+        <div className="gk-card__content">{children}</div>
 
-        {footer && <footer className="oui-card__footer">{footer}</footer>}
+        {footer && <footer className="gk-card__footer">{footer}</footer>}
       </Element>
     );
   }

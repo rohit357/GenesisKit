@@ -27,12 +27,9 @@ Repo: https://github.com/rohit357/GenesisKit
   Caution: `git add .` stages everything — repo has untracked user files (THEMING.md, src/theme.css, src/tokens.css) that must NOT be committed until user says so. Prefer explicit `git add <paths>`; if using `git add .`, the `git diff --cached` review is mandatory.
 - Full plan: see `ROADMAP.md`.
 
-## Naming seam (known debt)
+## Naming seam (RESOLVED 2026-07-20)
 
-Rebrand OpenUI → GenesisKit left split:
-- CSS classes still use `oui-` prefix.
-- Design tokens use `gk-` prefix.
-- Unify to single prefix planned (Milestone 1 leftover / Milestone 2).
+Rebrand OpenUI → GenesisKit split fixed: all CSS classes + generated ids now use `gk-` prefix (was `oui-`), matching `gk-` tokens. Sweep covered src ts/tsx/css incl user's untracked theme.css (user approved). One prefix everywhere.
 
 ## Verification commands
 
@@ -140,4 +137,13 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - Full `npm run check` passes.
 - NOT committed.
 - **Milestone 2 done → next per plan: Milestone 3 consistency + release readiness (prefix unification first).**
+
+### 2026-07-20 — Milestone 3 step 1: prefix unification (DONE, verified green)
+
+- Mechanical sweep: `oui-` → `gk-` across all src ts/tsx/css. 473 refs in 38 files (components, tests, generated ids like `gk-select-*`/`gk-tab-*`, BEM classes, user's untracked theme.css — user approved including it).
+- Zero `oui-` left in src. THEMING.md had none. ROADMAP/AGENT_NOTES keep historical mentions only.
+- Breaking for anyone targeting `.oui-*` selectors — v0.1.0, no users, cheapest now.
+- Full `npm run check` passes (57 tests, build green).
+- NOT committed.
+- Milestone 3 remaining: `"use client"` strategy, publint/attw/`npm pack` review, Changesets bootstrap. Then Storybook + docs (user-requested order).
 

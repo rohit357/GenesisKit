@@ -32,8 +32,8 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     forwardedRef
   ) => {
     const generatedId = useId();
-    const titleId = `oui-dialog-title-${generatedId}`;
-    const descriptionId = description ? `oui-dialog-description-${generatedId}` : undefined;
+    const titleId = `gk-dialog-title-${generatedId}`;
+    const descriptionId = description ? `gk-dialog-description-${generatedId}` : undefined;
     const dialogRef = useRef<HTMLDivElement>(null);
 
     useFocusTrap(dialogRef, open);
@@ -52,7 +52,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     return (
       <Portal>
         <div
-          className="oui-dialog__backdrop"
+          className="gk-dialog__backdrop"
           role="presentation"
           onMouseDown={(event) => {
             if (closeOnOverlayClick && event.target === event.currentTarget) onClose();
@@ -60,7 +60,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         >
           <div
             ref={mergeRefs(dialogRef, forwardedRef)}
-            className={cx("oui-dialog", className)}
+            className={cx("gk-dialog", className)}
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
@@ -68,19 +68,19 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
             tabIndex={-1}
             {...props}
           >
-            <div className="oui-dialog__header">
-              <div className="oui-dialog__heading">
-                <h2 className="oui-dialog__title" id={titleId}>
+            <div className="gk-dialog__header">
+              <div className="gk-dialog__heading">
+                <h2 className="gk-dialog__title" id={titleId}>
                   {title}
                 </h2>
                 {description && (
-                  <div className="oui-dialog__description" id={descriptionId}>
+                  <div className="gk-dialog__description" id={descriptionId}>
                     {description}
                   </div>
                 )}
               </div>
               <button
-                className="oui-dialog__close"
+                className="gk-dialog__close"
                 type="button"
                 aria-label={closeLabel}
                 onClick={onClose}
@@ -88,8 +88,8 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <div className="oui-dialog__content">{children}</div>
-            {footer && <div className="oui-dialog__footer">{footer}</div>}
+            <div className="gk-dialog__content">{children}</div>
+            {footer && <div className="gk-dialog__footer">{footer}</div>}
           </div>
         </div>
       </Portal>

@@ -10,6 +10,6 @@ describe("Spinner", () => {
 
   it("supports sizes and attributes", () => {
     render(<Spinner size="lg" data-testid="spinner" />);
-    expect(screen.getByTestId("spinner")).toHaveClass("oui-spinner--lg");
+    expect(screen.getByTestId("spinner")).toHaveClass("gk-spinner--lg");
   });
 });

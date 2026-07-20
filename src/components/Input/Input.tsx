@@ -20,17 +20,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const generatedId = useId();
-    const inputId = id ?? `oui-input-${generatedId}`;
+    const inputId = id ?? `gk-input-${generatedId}`;
     const descriptionId = description ? `${inputId}-description` : undefined;
     const errorId = error ? `${inputId}-error` : undefined;
     const describedBy = [ariaDescribedBy, descriptionId, errorId].filter(Boolean).join(" ");
 
     return (
-      <div className={cx("oui-field", fullWidth && "oui-field--full-width", className)}>
-        <label className="oui-field__label" htmlFor={inputId}>
+      <div className={cx("gk-field", fullWidth && "gk-field--full-width", className)}>
+        <label className="gk-field__label" htmlFor={inputId}>
           {label}
           {required && (
-            <span className="oui-field__required" aria-hidden="true">
+            <span className="gk-field__required" aria-hidden="true">
               *
             </span>
           )}
@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={inputId}
-          className={cx("oui-input", `oui-input--${size}`, Boolean(error) && "oui-input--error")}
+          className={cx("gk-input", `gk-input--${size}`, Boolean(error) && "gk-input--error")}
           required={required}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy || undefined}
@@ -47,13 +47,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         />
 
         {description && (
-          <div className="oui-field__description" id={descriptionId}>
+          <div className="gk-field__description" id={descriptionId}>
             {description}
           </div>
         )}
 
         {error && (
-          <div className="oui-field__error" id={errorId} role="alert">
+          <div className="gk-field__error" id={errorId} role="alert">
             {error}
           </div>
         )}

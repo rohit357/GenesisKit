@@ -19,18 +19,18 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   ) => (
     <div
       ref={ref}
-      className={cx("oui-alert", `oui-alert--${status}`, className)}
+      className={cx("gk-alert", `gk-alert--${status}`, className)}
       role={status === "error" ? "alert" : "status"}
       aria-live={status === "error" ? "assertive" : "polite"}
       {...props}
     >
-      <div className="oui-alert__content">
-        {title && <div className="oui-alert__title">{title}</div>}
-        <div className="oui-alert__message">{children}</div>
+      <div className="gk-alert__content">
+        {title && <div className="gk-alert__title">{title}</div>}
+        <div className="gk-alert__message">{children}</div>
       </div>
       {dismissible && (
         <button
-          className="oui-alert__dismiss"
+          className="gk-alert__dismiss"
           type="button"
           aria-label={dismissLabel}
           onClick={onDismiss}

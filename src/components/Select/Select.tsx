@@ -31,17 +31,17 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       placeholder !== undefined && value === undefined && defaultValue === undefined
         ? ""
         : defaultValue;
-    const selectId = id ?? `oui-select-${generatedId}`;
+    const selectId = id ?? `gk-select-${generatedId}`;
     const descriptionId = description ? `${selectId}-description` : undefined;
     const errorId = error ? `${selectId}-error` : undefined;
     const describedBy = [ariaDescribedBy, descriptionId, errorId].filter(Boolean).join(" ");
 
     return (
-      <div className={cx("oui-select-field", fullWidth && "oui-select-field--full-width")}>
-        <label className="oui-select-field__label" htmlFor={selectId}>
+      <div className={cx("gk-select-field", fullWidth && "gk-select-field--full-width")}>
+        <label className="gk-select-field__label" htmlFor={selectId}>
           {label}
           {required && (
-            <span className="oui-select-field__required" aria-hidden="true">
+            <span className="gk-select-field__required" aria-hidden="true">
               *
             </span>
           )}
@@ -51,9 +51,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           id={selectId}
           className={cx(
-            "oui-select",
-            `oui-select--${size}`,
-            Boolean(error) && "oui-select--error",
+            "gk-select",
+            `gk-select--${size}`,
+            Boolean(error) && "gk-select--error",
             className
           )}
           required={required}
@@ -72,13 +72,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </select>
 
         {description && (
-          <div className="oui-select-field__description" id={descriptionId}>
+          <div className="gk-select-field__description" id={descriptionId}>
             {description}
           </div>
         )}
 
         {error && (
-          <div className="oui-select-field__error" id={errorId} role="alert">
+          <div className="gk-select-field__error" id={errorId} role="alert">
             {error}
           </div>
         )}

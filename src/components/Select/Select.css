@@ -1,28 +1,28 @@
-.oui-select-field {
+.gk-select-field {
   color: #172033;
   display: grid;
   gap: 0.375rem;
   max-width: 28rem;
 }
 
-.oui-select-field--full-width {
+.gk-select-field--full-width {
   max-width: none;
   width: 100%;
 }
 
-.oui-select-field__label {
+.gk-select-field__label {
   color: #172033;
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.25;
 }
 
-.oui-select-field__required {
+.gk-select-field__required {
   color: #b91c1c;
   margin-left: 0.25rem;
 }
 
-.oui-select {
+.gk-select {
   appearance: none;
   background-color: #ffffff;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23475569' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -43,61 +43,61 @@
   width: 100%;
 }
 
-.oui-select:focus {
+.gk-select:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgb(37 99 235 / 20%);
 }
 
-.oui-select:disabled {
+.gk-select:disabled {
   background-color: #f1f5f9;
   cursor: not-allowed;
   opacity: 0.7;
 }
 
-.oui-select--sm {
+.gk-select--sm {
   font-size: 0.8125rem;
   min-height: 2rem;
   padding: 0.375rem 1.875rem 0.375rem 0.625rem;
 }
 
-.oui-select--md {
+.gk-select--md {
   font-size: 0.9375rem;
   min-height: 2.5rem;
   padding: 0.5rem 2rem 0.5rem 0.75rem;
 }
 
-.oui-select--lg {
+.gk-select--lg {
   font-size: 1rem;
   min-height: 3rem;
   padding: 0.75rem 2.125rem 0.75rem 0.875rem;
 }
 
-.oui-select--error {
+.gk-select--error {
   border-color: #dc2626;
 }
 
-.oui-select--error:focus {
+.gk-select--error:focus {
   border-color: #b91c1c;
   box-shadow: 0 0 0 3px rgb(220 38 38 / 18%);
 }
 
-.oui-select-field__description,
-.oui-select-field__error {
+.gk-select-field__description,
+.gk-select-field__error {
   font-size: 0.8125rem;
   line-height: 1.4;
 }
 
-.oui-select-field__description {
+.gk-select-field__description {
   color: #475569;
 }
 
-.oui-select-field__error {
+.gk-select-field__error {
   color: #b91c1c;
   font-weight: 500;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .oui-select {
+  .gk-select {
     transition-duration: 0.001ms;
   }
 }

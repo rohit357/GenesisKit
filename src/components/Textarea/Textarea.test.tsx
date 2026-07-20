@@ -10,7 +10,7 @@ describe("Textarea", () => {
     render(<Textarea label="Comment" />);
 
     const textarea = screen.getByLabelText("Comment");
-    expect(textarea).toHaveClass("oui-textarea--md", "oui-textarea--resize-vertical");
+    expect(textarea).toHaveClass("gk-textarea--md", "gk-textarea--resize-vertical");
   });
 
   it("connects description and error content for assistive technology", () => {
@@ -40,7 +40,7 @@ describe("Textarea", () => {
     const textarea = screen.getByRole("textbox", { name: /Biography/ });
     expect(textarea).toHaveAttribute("id", "bio");
     expect(textarea).toHaveAttribute("rows", "6");
-    expect(textarea).toHaveClass("oui-textarea--lg", "oui-textarea--resize-none");
+    expect(textarea).toHaveClass("gk-textarea--lg", "gk-textarea--resize-none");
     expect(textarea).toBeRequired();
     expect(ref.current).toBe(textarea);
   });

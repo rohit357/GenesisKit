@@ -10,7 +10,7 @@ describe("Button", () => {
 
     const button = screen.getByRole("button", { name: "Save changes" });
     expect(button).toHaveAttribute("type", "button");
-    expect(button).toHaveClass("oui-button--primary", "oui-button--md");
+    expect(button).toHaveClass("gk-button--primary", "gk-button--md");
   });
 
   it("supports variants and sizes", () => {
@@ -20,7 +20,7 @@ describe("Button", () => {
       </Button>
     );
 
-    expect(screen.getByRole("button")).toHaveClass("oui-button--danger", "oui-button--lg");
+    expect(screen.getByRole("button")).toHaveClass("gk-button--danger", "gk-button--lg");
   });
 
   it("calls the click handler", async () => {
@@ -38,6 +38,6 @@ describe("Button", () => {
     const button = screen.getByRole("button", { name: "Saving" });
     expect(button).toBeDisabled();
     expect(button).toHaveAttribute("aria-busy", "true");
-    expect(button.querySelector(".oui-button__spinner")).toBeInTheDocument();
+    expect(button.querySelector(".gk-button__spinner")).toBeInTheDocument();
   });
 });
