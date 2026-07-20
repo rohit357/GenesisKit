@@ -1,0 +1,16 @@
+.oui-radio-group { border: 0; color: #172033; margin: 0; max-width: 32rem; min-width: 0; padding: 0; }
+.oui-radio-group__legend { color: #172033; font-size: 0.9375rem; font-weight: 700; padding: 0; }
+.oui-radio-group__options { display: flex; gap: 0.75rem; margin-top: 0.625rem; }
+.oui-radio-group--vertical .oui-radio-group__options { flex-direction: column; }
+.oui-radio-group--horizontal .oui-radio-group__options { flex-wrap: wrap; }
+.oui-radio-option { align-items: flex-start; cursor: pointer; display: inline-flex; gap: 0.625rem; }
+.oui-radio-option--disabled { cursor: not-allowed; opacity: 0.6; }
+.oui-radio-option__control { accent-color: #2563eb; cursor: pointer; flex: 0 0 auto; margin: 0.2rem 0 0; }
+.oui-radio-option__control:focus-visible { outline: 3px solid rgb(37 99 235 / 35%); outline-offset: 2px; }
+.oui-radio-option__copy { display: grid; gap: 0.125rem; }
+.oui-radio-option__label { font-size: 0.9375rem; font-weight: 500; }
+.oui-radio-option__description, .oui-radio-group__description, .oui-radio-group__error { font-size: 0.8125rem; line-height: 1.4; }
+.oui-radio-option__description, .oui-radio-group__description { color: #475569; }
+.oui-radio-group__description { margin-top: 0.375rem; }
+.oui-radio-group__error { color: #b91c1c; font-weight: 500; margin-top: 0.5rem; }
+

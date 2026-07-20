@@ -1,0 +1,7 @@
+.oui-spinner { display: inline-flex; }
+.oui-spinner__circle { animation: oui-spinner-rotate 700ms linear infinite; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; display: block; height: 1.25rem; width: 1.25rem; }
+.oui-spinner--sm .oui-spinner__circle { height: 0.875rem; width: 0.875rem; }
+.oui-spinner--lg .oui-spinner__circle { border-width: 3px; height: 2rem; width: 2rem; }
+@keyframes oui-spinner-rotate { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .oui-spinner__circle { animation-duration: 0.001ms; } }
+
