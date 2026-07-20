@@ -9,7 +9,11 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
   description?: ReactNode;
   /** Validation content shown below the select. */
   error?: ReactNode;
-  /** Optional disabled option shown before the available choices. */
+  /**
+   * Hidden, non-selectable option shown before a choice is made. When set on
+   * an uncontrolled select without a defaultValue, it becomes the initial
+   * display text.
+   */
   placeholder?: string;
   /** Controls the select's height and horizontal padding. */
   size?: SelectSize;

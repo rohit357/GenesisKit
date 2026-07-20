@@ -17,12 +17,20 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       className,
       required,
       children,
+      defaultValue,
+      value,
       "aria-describedby": ariaDescribedBy,
       ...props
     },
     ref
   ) => {
     const generatedId = useId();
+    // When a placeholder is present on an uncontrolled select, default to it
+    // so the placeholder is what users see first.
+    const resolvedDefaultValue =
+      placeholder !== undefined && value === undefined && defaultValue === undefined
+        ? ""
+        : defaultValue;
     const selectId = id ?? `oui-select-${generatedId}`;
     const descriptionId = description ? `${selectId}-description` : undefined;
     const errorId = error ? `${selectId}-error` : undefined;
@@ -49,12 +57,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className
           )}
           required={required}
+          value={value}
+          defaultValue={resolvedDefaultValue}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy || undefined}
           {...props}
         >
           {placeholder && (
-            <option value="" disabled>
+            <option value="" disabled hidden>
               {placeholder}
             </option>
           )}

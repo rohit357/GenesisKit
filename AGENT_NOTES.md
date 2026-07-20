@@ -72,7 +72,7 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 
 ## Next milestones (from ROADMAP — renumbered 2026-07-20 after plan merge)
 
-2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. ~~RadioGroup (fallback name + required)~~ DONE. Remaining: Select (placeholder/chevron), Card (heading level), Tabs (manual activation + keepMounted).
+2. A11y audit fixes: ~~Dialog (portal/focus-trap/scroll-lock)~~ DONE. ~~RadioGroup (fallback name + required)~~ DONE. ~~Select (placeholder/chevron)~~ DONE. Remaining: Card (heading level), Tabs (manual activation + keepMounted).
 3. Consistency + release readiness: unify `oui-`/`gk-` prefix (mechanical sweep, BEFORE new components), `"use client"` strategy, publint/attw/`npm pack` review, Changesets bootstrap.
 4. Token v2 + real dark mode + new schemes (soft/sharp/glass) + `createTheme` + density modes.
 5. Shared internals (~~Portal, useFocusTrap~~ DONE; useControllableState, useDismiss, positioning next) + `new:component` generator → Phase A/B components.
@@ -112,4 +112,13 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - Added: **Post-v1.0** section — `npx genesiskit add button` CLI (shadcn-style copy-in). Gated on stable APIs + unified prefix + docs site. NOT before v1.0.
 - Added to this file: repo rule "`main` always releasable" + git workflow with mandatory `git diff --cached` review (and `git add .` caution re: untracked user theme files).
 - No milestone order change this round.
+
+### 2026-07-20 — Milestone 2 step 3: Select (DONE, verified green)
+
+- Placeholder option now `hidden` (was only `disabled`) → shows as initial display text, never re-selectable from dropdown, no ghost option in list.
+- Uncontrolled + placeholder + no defaultValue → component supplies `defaultValue=""` so placeholder is what renders first. Explicit `defaultValue`/`value` still win.
+- Custom chevron: `appearance: none` + inline-SVG `background-image` (slate #475569, right-aligned), extra right padding per size (sm/md/lg) so text never overlaps arrow. Cross-browser consistent (was native OS arrow).
+- Updated `placeholder` JSDoc. +2 tests (placeholder default-selected + unselectable; explicit defaultValue wins). 52 tests total.
+- Full `npm run check` passes.
+- NOT committed.
 

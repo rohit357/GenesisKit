@@ -16,8 +16,37 @@ describe("Select", () => {
 
     const select = screen.getByRole("combobox", { name: "Country" });
     expect(select).toHaveClass("oui-select--md");
-    expect(screen.getByRole("option", { name: "Choose a country" })).toBeDisabled();
+    const placeholderOption = screen.getByText("Choose a country");
+    expect(placeholderOption).toBeDisabled();
+    expect(placeholderOption).toHaveAttribute("hidden");
     expect(screen.getByRole("option", { name: "India" })).toBeInTheDocument();
+  });
+
+  it("selects the placeholder by default and keeps it unselectable", async () => {
+    const user = userEvent.setup();
+    render(
+      <Select label="Country" placeholder="Choose a country">
+        <option value="in">India</option>
+        <option value="us">United States</option>
+      </Select>
+    );
+
+    const select = screen.getByRole("combobox", { name: "Country" });
+    expect(select).toHaveValue("");
+
+    await user.selectOptions(select, "in");
+    expect(select).toHaveValue("in");
+  });
+
+  it("respects an explicit defaultValue over the placeholder", () => {
+    render(
+      <Select label="Country" placeholder="Choose a country" defaultValue="us">
+        <option value="in">India</option>
+        <option value="us">United States</option>
+      </Select>
+    );
+
+    expect(screen.getByRole("combobox", { name: "Country" })).toHaveValue("us");
   });
 
   it("supports descriptions, errors, required state, and custom ids", () => {
