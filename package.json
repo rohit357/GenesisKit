@@ -60,6 +60,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "publint": "publint",
     "attw": "attw --pack .",
     "prepublishOnly": "npm run check && npm run publint"
@@ -71,6 +73,10 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "0.16.4",
     "@eslint/js": "^9.17.0",
+    "@storybook/addon-a11y": "^8.4.7",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/react": "^8.4.7",
+    "@storybook/react-vite": "^8.4.7",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
@@ -85,6 +91,7 @@
     "publint": "^0.2.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "storybook": "^8.4.7",
     "tsup": "^8.3.5",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.0",

@@ -169,3 +169,16 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - Full `npm run check` passes (57 tests, prettier clean incl now-tracked token/theme css, build green).
 - NOT committed. **This unblocks Storybook — theme switcher will actually work now.**
 
+### 2026-07-20 — Milestone 3/tooling: Storybook foundation (DONE, verified build)
+
+- Storybook 8 + react-vite. Config: `.storybook/main.ts` (stories glob `src/**/*.stories.@(ts|tsx)`, addons essentials + a11y, telemetry off), `.storybook/preview.tsx`.
+- **Theme switcher:** toolbar dropdown (globalTypes `theme`) → decorator wraps every story in `<div className={gk-theme-*}>` with canvas bg + text vars so dark themes legible. 4 themes: genesis/midnight/emerald/rose. Relies on the tokens-in-bundle fix from prior step.
+- Pattern story: `Button.stories.tsx` — Playground (controls), Variants, Sizes, Loading, Disabled + autodocs tag. This is the TEMPLATE for remaining 13 stories.
+- Scripts: `storybook` (dev :6006), `build-storybook`. devDeps: storybook, @storybook/react, react-vite, addon-essentials, addon-a11y (all ^8.4.7).
+- Guards so `npm run check` stays green: stories live in src → typechecked/linted/formatted (all pass). vitest default include is `*.{test,spec}` → stories NOT collected as tests. tsup entry is only src/index.ts → stories NOT in published bundle. Added `storybook-static/` to .gitignore + .prettierignore + eslint ignores.
+- `npm run build-storybook` exits 0 (Button story + a11y + docs compiled). Chunk-size warning cosmetic (SB internals).
+- `npm run check` green (57 tests, build ok).
+- NOT committed.
+- **Next: remaining 13 stories (Input, Card, Checkbox, Textarea, Select, Badge, Alert, Spinner, Avatar, Switch, RadioGroup, Tabs, Dialog) using Button.stories pattern. Then Pages deploy workflow. Then docs.**
+- npm audit now 8 vulns (6 moderate, 1 high, 1 critical) — Storybook dev-dep tree. Dev-only, not shipped. Address before v1.0.
+
