@@ -160,3 +160,12 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - NOT committed.
 - Milestone 3 remaining: `"use client"` directive strategy, Changesets bootstrap. Then Storybook + docs.
 
+### 2026-07-20 — SHIP-BLOCKER fix: tokens missing from bundle (DONE, verified green)
+
+- **Critical bug found while prepping Storybook:** `src/styles.css` imported component CSS only — NOT `tokens.css` (defines `--gk-color-*`, theme scopes) or `theme.css` (defines `--gk-button-bg` etc. component hooks). Chain: component CSS → `var(--gk-button-bg)` [theme.css] → `var(--gk-color-primary)` [tokens.css]. Shipped `dist/index.css` had ZERO token/hook vars → every consumer got unstyled components (all vars undefined).
+- Why hidden: tokens.css + theme.css were untracked user files until user committed them this session; styles.css never wired them in.
+- Fix: styles.css now imports in correct cascade order — (1) tokens.css, (2) component CSS, (3) theme.css hooks last (per its own "loaded after component styles" comment).
+- Result: dist/index.css 20KB → 32KB, now contains `gk-theme-midnight`/`emerald`/`rose` scopes + 41 primary-color refs. Themes work by adding `class="gk-theme-*"` to any container.
+- Full `npm run check` passes (57 tests, prettier clean incl now-tracked token/theme css, build green).
+- NOT committed. **This unblocks Storybook — theme switcher will actually work now.**
+

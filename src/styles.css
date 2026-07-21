@@ -1,4 +1,9 @@
 /* Import this file once in an application entry point. */
+
+/* 1. Design tokens — primitive + semantic vars, theme scopes. Must come first. */
+@import "./tokens.css";
+
+/* 2. Component styles. */
 @import "./components/Button/Button.css";
 @import "./components/Input/Input.css";
 @import "./components/Card/Card.css";
@@ -14,3 +19,6 @@
 @import "./components/RadioGroup/RadioGroup.css";
 @import "./components/Tabs/Tabs.css";
 @import "./components/Dialog/Dialog.css";
+
+/* 3. Component-level customization hooks — loaded after component styles. */
+@import "./theme.css";
