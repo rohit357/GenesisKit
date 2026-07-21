@@ -124,32 +124,48 @@ the rebrand (`oui-` CSS classes vs `gk-` tokens).
 
 ## 5. Execution order
 
-1. **Foundation sweep** — extract utils, add lint/CI, package.json metadata.
-   _(done; leftovers → step 3: prefix unification, `"use client"`)_
-2. Fix the a11y audit list — Dialog _(done)_, RadioGroup _(done)_, Select,
-   Card, Tabs.
-3. **Consistency + release readiness** — unify `oui-`/`gk-` prefix (one
-   mechanical sweep across classes + tokens, before any new components),
-   `"use client"` strategy, npm package readiness checks (publint /
-   attw / pack review), Changesets bootstrap. Cheap now, expensive after
-   more components exist.
-4. Token v2 + real dark mode + `soft`/`sharp` schemes + `createTheme` +
-   density modes.
-5. Shared overlay internals (`Portal` + `useFocusTrap` done;
-   `useControllableState`, `useDismiss`, positioning next) +
-   `new:component` generator → Phase A + B components.
-6. Storybook (= demo site) + docs + a11y CI + visual tests +
-   `examples/next` + `examples/vite`.
-7. Phase C/D + release pipeline hardening + README/marketing/launch → v1.0.
+**Status (2026-07-20):** Milestones 1–3 substantially done — a11y audit closed
+(Dialog/RadioGroup/Select/Card/Tabs), component architecture stable, CI green,
+57 tests passing, package exports finalized (ESM/CJS + types, publint clean,
+package validated), theme system complete with tokens correctly bundled,
+Storybook foundation up with a working theme switcher, and `Button.stories`
+established as the reference-quality standard.
 
-### Post-v1.0 (long-term, only after the library is stable)
+### Phase 1 — Storybook coverage (CURRENT)
 
-- **CLI** — `npx genesiskit add button` copies a component's folder into a
-  consumer app (shadcn-style). Depends on stable component APIs + unified
-  prefix + docs site for CLI documentation. Do not start before v1.0.
+Story for every existing component, matching `Button.stories` quality. Remaining:
+Input, Card, Checkbox, Textarea, Select, Badge, Alert, Spinner, Avatar, Switch,
+RadioGroup, Tabs, Dialog. Each includes only what applies: Playground, Variants,
+Sizes, States (loading/disabled/error), Accessibility, Autodocs. **No redesign
+in this phase** — goal is complete docs + coverage. Then GitHub Pages deploy.
 
-Each step keeps the per-component folder convention — that convention is the
-thing to scale, not replace. Future extensibility rides on the same pattern:
-public hooks (`useToast`, `useControllableState`), a small utility layer
-(`src/utils`), layout primitives, then boilerplate blocks/templates — each
-still one isolated folder.
+### Phase 2 — Polish existing components
+
+After every component has Storybook coverage. Spacing, typography, hover/active
+states, focus rings, transitions, keyboard UX, responsive behavior, a11y
+refinements, API + visual consistency across the library. **No new components.**
+(A future, more-capable-model pass will do the deep premium visual design here —
+keep architecture flexible for it, but do not block on it.)
+
+### Phase 3 — Expand the library
+
+Only after coverage AND polish. New production-grade components, quality over
+quantity. Priority: Tooltip, Popover, DropdownMenu, Accordion, Progress,
+Skeleton, Toast, Breadcrumb, Pagination, Command palette, Drawer, Combobox,
+MultiSelect, Calendar, DatePicker, DataTable, … Built on shared internals
+(`Portal` + `useFocusTrap` done; `useControllableState`, `useDismiss`,
+positioning next) + the `new:component` generator.
+
+### Later
+
+Token v2 primitive layer + density modes + `createTheme`; docs website
+(`docs.genesiskit.dev`) separate from Storybook; `examples/next` + `examples/vite`;
+visual regression; Changesets + release pipeline; README/marketing/launch → v1.0.
+Post-v1.0: `npx genesiskit add <component>` CLI.
+
+### Standing rules
+
+Repo stays releasable after every milestone. Tests pass, Storybook builds, a11y
+holds, backward compat preserved where practical. Stop for review after each
+milestone. Each step keeps the per-component folder convention — scale it, don't
+replace it.

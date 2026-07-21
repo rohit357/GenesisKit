@@ -29,5 +29,13 @@ export default tseslint.config(
     rules: {
       "@typescript-eslint/no-explicit-any": "off"
     }
+  },
+  {
+    // Story `render` callbacks legitimately use hooks (useState for controlled
+    // components); they are real render functions even if not named as such.
+    files: ["**/*.stories.{ts,tsx}"],
+    rules: {
+      "react-hooks/rules-of-hooks": "off"
+    }
   }
 );

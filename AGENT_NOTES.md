@@ -69,12 +69,17 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 
 ## Next milestones (from ROADMAP — renumbered 2026-07-20 after plan merge)
 
-2. ~~A11y audit fixes~~ **MILESTONE 2 COMPLETE**: Dialog, RadioGroup, Select, Card, Tabs all done.
-3. Consistency + release readiness: unify `oui-`/`gk-` prefix (mechanical sweep, BEFORE new components), `"use client"` strategy, publint/attw/`npm pack` review, Changesets bootstrap.
-4. Token v2 + real dark mode + new schemes (soft/sharp/glass) + `createTheme` + density modes.
-5. Shared internals (~~Portal, useFocusTrap~~ DONE; useControllableState, useDismiss, positioning next) + `new:component` generator → Phase A/B components.
-6. Storybook (doubles as public demo site) + docs + a11y CI + visual regression + `examples/next` + `examples/vite`.
-7. Phase C/D components + release pipeline hardening + README/marketing/launch → v1.0.
+**DONE:** a11y audit (Dialog/RadioGroup/Select/Card/Tabs), prefix unification (`oui-`→`gk-`), package structure + exports (ESM/CJS + types, publint clean, react-dom peer, card types exported), tokens-in-bundle fix, Storybook foundation + theme switcher + Button reference story.
+
+**Phase 1 (CURRENT):** Storybook coverage for all 13 remaining components (Input, Card, Checkbox, Textarea, Select, Badge, Alert, Spinner, Avatar, Switch, RadioGroup, Tabs, Dialog) at Button-story quality. Each: Playground / Variants / Sizes (if applicable) / States / Accessibility / Autodocs. NO redesign. Then GitHub Pages deploy.
+
+**Phase 2:** Polish existing components (spacing, type, hover/active/focus, transitions, keyboard UX, responsive, a11y refinement, API + visual consistency). NO new components. Future stronger-model pass does deep premium visual design here — keep architecture flexible, don't block on it.
+
+**Phase 3:** New components (Tooltip, Popover, DropdownMenu, Accordion, Progress, Skeleton, Toast, Breadcrumb, Pagination, Command palette, Drawer, Combobox, MultiSelect, Calendar, DatePicker, DataTable…) on shared internals + generator. Quality > quantity.
+
+**Later:** Token v2 + density + createTheme; docs website; examples/next+vite; visual regression; Changesets + release → v1.0. Post-v1.0: CLI.
+
+Standing rules: repo releasable after every milestone; tests pass; Storybook builds; a11y holds; backward compat where practical; stop for review after each milestone.
 
 ## Progress log (cont.)
 
@@ -181,4 +186,14 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - NOT committed.
 - **Next: remaining 13 stories (Input, Card, Checkbox, Textarea, Select, Badge, Alert, Spinner, Avatar, Switch, RadioGroup, Tabs, Dialog) using Button.stories pattern. Then Pages deploy workflow. Then docs.**
 - npm audit now 8 vulns (6 moderate, 1 high, 1 critical) — Storybook dev-dep tree. Dev-only, not shipped. Address before v1.0.
+
+### 2026-07-20 — Phase 1: Storybook coverage COMPLETE (all 14 components, verified build)
+
+- Added 13 stories at Button-reference quality: Input, Card, Checkbox, Textarea, Select, Badge, Alert, Spinner, Avatar, Switch, RadioGroup, Tabs, Dialog. Each: Playground + Variants/Sizes/States as applicable + autodocs tag. a11y addon runs per story.
+- Dialog story: controlled via local `useState` (open/onClose) so focus trap + scroll lock exercisable. Meta args include dummy `open:false`/`onClose` to satisfy required-prop story type; render overrides.
+- Card/Dialog stories import Button as demo trigger — cross-component import fine in stories.
+- **2 build gotchas fixed:** (1) Dialog StoryObj type required `open`/`onClose` → added to meta.args. (2) eslint `react-hooks/rules-of-hooks` errored on `useState` inside story `render` fns → added eslint override turning that rule off for `**/*.stories.{ts,tsx}` (SB render callbacks legitimately use hooks).
+- `npm run check` green (57 tests, build ok). `npm run build-storybook` exit 0 — all 14 story files compiled.
+- NOT committed.
+- **Phase 1 remaining: GitHub Pages deploy workflow for Storybook. Then Phase 2 (polish).**
 
