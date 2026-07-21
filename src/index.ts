@@ -5,7 +5,13 @@ export type { ButtonProps, ButtonSize, ButtonVariant } from "./components/Button
 export { Input } from "./components/Input";
 export type { InputProps, InputSize } from "./components/Input";
 export { Card } from "./components/Card";
-export type { CardPadding, CardProps, CardVariant } from "./components/Card";
+export type {
+  CardElement,
+  CardHeadingLevel,
+  CardPadding,
+  CardProps,
+  CardVariant
+} from "./components/Card";
 export { Checkbox } from "./components/Checkbox";
 export type { CheckboxProps, CheckboxSize } from "./components/Checkbox";
 export { Textarea } from "./components/Textarea";

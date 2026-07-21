@@ -147,3 +147,16 @@ Avatar, Switch, RadioGroup, Tabs, Dialog.
 - NOT committed.
 - Milestone 3 remaining: `"use client"` strategy, publint/attw/`npm pack` review, Changesets bootstrap. Then Storybook + docs (user-requested order).
 
+### 2026-07-20 — Milestone 3 step 2: npm package structure + exports (DONE, verified green)
+
+- **Bug fixed (publint caught):** `exports["."].types` resolved as ESM under `require` condition → CJS consumers got wrong types. Split into per-condition blocks: `import` → `.d.ts`/`.js`, `require` → `.d.cts`/`.cjs` (types key first in each). publint now "All good!".
+- **Bug fixed:** `react-dom` used by Portal (createPortal) but missing from peerDependencies → added `"react-dom": ">=18"`.
+- **Export hygiene:** new Card types `CardElement` + `CardHeadingLevel` were unexported → added to Card/index.ts + src/index.ts.
+- Added scripts: `publint`, `attw` (`attw --pack .`), `prepublishOnly` (runs check + publint before any publish → main-releasable guard at publish time too).
+- Added devDeps: `publint@^0.2.12`, `@arethetypeswrong/cli@0.16.4` (pinned).
+- **attw crashes in THIS env** (`Cannot read properties of undefined (reading 'filename')`) on 0.16 + 0.17 — environmental (node PATH quirk on Git Bash Windows), NOT our package. Tarball hand-verified: dist has index.js/.cjs/.css + index.d.ts + index.d.cts + maps, README, LICENSE, package.json. attw runs fine in CI.
+- Tarball contents correct (`npm pack` inspected). `files: ["dist"]` + README/LICENSE auto-included.
+- Full `npm run check` passes (57 tests, build green).
+- NOT committed.
+- Milestone 3 remaining: `"use client"` directive strategy, Changesets bootstrap. Then Storybook + docs.
+
