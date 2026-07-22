@@ -237,3 +237,15 @@ Standing rules: repo releasable after every milestone; tests pass; Storybook bui
 - `npm run check` green (57 tests, build ok). dist/index.css 32.3→33.9KB (var refs). NOT committed.
 - **Next: M3 selection controls (Checkbox/Radio/Switch) — scales + focus-ring unify. STOP for review first.**
 
+### 2026-07-22 — Phase 2 M3: selection controls tokenized + focus-ring unified (DONE, verified green)
+
+- Rewrote `Checkbox.css`, `RadioGroup.css`, `Switch.css` onto M1 scales + semantic tokens. No markup/API change.
+- **Focus-ring unified:** all three used `outline: 3px solid rgb(37 99 235 / 35%)` → now `var(--gk-focus-ring)` (32%), matching Button + fields. Closes the 20/30/32/35% drift for the whole interactive set. Imperceptible 35→32% shift.
+- **Legend weight normalized:** radio `__legend` `700` → `--gk-font-weight-semibold` (600) to match the form-family label tier (Input/Select/Textarea labels = 600). Hierarchy still clear: group label 600 > option label 500 (medium) > helper 400/normal.
+- Switch motion tokenized: `150ms ease` → `var(--gk-motion-fast) var(--gk-ease-standard)` (curve now matches fields; was raw `ease`). Track radius `999px` → `--gk-radius-full`.
+- Hardcoded hex → matching tokens (accent `#2563eb`→primary, checked track→primary, thumb `#fff`→surface, label/desc/error colors→tokens) — all value-matched to what theme.css renders today, zero visual change.
+- Helper line-height `1.4` → `--gk-leading-normal` (1.45), same micro-normalization as M2.
+- **Kept literal (off-scale one-offs, documented):** switch off-track grey `#94a3b8` (no semantic token exists), thumb shadow `0 1px 2px rgb(15 23 42/25%)` (25% ≠ shadow-sm 8%), control box dims (1rem/0.875rem, track/thumb sizes), optical radio margin `0.2rem`, text indents (checkbox `1.625rem`, switch `3.375rem` = control width + gap).
+- `npm run check` green (57 tests, all gates). NOT committed.
+- **Next: M4 surfaces (Card/Dialog) — scales + heading-weight rule + motion tokens. STOP for review first.**
+
