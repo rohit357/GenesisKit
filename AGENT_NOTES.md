@@ -206,3 +206,20 @@ Standing rules: repo releasable after every milestone; tests pass; Storybook bui
 - NOT committed.
 - **Phase 1 COMPLETE → Phase 2: polish existing components (no new components).**
 
+### 2026-07-22 — Phase 2 kickoff: design-system audit + M1 token foundation (DONE, verified green)
+
+- **Full library CSS audit** (all 14 components + tokens/theme/styles). Cohesion gaps found:
+  1. No spacing scale — padding/gap ad hoc (`0.375/0.5/0.625/0.75/0.875/1/1.25/1.5/2rem`).
+  2. No type scale — 8 scattered font-sizes, font-weight mixes 500/600/700/**800**, line-height mixes 1.25–1.5.
+  3. Heading-weight drift: Alert title + Avatar use `800`; labels `600`; badge `700`. No rule → normalize to `bold`(700) later.
+  4. **Dead color layer:** every component CSS hardcodes hex, then `theme.css` re-declares via tokens and WINS (loads last). e.g. Input border hardcoded `#94a3b8` but token `--gk-color-border`=`#cbd5e1` renders. Editing component-CSS colors does nothing → trap. Kill in per-family milestones.
+  5. Raw motion: component CSS writes `150ms ease` literally, not `var(--gk-motion-fast) var(--gk-ease-standard)`. Animations ad hoc 160/180/200/220ms.
+  6. Focus-ring opacity drift: 20/30/32/35% for the "same" ring.
+- **M1 = token foundation (additive, zero visual/API change).** Added to `tokens.css` (`:root,.gk-theme-genesis` block, scale is theme-agnostic so not repeated per theme):
+  - Spacing: `--gk-space-1..11` (2px step: 0.125→2rem) — matches existing rhythm so migration is 1:1, no redesign.
+  - Type: `--gk-font-size-2xs..3xl` (0.6875→1.25rem), `--gk-font-weight-normal/medium/semibold/bold` (400/500/600/700), `--gk-leading-tight/snug/normal/relaxed` (1.25/1.35/1.45/1.5).
+  - Motion: added `--gk-motion-emphasis: 220ms`, `--gk-ease-out`.
+- `npm run check` green (57 tests, build ok). dist/index.css now carries the scale vars. NOT committed.
+- **Phase 2 plan (milestones):** M2 form-field family (Input/Select/Textarea) → consume scales + kill dead color layer + border→token. M3 selection controls (Checkbox/Radio/Switch) → scales + focus-ring unify. M4 surfaces (Card/Dialog) → scales + heading-weight rule + motion tokens. M5 feedback/display (Alert/Badge/Avatar/Spinner/Tabs) → scales + drop 800 + motion tokens. M6 sweep + Storybook visual pass.
+- **Next: M2 (form-field family). STOP for review first.**
+
