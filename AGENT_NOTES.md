@@ -197,3 +197,12 @@ Standing rules: repo releasable after every milestone; tests pass; Storybook bui
 - NOT committed.
 - **Phase 1 remaining: GitHub Pages deploy workflow for Storybook. Then Phase 2 (polish).**
 
+### 2026-07-21 — Phase 1 final: Storybook Pages deploy (DONE) — PHASE 1 COMPLETE
+
+- `.github/workflows/deploy-storybook.yml`: push to main (+ manual dispatch) → npm ci → build-storybook → upload `storybook-static` → deploy via actions/deploy-pages@v4. Official Pages actions, `pages`/`id-token` permissions, `concurrency: pages` cancels stale deploys.
+- **User must one-time enable: repo Settings → Pages → Source = "GitHub Actions".** Without it, deploy job fails.
+- Site lands at https://rohit357.github.io/GenesisKit/ — Storybook = public demo (per plan, no separate demo app).
+- prettier clean on workflow yml. No src changes → check unaffected (still green from prior step).
+- NOT committed.
+- **Phase 1 COMPLETE → Phase 2: polish existing components (no new components).**
+
