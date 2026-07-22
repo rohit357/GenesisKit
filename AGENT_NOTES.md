@@ -223,3 +223,17 @@ Standing rules: repo releasable after every milestone; tests pass; Storybook bui
 - **Phase 2 plan (milestones):** M2 form-field family (Input/Select/Textarea) → consume scales + kill dead color layer + border→token. M3 selection controls (Checkbox/Radio/Switch) → scales + focus-ring unify. M4 surfaces (Card/Dialog) → scales + heading-weight rule + motion tokens. M5 feedback/display (Alert/Badge/Avatar/Spinner/Tabs) → scales + drop 800 + motion tokens. M6 sweep + Storybook visual pass.
 - **Next: M2 (form-field family). STOP for review first.**
 
+### 2026-07-22 — Phase 2 M2: form-field family tokenized (DONE, verified green)
+
+- Rewrote `Input.css`, `Select.css`, `Textarea.css` to consume the M1 scales + semantic color tokens. No markup/API/prop change.
+- **Killed the dead-hex trap:** hardcoded hex in these 3 files was silently overridden by `theme.css` (loads last, wins). Replaced each with the token that ALREADY renders → CSS now honest + standalone-correct. Verified value-for-value so zero visual change, e.g.:
+  - input border `#94a3b8` → `var(--gk-color-border)` (renders `#cbd5e1` today via theme — matched).
+  - focus ring `rgb(37 99 235 / 20%)` → `var(--gk-focus-ring)` (renders 32% today — matched).
+  - error border `#dc2626` → `var(--gk-color-danger)` (renders `#b91c1c` today — matched); error-focus ring `rgb(220 38 38/18%)` → `rgb(185 28 28/18%)` (matches theme's rendered value).
+- Spacing → `--gk-space-*`; font-size → `--gk-font-size-*`; weight → `--gk-font-weight-*`; line-height → `--gk-leading-*`; transitions → `var(--gk-motion-fast) var(--gk-ease-standard)`.
+- **One intentional micro-normalization:** description/error line-height `1.4` → `--gk-leading-normal` (1.45). Imperceptible on helper text; removes an off-scale value.
+- Kept structural literals (max-width 28/32rem, min-height 2/2.5/3rem + textarea 4.5/5/6rem, select chevron right-padding 1.875/2/2.125rem — chevron clearance, not rhythm).
+- `theme.css` untouched (still the customization-hook layer, still wins). Duplication component↔theme now both token-based → single source (token), no longer a trap.
+- `npm run check` green (57 tests, build ok). dist/index.css 32.3→33.9KB (var refs). NOT committed.
+- **Next: M3 selection controls (Checkbox/Radio/Switch) — scales + focus-ring unify. STOP for review first.**
+
