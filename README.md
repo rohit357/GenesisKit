@@ -14,7 +14,7 @@ GenesisKit is an open-source React UI library of small, predictable, accessible 
   <a href="https://github.com/rohit357/GenesisKit/actions/workflows/deploy-storybook.yml"><img alt="GitHub Pages" src="https://github.com/rohit357/GenesisKit/actions/workflows/deploy-storybook.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white">
-  <img alt="Storybook" src="https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white">
+  <a href="https://rohit357.github.io/GenesisKit/"><img alt="Storybook" src="https://img.shields.io/badge/Storybook-live-ff4785?logo=storybook&logoColor=white"></a>
   <a href="https://github.com/rohit357/GenesisKit/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/rohit357/GenesisKit?style=social"></a>
 </p>
 
@@ -141,7 +141,7 @@ The live component playground doubles as the public demo, with a theme switcher 
 
 <!-- Storybook Preview -->
 
-🔗 **Live demo:** `<STORYBOOK_URL>` _(GitHub Pages — link to be added once Pages is enabled)_
+🔗 **Live demo:** [rohit357.github.io/GenesisKit](https://rohit357.github.io/GenesisKit/)
 
 Run it locally:
 
