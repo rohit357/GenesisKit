@@ -83,4 +83,29 @@ describe("Card", () => {
     expect(screen.getByText("Simple content")).toBeInTheDocument();
     expect(screen.queryByRole("banner")).not.toBeInTheDocument();
   });
+
+  it("supports the soft variant", () => {
+    render(
+      <Card variant="soft" data-testid="soft-card">
+        Soft surface
+      </Card>
+    );
+
+    expect(screen.getByTestId("soft-card")).toHaveClass("gk-card--soft");
+  });
+
+  it("adds the interactive class without changing semantics", () => {
+    render(
+      <Card interactive data-testid="interactive-card">
+        Click me
+      </Card>
+    );
+
+    const card = screen.getByTestId("interactive-card");
+    expect(card).toHaveClass("gk-card--interactive");
+    // Interactive is visual only — the card stays a role-less div with no
+    // implicit button role.
+    expect(card).not.toHaveAttribute("role");
+    expect(card.tagName).toBe("DIV");
+  });
 });

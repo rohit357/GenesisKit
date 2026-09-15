@@ -8,16 +8,18 @@ const meta = {
   component: Card,
   tags: ["autodocs"],
   argTypes: {
-    variant: { control: "inline-radio", options: ["elevated", "outlined"] },
+    variant: { control: "inline-radio", options: ["elevated", "outlined", "soft"] },
     padding: { control: "inline-radio", options: ["sm", "md", "lg"] },
     as: { control: "inline-radio", options: ["div", "section", "article"] },
-    headingLevel: { control: "inline-radio", options: [2, 3, 4, 5, 6] }
+    headingLevel: { control: "inline-radio", options: [2, 3, 4, 5, 6] },
+    interactive: { control: "boolean" }
   },
   args: {
     title: "Account settings",
     description: "Manage your profile and preferences.",
     variant: "elevated",
     padding: "md",
+    interactive: false,
     children: "Card body content goes here."
   }
 } satisfies Meta<typeof Card>;
@@ -32,6 +34,17 @@ export const Variants: Story = {
     <div style={{ display: "grid", gap: "1rem", maxWidth: "24rem" }}>
       <Card {...args} variant="elevated" title="Elevated" />
       <Card {...args} variant="outlined" title="Outlined" />
+      <Card {...args} variant="soft" title="Soft" />
+    </div>
+  )
+};
+
+export const Padding: Story = {
+  render: (args) => (
+    <div style={{ display: "grid", gap: "1rem", maxWidth: "24rem" }}>
+      <Card {...args} variant="outlined" padding="sm" title="Small padding" />
+      <Card {...args} variant="outlined" padding="md" title="Medium padding" />
+      <Card {...args} variant="outlined" padding="lg" title="Large padding" />
     </div>
   )
 };
@@ -46,6 +59,16 @@ export const WithHeaderActionAndFooter: Story = {
       </Button>
     ),
     footer: "Updated 2 minutes ago"
+  }
+};
+
+export const Interactive: Story = {
+  args: {
+    interactive: true,
+    title: "Project Aurora",
+    description: "Last activity 2 hours ago",
+    children:
+      "Wrap this card in a Link or button in your own code to make it actionable. The interactive prop is purely visual."
   }
 };
 

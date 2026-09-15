@@ -62,6 +62,29 @@ describe("Dialog", () => {
     expect(document.body.style.overflow).not.toBe("hidden");
   });
 
+  it("applies the requested size class (default md)", () => {
+    const { rerender } = render(
+      <Dialog open title="Default size" onClose={vi.fn()}>
+        Content
+      </Dialog>
+    );
+    expect(screen.getByRole("dialog")).toHaveClass("gk-dialog--md");
+
+    rerender(
+      <Dialog open size="lg" title="Large" onClose={vi.fn()}>
+        Content
+      </Dialog>
+    );
+    expect(screen.getByRole("dialog")).toHaveClass("gk-dialog--lg");
+
+    rerender(
+      <Dialog open size="sm" title="Small" onClose={vi.fn()}>
+        Content
+      </Dialog>
+    );
+    expect(screen.getByRole("dialog")).toHaveClass("gk-dialog--sm");
+  });
+
   it("moves focus into the dialog and returns it to the trigger on close", async () => {
     const user = userEvent.setup();
     function Harness() {

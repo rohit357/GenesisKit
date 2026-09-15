@@ -17,6 +17,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       footer,
       padding = "md",
       variant = "elevated",
+      interactive = false,
       ...props
     },
     ref
@@ -32,7 +33,13 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <Element
         ref={ref}
-        className={cx("gk-card", `gk-card--${padding}`, `gk-card--${variant}`, className)}
+        className={cx(
+          "gk-card",
+          `gk-card--${padding}`,
+          `gk-card--${variant}`,
+          interactive && "gk-card--interactive",
+          className
+        )}
         aria-labelledby={labelledBy}
         {...props}
       >

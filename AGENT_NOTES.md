@@ -249,3 +249,17 @@ Standing rules: repo releasable after every milestone; tests pass; Storybook bui
 - `npm run check` green (57 tests, all gates). NOT committed.
 - **Next: M4 surfaces (Card/Dialog) — scales + heading-weight rule + motion tokens. STOP for review first.**
 
+### 2026-09-15 — Phase 2 M4: surfaces refined + Card variant expansion (DONE, verified green)
+
+- **Card:** migrated hardcoded literals → tokens (spacing/type/radius/shadow/motion). Title now `--gk-font-weight-bold` (700) — heading-weight rule applied. Description `--gk-font-weight-normal` (400), muted color via existing semantic var. Padding scale (`sm/md/lg`) maps to `--gk-space-8/10/11`. Header gap, header→content margin, footer margin/padding all on the scale.
+- **Card variants:** kept `elevated` + `outlined`, added `soft` (surface-subtle bg + subtle border + no shadow) for low-emphasis surfaces. Theme hooks exposed per variant.
+- **Card `interactive` prop:** NEW, visual only — hover lift + cursor pointer + focus ring. Does NOT change semantics (no auto `role=button`, card stays role-less div). Consumers compose their own `<button>`/`<Link>` wrapper when they need actionable semantics. Test guards the no-role contract.
+- **Dialog:** migrated hardcoded literals → tokens. Title font-weight-bold applied. Motion (`160ms ease-out` / `180ms ease-out`) → `--gk-motion-fast` / `--gk-motion-enter` + `--gk-ease-standard`/`--gk-ease-out`. Focus ring → `--gk-focus-ring`. Close button → placeholder/heading colors.
+- **Dialog `size` prop:** NEW `sm|md|lg` (24rem / 32rem / 42rem). Default `md` preserves old max-width (32rem) → fully backward compatible. New size vars in tokens.css (`--gk-dialog-size-sm/md/lg`) + matching theme hooks. Test asserts default md + class flips on sm/lg.
+- **Public API preserved:** Card variant type widened (`outlined | soft`), `interactive` added (default false), Dialog `size` added (default md). No removal. Existing stories still work.
+- +3 tests (Card soft, Card interactive no-role contract, Dialog size class). 60 tests total.
+- Storybook: Card stories gained `Padding` + `Interactive`; Dialog stories gained `Sizes`. Existing stories intact.
+- `npm run check` green (60 tests, all gates). `npm run build-storybook` exit 0.
+- NOT committed.
+- **Next per approved plan: M4.5 (Spinner + Tabs token polish). STOP for review first.**
+

@@ -1,40 +1,75 @@
 .gk-card {
-  background: #ffffff;
-  border-radius: 0.75rem;
+  background: var(--gk-card-bg, var(--gk-color-surface));
+  border: 1px solid var(--gk-card-border, var(--gk-color-border-subtle));
+  border-radius: var(--gk-card-radius, var(--gk-radius-md));
+  box-shadow: var(--gk-card-shadow, none);
   box-sizing: border-box;
-  color: #172033;
+  color: var(--gk-card-text, var(--gk-color-text));
   display: flex;
   flex-direction: column;
   max-width: 40rem;
   overflow: hidden;
+  transition:
+    background-color var(--gk-motion-fast) var(--gk-ease-standard),
+    border-color var(--gk-motion-fast) var(--gk-ease-standard),
+    box-shadow var(--gk-motion-fast) var(--gk-ease-standard),
+    transform var(--gk-motion-fast) var(--gk-ease-standard);
   width: 100%;
 }
 
+/* Variants ----------------------------------------------------------- */
+
 .gk-card--elevated {
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+  --gk-card-shadow: var(--gk-card-elevated-shadow, var(--gk-shadow-md));
 }
 
 .gk-card--outlined {
-  border: 1px solid #cbd5e1;
+  --gk-card-shadow: var(--gk-card-outlined-shadow, none);
 }
+
+.gk-card--soft {
+  --gk-card-bg: var(--gk-card-soft-bg, var(--gk-color-surface-subtle));
+  --gk-card-border: var(--gk-card-soft-border, var(--gk-color-border-subtle));
+  --gk-card-shadow: var(--gk-card-soft-shadow, none);
+}
+
+/* Padding scale ------------------------------------------------------- */
 
 .gk-card--sm {
-  padding: 1rem;
+  padding: var(--gk-space-8);
 }
-
 .gk-card--md {
-  padding: 1.5rem;
+  padding: var(--gk-space-10);
+}
+.gk-card--lg {
+  padding: var(--gk-space-11);
 }
 
-.gk-card--lg {
-  padding: 2rem;
+/* Interactive treatment — visual only.
+   Does NOT change semantics. The card stays a role-less div unless the
+   consumer wraps it in / composes it with an interactive element of
+   their own choosing (Link, button, etc.). */
+
+.gk-card--interactive {
+  cursor: var(--gk-card-interactive-cursor, pointer);
 }
+
+.gk-card--interactive:hover {
+  --gk-card-shadow: var(--gk-card-interactive-hover-shadow, var(--gk-shadow-lg));
+  transform: translateY(var(--gk-card-interactive-hover-translate, -1px));
+}
+
+.gk-card--interactive:focus-visible {
+  outline: 3px solid var(--gk-card-interactive-focus-ring, var(--gk-focus-ring));
+  outline-offset: 2px;
+}
+
+/* Header / body / footer parts ---------------------------------------- */
 
 .gk-card__header {
   align-items: flex-start;
   display: flex;
-  gap: 1rem;
+  gap: var(--gk-space-8);
   justify-content: space-between;
 }
 
@@ -43,17 +78,19 @@
 }
 
 .gk-card__title {
-  color: #0f172a;
-  font-size: 1.125rem;
-  line-height: 1.35;
+  color: var(--gk-color-heading);
+  font-size: var(--gk-font-size-2xl);
+  font-weight: var(--gk-font-weight-bold);
+  line-height: var(--gk-leading-snug);
   margin: 0;
 }
 
 .gk-card__description {
-  color: #475569;
-  font-size: 0.875rem;
-  line-height: 1.45;
-  margin-top: 0.375rem;
+  color: var(--gk-color-muted);
+  font-size: var(--gk-font-size-md);
+  font-weight: var(--gk-font-weight-normal);
+  line-height: var(--gk-leading-normal);
+  margin-top: var(--gk-space-3);
 }
 
 .gk-card__action {
@@ -65,11 +102,20 @@
 }
 
 .gk-card__header + .gk-card__content {
-  margin-top: 1.25rem;
+  margin-top: var(--gk-space-9);
 }
 
 .gk-card__footer {
-  border-top: 1px solid #e2e8f0;
-  margin-top: 1.25rem;
-  padding-top: 1rem;
+  border-top: 1px solid var(--gk-color-border-subtle);
+  margin-top: var(--gk-space-9);
+  padding-top: var(--gk-space-8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gk-card {
+    transition-duration: 0.001ms;
+  }
+  .gk-card--interactive:hover {
+    transform: none;
+  }
 }

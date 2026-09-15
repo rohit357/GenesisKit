@@ -40,6 +40,12 @@
   --gk-radius-md: 0.75rem;
   --gk-radius-lg: 0.875rem;
   --gk-radius-full: 999px;
+
+  /* Dialog size scale. */
+  --gk-dialog-size-sm: 24rem;
+  --gk-dialog-size-md: 32rem;
+  --gk-dialog-size-lg: 42rem;
+
   --gk-motion-fast: 150ms;
   --gk-motion-enter: 200ms;
   --gk-motion-emphasis: 220ms;

@@ -25,6 +25,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       onClose,
       closeLabel = "Close dialog",
       closeOnOverlayClick = true,
+      size = "md",
       className,
       children,
       ...props
@@ -60,7 +61,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         >
           <div
             ref={mergeRefs(dialogRef, forwardedRef)}
-            className={cx("gk-dialog", className)}
+            className={cx("gk-dialog", `gk-dialog--${size}`, className)}
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}

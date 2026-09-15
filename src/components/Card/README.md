@@ -14,7 +14,16 @@ an optional title, description, header action, body content, and footer.
 </Card>
 ```
 
-Variants: `elevated` and `outlined`.
+Variants: `elevated` (default), `outlined`, `soft`.
 
-Padding: `sm`, `md`, and `lg`.
+Padding: `sm`, `md` (default), and `lg`.
 
+Use `interactive` for the hover-lift + cursor-pointer + focus ring visual
+treatment. The prop is **visual only** — it does not add `role="button"`. To
+make a card actionable, wrap it in your own `<button>` or `<Link>`:
+
+```tsx
+<button type="button" onClick={...} style={{ all: "unset", display: "block" }}>
+  <Card interactive title="Project Aurora">...</Card>
+</button>
+```

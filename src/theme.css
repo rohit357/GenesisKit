@@ -159,6 +159,26 @@
   box-shadow: var(--gk-card-outlined-shadow, none);
 }
 
+.gk-card--soft {
+  --gk-card-bg: var(--gk-card-soft-bg, var(--gk-color-surface-subtle));
+  --gk-card-border: var(--gk-card-soft-border, var(--gk-color-border-subtle));
+  box-shadow: var(--gk-card-soft-shadow, none);
+}
+
+.gk-card--interactive {
+  cursor: var(--gk-card-interactive-cursor, pointer);
+}
+
+.gk-card--interactive:hover {
+  box-shadow: var(--gk-card-interactive-hover-shadow, var(--gk-shadow-lg));
+  transform: translateY(var(--gk-card-interactive-hover-translate, -1px));
+}
+
+.gk-card--interactive:focus-visible {
+  outline: 3px solid var(--gk-card-interactive-focus-ring, var(--gk-focus-ring));
+  outline-offset: 2px;
+}
+
 .gk-card__title,
 .gk-dialog__title {
   color: var(--gk-color-heading);

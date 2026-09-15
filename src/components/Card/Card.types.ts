@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
 export type CardPadding = "sm" | "md" | "lg";
-export type CardVariant = "elevated" | "outlined";
+export type CardVariant = "elevated" | "outlined" | "soft";
 export type CardElement = "div" | "section" | "article";
 export type CardHeadingLevel = 2 | 3 | 4 | 5 | 6;
 
@@ -27,6 +27,19 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, "title">
   footer?: ReactNode;
   /** Controls the card's internal spacing. */
   padding?: CardPadding;
-  /** Controls the card's surface treatment. */
+  /**
+   * Controls the card's surface treatment.
+   * - `elevated`: bordered + soft shadow. Default.
+   * - `outlined`: bordered, no shadow.
+   * - `soft`: subtle background, no shadow.
+   */
   variant?: CardVariant;
+  /**
+   * Adds hover lift + pointer cursor + focus ring.
+   * Visual only — does not change semantics. Wrap the Card in your own
+   * interactive element (`<button>`, `<Link>`, etc.) when the card needs
+   * to be actionable.
+   * @default false
+   */
+  interactive?: boolean;
 }
