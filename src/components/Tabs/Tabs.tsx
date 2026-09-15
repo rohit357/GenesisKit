@@ -14,6 +14,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       orientation = "horizontal",
       activationMode = "automatic",
       keepMounted = false,
+      variant = "underline",
       className,
       ...props
     },
@@ -66,7 +67,11 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       : items.filter((item) => item.value === activeItem.value);
 
     return (
-      <div ref={ref} className={cx("gk-tabs", `gk-tabs--${orientation}`, className)} {...props}>
+      <div
+        ref={ref}
+        className={cx("gk-tabs", `gk-tabs--${orientation}`, `gk-tabs--${variant}`, className)}
+        {...props}
+      >
         <div className="gk-tabs__list" role="tablist" aria-orientation={orientation}>
           {items.map((item, index) => {
             const tabId = `gk-tab-${generatedId}-${item.value}`;

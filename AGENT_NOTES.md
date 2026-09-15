@@ -263,3 +263,82 @@ Standing rules: repo releasable after every milestone; tests pass; Storybook bui
 - NOT committed.
 - **Next per approved plan: M4.5 (Spinner + Tabs token polish). STOP for review first.**
 
+### 2026-09-15 — Phase 2 M4.5: Spinner + Tabs token polish (DONE, verified green)
+
+- **Tabs:** migrated hardcoded literals → tokens.
+  - Colors: `#172033`→`--gk-color-text`, `#e2e8f0`→`--gk-color-border-subtle`, `#64748b`→`--gk-color-placeholder`, `#f8fafc`→`--gk-color-surface-subtle`, `#1d4ed8`→`--gk-color-primary-hover`, `#2563eb`→`--gk-color-primary`.
+  - Spacing: `1rem`→`--gk-space-8`, `0.25rem`→`--gk-space-2`, `0.5rem`→`--gk-space-4`, `0.625rem 0.875rem`→`--gk-space-5`/`--gk-space-7`.
+  - Typography: `font-size: 0.9375rem`→`--gk-font-size-lg`, `font-weight: 600`→`--gk-font-weight-semibold`, panel `line-height: 1.5`→`--gk-leading-relaxed`.
+  - Motion: `transition: 150ms ease`→`var(--gk-motion-fast) var(--gk-ease-standard)`; panel enter `180ms ease-out`→`var(--gk-motion-enter) var(--gk-ease-out)`.
+  - Focus: `outline: 3px solid rgb(37 99 235 / 30%)`→`var(--gk-focus-ring)` (32%, matches Button + fields + controls — final focus-ring drift closed).
+  - `prefers-reduced-motion` honored (transition-duration 0.001ms + animation none).
+- **Spinner:** reviewed — already token-clean (`currentColor` → `--gk-spinner-color` hook in theme.css wins). Sizes (0.875/1.25/2rem) + border-width (2/3px) + 700ms rotation are deliberate off-scale component literals (control dimensions, not UI motion). No token candidate exists. No edits required beyond reformatting the file to match prettier.
+- **No API change.** No story change required. No new variants.
+- `npm run check` green (60 tests, all gates). `npm run build-storybook` exit 0. dist/index.css 37.90→38.31 KB (Tabs var refs).
+- NOT committed.
+- **Next per approved plan: M5 feedback/display (Alert/Badge/Avatar/Spinner/Tabs). STOP for review first.**
+
+### 2026-09-15 — Phase 2 M5: feedback/display family expressive + token-clean (DONE, verified green)
+
+**Alert** [Alert.tsx](src/components/Alert/Alert.tsx):
+- **NEW `icon?: ReactNode` slot** — leading ReactNode (svg/emoji). Wrapped in `aria-hidden` div so it does not duplicate status announcement. Real-world use: `<Alert icon={<CheckIcon />} status="success">`. Avoided auto-default-icon-per-status mapping (brittle; consumers pick their own product icon).
+- **NEW `actions?: ReactNode` slot** — trailing ReactNode between content and dismiss. Real-world: "Undo", "View details", "Update now". Common pattern in product alerts.
+- Title font-weight 800→`--gk-font-weight-bold` (700). Title `--gk-font-size-md`; message `--gk-font-size-sm`. Hierarchy preserved via size + weight.
+- Animation 220ms ease-out→`--gk-motion-emphasis` + `--gk-ease-out`. Focus ring → `--gk-focus-ring`. Line-height 1.45→`--gk-leading-normal`. Spacing scale throughout. Status colors → existing semantic tokens (`--gk-color-{primary,success,warning,danger}-{soft,border}`).
+- Dismiss button hover opacity + `--gk-focus-ring` focus treatment.
+
+**Badge** [Badge.tsx](src/components/Badge/Badge.tsx):
+- **NEW `outline?: boolean`** — transparent bg, semantic border + text. Justified: badges used inline with text (table cells, status pills) where filled too heavy.
+- **NEW `dot?: boolean`** — leading status dot using `currentColor`. Common presence-indicator pattern.
+- **NEW `removable?: boolean` + `onRemove` + `removeLabel`** — close affordance with accessible label. Filter-chip pattern, common in real product UI.
+- Token migration: font-weight 700→`--gk-font-weight-bold`; sizes `0.6875rem`/`0.75rem`→`--gk-font-size-2xs`/`--gk-font-size-xs`; paddings/min-heights → `--gk-space-*`; radius 999px→`--gk-radius-full`. New theme hooks: `--gk-badge-outline-bg`.
+- Removed per-variant enter animation (was every badge on every render — visual noise). Kept remove-button hover transition only.
+
+**Avatar** [Avatar.tsx](src/components/Avatar/Avatar.tsx):
+- **NEW `status?: AvatarStatus`** — `"none" | "online" | "busy" | "away" | "offline"`. Bottom-right dot. `none` (default) hides dot entirely. New theme hooks `--gk-avatar-status-{online,busy,away,offline}`. Decorative (`aria-hidden`) — presence semantics live on context, not avatar.
+- **NEW `size="xl"`** (5rem) — hero/profile avatar size for user menus, settings headers. Off-scale component literal like other avatar dims.
+- Token migration: font-weight 800→`--gk-font-weight-bold`; sizes → `--gk-font-size-{xs,lg,2xl,3xl}`; bg gradient via `--gk-avatar-bg` hook (theme.css wins; gradient identical to what previously rendered).
+- AvatarGroup **deferred** (not in M5 scope — would be a new component family).
+
+**Spinner** [Spinner.css](src/components/Spinner/Spinner.css):
+- Reviewed. No edits needed. Already token-clean. 700ms rotation is intentional off-scale component dim. Sizes 0.875/1.25/2rem + border-width 2/3px kept as off-scale component literals (no semantic token exists; rotation ≠ UI motion scale).
+
+**Tabs** [Tabs.tsx](src/components/Tabs/Tabs.tsx):
+- **NEW `variant?: "underline" | "pills"`** — pills renders soft-pill tabs with active filled with primary bg + primary-foreground text. Justified: pill-style tabs are a legitimate alternative visual language for in-page filtering / tool switchers. Keyboard nav + activationMode + keepMounted + orientation behavior unchanged across both variants (test guards it).
+- New theme hooks: `--gk-tabs-pill-active-bg`, `--gk-tabs-pill-active-text`.
+
+**Public API additions (all backward compatible, defaults preserve prior behavior):**
+- `Alert.icon?`, `Alert.actions?`
+- `Badge.outline?`, `Badge.dot?`, `Badge.removable?`, `Badge.onRemove?`, `Badge.removeLabel?`
+- `Avatar.status?`, `AvatarSize` widened from `"sm"|"md"|"lg"` to `"sm"|"md"|"lg"|"xl"`
+- `Tabs.variant?` defaulting to `"underline"`
+
+**Visual-system decisions:**
+- All five components share: `--gk-font-size-*` + `--gk-font-weight-*` + `--gk-leading-*` scale; `--gk-space-*` padding/gap; `--gk-focus-ring` (32% across the board — focus-ring drift closed M4.5); `--gk-motion-fast` + `--gk-ease-standard` (hover/active), `--gk-motion-{enter,emphasis}` + `--gk-ease-{standard,out}` for entrance animations; `--gk-radius-{sm,md,full}` for shape consistency; semantic color tokens per status.
+- Heading-weight drift fully resolved: Alert title + Avatar use `--gk-font-weight-bold` (700) — no more `800`.
+
+**Accessibility preserved:**
+- Alert `role`/`aria-live` per status unchanged. New icon wrapper `aria-hidden` so screen readers still hear title + body.
+- Badge remove button has accessible label via `removeLabel`; dot is `aria-hidden`.
+- Avatar status dot is `aria-hidden` — does not pollute the avatar's accessible name. `role="img"` + `aria-label={alt ?? name}` unchanged.
+- Tabs pills variant keeps ARIA roles, roving tabindex, manual/automatic activation, keepMounted, vertical orientation. Test explicitly asserts keyboard nav works in pills.
+- `prefers-reduced-motion` honored everywhere (Alert + Badge remove + Tabs panel enter all disable animation).
+
+**Tests:** +11 new (Alert icon slot + actions slot + actions-before-dismiss ordering; Badge outline + dot a11y + removable; Avatar xl size + status dot rendering + status-none hides dot; Tabs pills class + keyboard nav). **71/71 green.**
+
+**Storybook:** added stories only where they demonstrate new capability.
+- Alert: `WithIcon`, `WithActions`, `WithIconAndActionsAndDismiss`. Existing stories intact.
+- Badge: `Outline`, `Dot`, `Removable`. Existing Variants/Sizes intact.
+- Avatar: `Sizes` extended (sm/md/lg/xl), `Statuses`. Existing intact.
+- Tabs: `Pills`. Existing intact.
+- Spinner: unchanged.
+
+**Verified:**
+- `npm run check` exit 0. typecheck + lint + format + 71 tests + build all green.
+- `npm run build-storybook` exit 0.
+- dist/index.css 38.31 → 41.73 KB (new component selectors + theme hooks).
+- dist/index.js 27.76 → 29.68 KB (slot wiring + new props).
+- All existing tests still pass — zero regressions.
+- NOT committed.
+- **Next per approved plan: M5.5 Button richness. STOP for review first.**
+

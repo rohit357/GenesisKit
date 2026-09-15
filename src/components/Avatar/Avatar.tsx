@@ -11,21 +11,39 @@ const getInitials = (name: string) => {
 };
 
 export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
-  ({ name, src, alt, size = "md", shape = "circle", className, ...props }, ref) => {
+  (
+    { name, src, alt, size = "md", shape = "circle", status = "none", className, ...props },
+    ref
+  ) => {
     const [imageFailed, setImageFailed] = useState(false);
     const label = alt ?? name;
+    const showStatus = status !== "none";
     return (
       <span
         ref={ref}
-        className={cx("gk-avatar", `gk-avatar--${size}`, `gk-avatar--${shape}`, className)}
+        className={cx(
+          "gk-avatar",
+          `gk-avatar--${size}`,
+          `gk-avatar--${shape}`,
+          showStatus && `gk-avatar--status-${status}`,
+          className
+        )}
         role="img"
         aria-label={label}
         {...props}
       >
-        {src && !imageFailed ? (
-          <img src={src} alt="" aria-hidden="true" onError={() => setImageFailed(true)} />
-        ) : (
-          <span aria-hidden="true">{getInitials(name)}</span>
+        <span className="gk-avatar__media">
+          {src && !imageFailed ? (
+            <img src={src} alt="" aria-hidden="true" onError={() => setImageFailed(true)} />
+          ) : (
+            <span aria-hidden="true">{getInitials(name)}</span>
+          )}
+        </span>
+        {showStatus && (
+          <span
+            className={cx("gk-avatar__status", `gk-avatar__status--${status}`)}
+            aria-hidden="true"
+          />
         )}
       </span>
     );

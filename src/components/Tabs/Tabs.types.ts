@@ -7,6 +7,8 @@ export interface TabItem {
   disabled?: boolean;
 }
 
+export type TabsVariant = "underline" | "pills";
+
 export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
   items: TabItem[];
   value?: string;
@@ -25,4 +27,11 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   keepMounted?: boolean;
+  /**
+   * Visual treatment for the tab list.
+   * - `underline` (default): classic tab row with an active underline.
+   * - `pills`: each tab rendered as a soft pill; active uses the primary
+   *   soft background + primary foreground.
+   */
+  variant?: TabsVariant;
 }

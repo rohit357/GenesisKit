@@ -11,7 +11,10 @@ const meta = {
       control: "inline-radio",
       options: ["neutral", "info", "success", "warning", "danger"]
     },
-    size: { control: "inline-radio", options: ["sm", "md"] }
+    size: { control: "inline-radio", options: ["sm", "md"] },
+    outline: { control: "boolean" },
+    dot: { control: "boolean" },
+    removable: { control: "boolean" }
   },
   args: {
     children: "Badge",
@@ -55,6 +58,63 @@ export const Sizes: Story = {
       </Badge>
       <Badge {...args} size="md">
         Medium
+      </Badge>
+    </div>
+  )
+};
+
+export const Outline: Story = {
+  render: (args) => (
+    <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+      <Badge {...args} variant="neutral" outline>
+        Neutral
+      </Badge>
+      <Badge {...args} variant="info" outline>
+        Info
+      </Badge>
+      <Badge {...args} variant="success" outline>
+        Success
+      </Badge>
+      <Badge {...args} variant="warning" outline>
+        Warning
+      </Badge>
+      <Badge {...args} variant="danger" outline>
+        Danger
+      </Badge>
+    </div>
+  )
+};
+
+export const Dot: Story = {
+  render: (args) => (
+    <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+      <Badge {...args} variant="success" dot>
+        Live
+      </Badge>
+      <Badge {...args} variant="warning" dot>
+        Beta
+      </Badge>
+      <Badge {...args} variant="danger" dot>
+        Offline
+      </Badge>
+      <Badge {...args} variant="info" dot>
+        Syncing
+      </Badge>
+    </div>
+  )
+};
+
+export const Removable: Story = {
+  render: (args) => (
+    <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+      <Badge {...args} variant="neutral" removable removeLabel={`Remove TypeScript`}>
+        TypeScript
+      </Badge>
+      <Badge {...args} variant="info" removable removeLabel={`Remove React`}>
+        React
+      </Badge>
+      <Badge {...args} variant="success" removable removeLabel={`Remove Tested`}>
+        Tested
       </Badge>
     </div>
   )

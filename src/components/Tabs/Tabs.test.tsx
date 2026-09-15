@@ -65,4 +65,17 @@ describe("Tabs", () => {
     expect(screen.getAllByRole("tabpanel")).toHaveLength(1);
     expect(screen.queryByText("Activity content")).not.toBeInTheDocument();
   });
+
+  it("supports the pills variant", () => {
+    render(<Tabs items={items} variant="pills" data-testid="tabs" />);
+    expect(screen.getByTestId("tabs")).toHaveClass("gk-tabs--pills");
+  });
+
+  it("keeps keyboard behavior intact in pills variant", async () => {
+    const user = userEvent.setup();
+    render(<Tabs items={items} variant="pills" />);
+    await user.click(screen.getByRole("tab", { name: "Overview" }));
+    await user.keyboard("{ArrowRight}");
+    expect(screen.getByRole("tab", { name: "Activity" })).toHaveAttribute("aria-selected", "true");
+  });
 });

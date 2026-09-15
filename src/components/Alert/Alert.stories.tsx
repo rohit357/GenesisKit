@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Alert } from "./Alert";
+import { Button } from "../Button";
 
 const meta = {
   title: "Components/Alert",
@@ -45,6 +46,49 @@ export const Statuses: Story = {
       </Alert>
     </div>
   )
+};
+
+export const WithIcon: Story = {
+  args: {
+    status: "success",
+    title: "Saved",
+    icon: <span aria-hidden>✓</span>,
+    children: "Your changes are live."
+  }
+};
+
+export const WithActions: Story = {
+  args: {
+    status: "info",
+    title: "Update available",
+    children: "Version 2.1 is ready to install.",
+    actions: (
+      <>
+        <Button size="sm" variant="ghost">
+          Later
+        </Button>
+        <Button size="sm" variant="secondary">
+          Install
+        </Button>
+      </>
+    )
+  }
+};
+
+export const WithIconAndActionsAndDismiss: Story = {
+  args: {
+    status: "warning",
+    title: "Item deleted",
+    icon: <span aria-hidden>!</span>,
+    children: "The project has been moved to trash.",
+    actions: (
+      <Button size="sm" variant="ghost">
+        Undo
+      </Button>
+    ),
+    dismissible: true,
+    onDismiss: () => {}
+  }
 };
 
 export const Dismissible: Story = {

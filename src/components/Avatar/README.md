@@ -7,5 +7,11 @@ supplied or the image cannot load.
 <Avatar name="Ada Lovelace" src="/ada.jpg" />
 ```
 
-Sizes: `sm`, `md`, and `lg`. Shapes: `circle` and `square`.
+Sizes: `sm`, `md`, `lg`, `xl`. Shapes: `circle`, `square`.
 
+## Status indicator
+
+`status` shows a presence dot at the bottom-right of the avatar. Values:
+`none` (default, no dot), `online`, `busy`, `away`, `offline`. The dot is
+decorative (`aria-hidden`) — status semantics belong on the surrounding
+context, not the avatar itself.

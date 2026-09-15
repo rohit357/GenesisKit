@@ -12,6 +12,8 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       dismissible = false,
       onDismiss,
       dismissLabel = "Dismiss alert",
+      icon,
+      actions,
       className,
       ...props
     },
@@ -24,19 +26,29 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       aria-live={status === "error" ? "assertive" : "polite"}
       {...props}
     >
+      {icon && (
+        <div className="gk-alert__icon" aria-hidden="true">
+          {icon}
+        </div>
+      )}
       <div className="gk-alert__content">
         {title && <div className="gk-alert__title">{title}</div>}
         <div className="gk-alert__message">{children}</div>
       </div>
-      {dismissible && (
-        <button
-          className="gk-alert__dismiss"
-          type="button"
-          aria-label={dismissLabel}
-          onClick={onDismiss}
-        >
-          <span aria-hidden="true">×</span>
-        </button>
+      {(actions || dismissible) && (
+        <div className="gk-alert__trail">
+          {actions && <div className="gk-alert__actions">{actions}</div>}
+          {dismissible && (
+            <button
+              className="gk-alert__dismiss"
+              type="button"
+              aria-label={dismissLabel}
+              onClick={onDismiss}
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          )}
+        </div>
       )}
     </div>
   )

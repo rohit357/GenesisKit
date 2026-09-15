@@ -203,6 +203,10 @@
   color: var(--gk-badge-text);
 }
 
+.gk-badge--outline {
+  background: var(--gk-badge-outline-bg, transparent);
+}
+
 .gk-badge--info {
   --gk-badge-bg: var(--gk-color-primary-soft);
   --gk-badge-border: var(--gk-color-primary-border);
@@ -260,6 +264,19 @@
   border-radius: var(--gk-avatar-square-radius, var(--gk-radius-sm));
 }
 
+.gk-avatar__status--online {
+  background: var(--gk-avatar-status-online, #16a34a);
+}
+.gk-avatar__status--offline {
+  background: var(--gk-avatar-status-offline, #94a3b8);
+}
+.gk-avatar__status--busy {
+  background: var(--gk-avatar-status-busy, #dc2626);
+}
+.gk-avatar__status--away {
+  background: var(--gk-avatar-status-away, #f59e0b);
+}
+
 .gk-spinner {
   color: var(--gk-spinner-color, var(--gk-color-primary));
 }
@@ -299,6 +316,12 @@
 .gk-tabs__tab--active {
   border-color: var(--gk-tabs-active-indicator, var(--gk-color-primary));
   color: var(--gk-tabs-active-text, var(--gk-color-primary));
+}
+
+.gk-tabs--pills .gk-tabs__tab--active {
+  background: var(--gk-tabs-pill-active-bg, var(--gk-color-primary));
+  border-color: transparent;
+  color: var(--gk-tabs-pill-active-text, var(--gk-color-primary-foreground));
 }
 
 .gk-dialog__backdrop {

@@ -19,4 +19,22 @@ describe("Avatar", () => {
     render(<Avatar name="A" size="lg" shape="square" data-testid="avatar" />);
     expect(screen.getByTestId("avatar")).toHaveClass("gk-avatar--lg", "gk-avatar--square");
   });
+
+  it("supports the xl size for hero/profile avatars", () => {
+    render(<Avatar name="Grace" size="xl" data-testid="avatar" />);
+    expect(screen.getByTestId("avatar")).toHaveClass("gk-avatar--xl");
+  });
+
+  it("renders a status dot for non-none statuses", () => {
+    render(<Avatar name="Ada" status="online" data-testid="avatar" />);
+    expect(screen.getByTestId("avatar")).toHaveClass("gk-avatar--status-online");
+    const dot = screen.getByTestId("avatar").querySelector(".gk-avatar__status");
+    expect(dot).toBeInTheDocument();
+    expect(dot).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("hides the status indicator when status is none", () => {
+    render(<Avatar name="Ada" data-testid="avatar" />);
+    expect(screen.getByTestId("avatar").querySelector(".gk-avatar__status")).toBeNull();
+  });
 });

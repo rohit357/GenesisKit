@@ -1,52 +1,87 @@
 .gk-avatar {
   align-items: center;
-  animation: gk-avatar-enter 200ms ease-out both;
-  background: linear-gradient(135deg, #dbeafe, #c4b5fd);
-  color: #312e81;
+  background: var(--gk-avatar-bg, linear-gradient(135deg, var(--gk-color-primary-soft), #c4b5fd));
+  border-radius: var(--gk-avatar-radius, var(--gk-radius-full));
+  color: var(--gk-avatar-text, var(--gk-color-primary));
   display: inline-flex;
-  font-weight: 800;
+  font-weight: var(--gk-font-weight-bold);
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
   vertical-align: middle;
 }
+
+.gk-avatar__media {
+  align-items: center;
+  border-radius: inherit;
+  display: inline-flex;
+  height: 100%;
+  inset: 0;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+
 .gk-avatar--circle {
-  border-radius: 50%;
+  border-radius: var(--gk-avatar-radius, var(--gk-radius-full));
 }
+
 .gk-avatar--square {
-  border-radius: 0.625rem;
+  border-radius: var(--gk-avatar-square-radius, var(--gk-radius-md));
 }
+
 .gk-avatar--sm {
-  font-size: 0.75rem;
+  font-size: var(--gk-font-size-xs);
   height: 2rem;
   width: 2rem;
 }
+
 .gk-avatar--md {
-  font-size: 0.9375rem;
+  font-size: var(--gk-font-size-lg);
   height: 2.5rem;
   width: 2.5rem;
 }
+
 .gk-avatar--lg {
-  font-size: 1.125rem;
+  font-size: var(--gk-font-size-2xl);
   height: 3.5rem;
   width: 3.5rem;
 }
+
+.gk-avatar--xl {
+  font-size: var(--gk-font-size-3xl);
+  height: 5rem;
+  width: 5rem;
+}
+
 .gk-avatar img {
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
-@keyframes gk-avatar-enter {
-  from {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+
+/* Status indicator — bottom-right dot with ring. */
+.gk-avatar__status {
+  background: var(--gk-color-surface);
+  border: 2px solid var(--gk-color-surface);
+  border-radius: var(--gk-radius-full);
+  bottom: 0;
+  height: 0.625rem;
+  position: absolute;
+  right: 0;
+  width: 0.625rem;
 }
-@media (prefers-reduced-motion: reduce) {
-  .gk-avatar {
-    animation: none;
-  }
+
+.gk-avatar__status--online {
+  background: var(--gk-avatar-status-online, #16a34a);
+}
+.gk-avatar__status--offline {
+  background: var(--gk-avatar-status-offline, #94a3b8);
+}
+.gk-avatar__status--busy {
+  background: var(--gk-avatar-status-busy, #dc2626);
+}
+.gk-avatar__status--away {
+  background: var(--gk-avatar-status-away, #f59e0b);
 }

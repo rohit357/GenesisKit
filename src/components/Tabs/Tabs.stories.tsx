@@ -16,12 +16,14 @@ const meta = {
   argTypes: {
     orientation: { control: "inline-radio", options: ["horizontal", "vertical"] },
     activationMode: { control: "inline-radio", options: ["automatic", "manual"] },
-    keepMounted: { control: "boolean" }
+    keepMounted: { control: "boolean" },
+    variant: { control: "inline-radio", options: ["underline", "pills"] }
   },
   args: {
     items,
     orientation: "horizontal",
-    activationMode: "automatic"
+    activationMode: "automatic",
+    variant: "underline"
   }
 } satisfies Meta<typeof Tabs>;
 
@@ -32,6 +34,10 @@ export const Playground: Story = {};
 
 export const Vertical: Story = {
   args: { orientation: "vertical" }
+};
+
+export const Pills: Story = {
+  args: { variant: "pills" }
 };
 
 export const ManualActivation: Story = {

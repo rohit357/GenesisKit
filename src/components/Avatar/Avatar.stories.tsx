@@ -7,13 +7,18 @@ const meta = {
   component: Avatar,
   tags: ["autodocs"],
   argTypes: {
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
-    shape: { control: "inline-radio", options: ["circle", "square"] }
+    size: { control: "inline-radio", options: ["sm", "md", "lg", "xl"] },
+    shape: { control: "inline-radio", options: ["circle", "square"] },
+    status: {
+      control: "inline-radio",
+      options: ["none", "online", "offline", "busy", "away"]
+    }
   },
   args: {
     name: "Ada Lovelace",
     size: "md",
-    shape: "circle"
+    shape: "circle",
+    status: "none"
   }
 } satisfies Meta<typeof Avatar>;
 
@@ -40,6 +45,7 @@ export const Sizes: Story = {
       <Avatar {...args} size="sm" />
       <Avatar {...args} size="md" />
       <Avatar {...args} size="lg" />
+      <Avatar {...args} size="xl" />
     </div>
   )
 };
@@ -49,6 +55,18 @@ export const Shapes: Story = {
     <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
       <Avatar {...args} shape="circle" />
       <Avatar {...args} shape="square" />
+    </div>
+  )
+};
+
+export const Statuses: Story = {
+  render: (args) => (
+    <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+      <Avatar {...args} status="online" />
+      <Avatar {...args} status="busy" />
+      <Avatar {...args} status="away" />
+      <Avatar {...args} status="offline" />
+      <Avatar {...args} status="none" />
     </div>
   )
 };
