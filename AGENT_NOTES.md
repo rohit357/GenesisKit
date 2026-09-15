@@ -342,3 +342,74 @@ Standing rules: repo releasable after every milestone; tests pass; Storybook bui
 - NOT committed.
 - **Next per approved plan: M5.5 Button richness. STOP for review first.**
 
+### 2026-09-15 — Phase 2 M5.5: Button richness + flagship standard established (DONE, verified green)
+
+**Button expanded** [Button.tsx](src/components/Button/Button.tsx) — flagship Button:
+
+**API additions (all backward compat, defaults preserve prior behavior):**
+- `variant` widened: `"primary" | "secondary" | "ghost" | "danger" | "outline" | "soft" | "link" | "gradient"`.
+- NEW `fullWidth?: boolean` (default false). Stretches to fill parent width. Mobile CTAs / form submits.
+
+**API proposals REJECTED (with reasoning):**
+- `iconLeft` / `iconRight` slot props — **rejected**. React children composition already provides a cleaner API: `<Button><Icon /> Create project</Button>`. Slot props add API surface for a layout concern solvable by composition. Documented in README with two patterns (with-label, icon-only with `aria-label`).
+- `iconOnly` prop — **rejected**. Same reasoning: consumers set `aria-label` on the button directly and compose children. A prop would create a "magic aspect ratio" rule with no real win.
+- New `size="xs"` — **rejected**. No real demand; sm already covers tight rows. Adding it just for symmetry is exactly the prop-explosion trap the standard forbids.
+
+**Visual design:**
+- All variants share typography, focus-ring, motion, and hover-lift (-1px) + shadow-sm treatment from M4 polish. **No** gimmicks.
+- `outline` — bordered transparent, primary fg + primary-border, primary-soft on hover. Visual weight just below secondary.
+- `soft` — primary-soft bg, primary fg, **flat** (no hover-lift/shadow — feels quieter). Hover darkens to primary-border.
+- `link` — text-only, no chrome, no min-width, padding 0. Hover underlines + uses primary-hover.
+- `gradient` — linear-gradient(135deg, primary → primary-hover). Hover reverses gradient + shadow-md. Hero/marketing CTA feel without being shouty.
+- All variants respect theme hooks `--gk-button-{outline,soft,link,gradient}-{bg,fg,border,hover-bg}` so consumers can re-tone without forking.
+
+**Theme.css hooks added:** `--gk-button-outline-*`, `--gk-button-soft-*`, `--gk-button-link-*`, `--gk-button-gradient-*`. Preserves primitive→semantic→component→consumer override stack. No runtime CSS-in-JS.
+
+**Tests:** +7 (4 variant-class tests via `it.each`, fullWidth class, icon-composition accessible name + icon child, loading with new variants). **78/78 green.**
+
+**Storybook:** added `IconComposition` (4 buttons composing icons via children — demonstrates the no-slot-prop API), `FullWidth` (3 stacked), `LoadingWithVariant`, `Hierarchy` (semantic importance ordering: primary → secondary → outline → soft → ghost → link). Existing stories intact.
+
+---
+
+## FLAGSHIP COMPONENT STANDARD (reusable for every component in the library)
+
+**Established M5.5.** Every component in GenesisKit must eventually meet this standard. "Flagship" = best-in-class within its category, not "maximum props".
+
+Every component is evaluated against:
+
+1. **Default design** — default state already looks premium, not generic.
+2. **Visual variety** — meaningful visual modes, not random variants.
+3. **Customization** — colors, radius, spacing, depth tunable via tokens + CSS-var hooks.
+4. **Composition** — combines naturally with other GenesisKit components (Alert + Button, Card + Button, Dialog + Button).
+5. **States** — hover, active, focus, disabled, loading, error, selected all polished.
+6. **Accessibility** — semantics, keyboard, ARIA, focus, `prefers-reduced-motion` preserved.
+7. **Responsiveness** — behaves well across widths/densities.
+8. **Theme personality** — responds correctly to GenesisKit themes (midnight/emerald/rose) and eventually personality presets.
+9. **Storybook** — shows both technical behavior AND meaningful visual possibilities.
+10. **API quality** — props justified, composable, typed, understandable. Composition > prop slots. Documented rejection reasons for any API considered.
+
+**Per-component expression vocabulary (do NOT force symmetry):**
+- **Button:** variants + size + loading + fullWidth + icon composition
+- **Card:** surface/elevation + density + interactive treatment + header/footer composition
+- **Dialog:** sizes + surface treatment + layout + actions + motion
+- **Alert:** status + icon + actions + dismissible + visual treatment
+- **Badge:** status + dot + outline + removable + compact density
+- **Avatar:** sizes + status + shape + image/fallback
+- **Tabs:** underline/pills + density + icon/badge composition + active state
+- **Input/Select/Textarea:** density + labels/descriptions/errors + adornments + focus/error/disabled
+- **Checkbox/Radio/Switch:** control sizing + state visuals + label hierarchy + descriptions + focus
+- **Spinner:** size + label + contextual color + reduced-motion
+
+**Visual bar:** "Would a developer be happy to use this in a polished production app without immediately restyling it?" If no, the component is not finished.
+
+**Architecture preservation:** primitive tokens → semantic/theme tokens → component hooks → variants/states → consumer overrides. No runtime CSS-in-JS. No hundreds of one-off variables.
+
+---
+
+- `npm run check` exit 0. typecheck + lint + format + 78 tests + build all green.
+- `npm run build-storybook` exit 0.
+- dist/index.css 41.73 → 43.20 KB. dist/index.js 29.68 → 31.42 KB.
+- All existing tests still pass — zero regressions.
+- NOT committed.
+- **Next per approved plan: M6 customization system first-class. STOP for review first.**
+

@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+export type ButtonVariant =
+  "primary" | "secondary" | "ghost" | "danger" | "outline" | "soft" | "link" | "gradient";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,4 +11,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   /** Shows a progress state and prevents interaction. */
   loading?: boolean;
+  /**
+   * Stretches the button to fill its parent's width. Useful for mobile CTAs
+   * and form submit actions.
+   * @default false
+   */
+  fullWidth?: boolean;
 }

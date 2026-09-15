@@ -9,14 +9,47 @@ component for actions, form submissions, and destructive confirmations.
 </Button>
 ```
 
-Variants: `primary`, `secondary`, `ghost`, and `danger`.
+## Variants
 
-Sizes: `sm`, `md`, and `lg`.
+`primary`, `secondary`, `outline`, `soft`, `ghost`, `link`, `danger`, `gradient`.
 
-Set `loading` while an action is pending. The button becomes disabled and
-announces its busy state to assistive technology:
+| Variant    | When                                              |
+| | |
+| `primary`  | The page's main action. Default.                |
+| `secondary`| An alternative alongside a primary.             |
+| `outline`  | Less-emphasized CTAs; pairs with primary.       |
+| `soft`     | Low-emphasis primary; subtle backgrounds.       |
+| `ghost`    | Tertiary actions in toolbars and headers.       |
+| `link`     | Inline-style actions; no chrome.                |
+| `danger`   | Destructive confirmations.                      |
+| `gradient` | Hero / marketing CTAs.                          |
+
+## Sizes
+
+`sm`, `md`, `lg`.
+
+## Composition
+
+Icons are passed as children — no dedicated slot prop. Use
+`aria-hidden` on decorative icons:
 
 ```tsx
-<Button loading>Saving changes</Button>
+<Button>
+  <PlusIcon aria-hidden />
+  Create project
+</Button>
 ```
 
+For icon-only buttons, provide an accessible label directly:
+
+```tsx
+<Button variant="ghost" aria-label="Close">
+  <CloseIcon aria-hidden />
+</Button>
+```
+
+## Flagship flags
+
+- `fullWidth` — stretches to fill the parent (mobile CTAs, form submits).
+- `loading` — disabled + `aria-busy="true"` + spinner. Works with every
+  variant.

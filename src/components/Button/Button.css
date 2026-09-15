@@ -7,27 +7,31 @@
   align-items: center;
   background: var(--gk-button-bg);
   border: 1px solid var(--gk-button-border);
-  border-radius: 0.5rem;
+  border-radius: var(--gk-button-radius, var(--gk-radius-sm));
   box-sizing: border-box;
   color: var(--gk-button-fg);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
-  font-weight: 600;
-  gap: 0.5rem;
+  font-weight: var(--gk-font-weight-semibold);
+  gap: var(--gk-space-4);
   justify-content: center;
-  line-height: 1.25;
+  line-height: var(--gk-leading-tight);
   min-width: 5.5rem;
   position: relative;
+  text-decoration: none;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    box-shadow 150ms ease,
-    color 150ms ease;
+    background-color var(--gk-motion-fast) var(--gk-ease-standard),
+    border-color var(--gk-motion-fast) var(--gk-ease-standard),
+    box-shadow var(--gk-motion-fast) var(--gk-ease-standard),
+    color var(--gk-motion-fast) var(--gk-ease-standard),
+    transform var(--gk-motion-fast) var(--gk-ease-standard);
 }
 
 .gk-button:hover:not(:disabled) {
   background: var(--gk-button-hover-bg);
+  box-shadow: var(--gk-button-hover-shadow, var(--gk-shadow-sm));
+  transform: translateY(var(--gk-button-hover-translate, -1px));
 }
 
 .gk-button:focus-visible {
@@ -41,40 +45,105 @@
 }
 
 .gk-button--sm {
-  font-size: 0.8125rem;
+  font-size: var(--gk-font-size-sm);
   min-height: 2rem;
-  padding: 0.375rem 0.75rem;
+  padding: var(--gk-space-3) var(--gk-space-6);
 }
 
 .gk-button--md {
-  font-size: 0.9375rem;
+  font-size: var(--gk-font-size-md);
   min-height: 2.5rem;
-  padding: 0.5rem 1rem;
+  padding: var(--gk-space-4) var(--gk-space-8);
 }
 
 .gk-button--lg {
-  font-size: 1rem;
+  font-size: var(--gk-font-size-xl);
   min-height: 3rem;
-  padding: 0.75rem 1.25rem;
+  padding: var(--gk-space-6) var(--gk-space-9);
 }
 
+/* Existing variants ------------------------------------------------------ */
+
 .gk-button--secondary {
-  --gk-button-bg: #ffffff;
-  --gk-button-fg: #1d4ed8;
-  --gk-button-border: #93c5fd;
-  --gk-button-hover-bg: #eff6ff;
+  --gk-button-bg: var(--gk-button-secondary-bg, var(--gk-color-surface));
+  --gk-button-fg: var(--gk-button-secondary-fg, var(--gk-color-primary));
+  --gk-button-border: var(--gk-button-secondary-border, var(--gk-color-primary-border));
+  --gk-button-hover-bg: var(--gk-button-secondary-hover-bg, var(--gk-color-primary-soft));
 }
 
 .gk-button--ghost {
-  --gk-button-bg: transparent;
-  --gk-button-fg: #1d4ed8;
-  --gk-button-hover-bg: #eff6ff;
+  --gk-button-bg: var(--gk-button-ghost-bg, transparent);
+  --gk-button-fg: var(--gk-button-ghost-fg, var(--gk-color-primary));
+  --gk-button-hover-bg: var(--gk-button-ghost-hover-bg, var(--gk-color-primary-soft));
 }
 
 .gk-button--danger {
-  --gk-button-bg: #dc2626;
-  --gk-button-hover-bg: #b91c1c;
+  --gk-button-bg: var(--gk-button-danger-bg, var(--gk-color-danger));
+  --gk-button-hover-bg: var(--gk-button-danger-hover-bg, var(--gk-color-danger-strong));
 }
+
+/* New variants ---------------------------------------------------------- */
+
+.gk-button--outline {
+  --gk-button-bg: var(--gk-button-outline-bg, transparent);
+  --gk-button-fg: var(--gk-button-outline-fg, var(--gk-color-primary));
+  --gk-button-border: var(--gk-button-outline-border, var(--gk-color-primary-border));
+  --gk-button-hover-bg: var(--gk-button-outline-hover-bg, var(--gk-color-primary-soft));
+}
+
+.gk-button--soft {
+  --gk-button-bg: var(--gk-button-soft-bg, var(--gk-color-primary-soft));
+  --gk-button-fg: var(--gk-button-soft-fg, var(--gk-color-primary));
+  --gk-button-border: var(--gk-button-soft-border, transparent);
+  --gk-button-hover-bg: var(--gk-button-soft-hover-bg, var(--gk-color-primary-soft));
+  --gk-button-hover-shadow: none;
+  --gk-button-hover-translate: 0;
+}
+
+.gk-button--soft:hover:not(:disabled) {
+  background: var(--gk-button-soft-hover-bg, var(--gk-color-primary-border));
+}
+
+.gk-button--link {
+  --gk-button-bg: var(--gk-button-link-bg, transparent);
+  --gk-button-fg: var(--gk-button-link-fg, var(--gk-color-primary));
+  --gk-button-border: var(--gk-button-link-border, transparent);
+  --gk-button-hover-bg: var(--gk-button-link-hover-bg, transparent);
+  --gk-button-hover-shadow: none;
+  --gk-button-hover-translate: 0;
+  border: 0;
+  min-width: 0;
+  padding: 0;
+  text-underline-offset: 0.2em;
+}
+
+.gk-button--link:hover:not(:disabled) {
+  color: var(--gk-button-link-hover-fg, var(--gk-color-primary-hover));
+  text-decoration: underline;
+}
+
+.gk-button--gradient {
+  --gk-button-bg: var(
+    --gk-button-gradient-bg,
+    linear-gradient(135deg, var(--gk-color-primary), var(--gk-color-primary-hover))
+  );
+  --gk-button-fg: var(--gk-button-gradient-fg, var(--gk-color-primary-foreground));
+  --gk-button-border: var(--gk-button-gradient-border, transparent);
+  --gk-button-hover-bg: var(
+    --gk-button-gradient-hover-bg,
+    linear-gradient(135deg, var(--gk-color-primary-hover), var(--gk-color-primary))
+  );
+  --gk-button-hover-shadow: var(--gk-button-gradient-shadow, var(--gk-shadow-md));
+}
+
+/* Layout modifiers ------------------------------------------------------ */
+
+.gk-button--full-width {
+  display: flex;
+  width: 100%;
+}
+
+/* Loading --------------------------------------------------------------- */
 
 .gk-button__spinner {
   animation: gk-button-spin 700ms linear infinite;
@@ -100,5 +169,8 @@
   .gk-button__spinner {
     animation-duration: 0.001ms;
     transition-duration: 0.001ms;
+  }
+  .gk-button:hover:not(:disabled) {
+    transform: none;
   }
 }

@@ -51,6 +51,39 @@
   --gk-button-hover-bg: var(--gk-button-danger-hover-bg, var(--gk-color-danger-strong));
 }
 
+.gk-button--outline {
+  --gk-button-bg: var(--gk-button-outline-bg, transparent);
+  --gk-button-fg: var(--gk-button-outline-fg, var(--gk-color-primary));
+  --gk-button-border: var(--gk-button-outline-border, var(--gk-color-primary-border));
+  --gk-button-hover-bg: var(--gk-button-outline-hover-bg, var(--gk-color-primary-soft));
+}
+
+.gk-button--soft {
+  --gk-button-bg: var(--gk-button-soft-bg, var(--gk-color-primary-soft));
+  --gk-button-fg: var(--gk-button-soft-fg, var(--gk-color-primary));
+  --gk-button-hover-bg: var(--gk-button-soft-hover-bg, var(--gk-color-primary-border));
+}
+
+.gk-button--link {
+  --gk-button-fg: var(--gk-button-link-fg, var(--gk-color-primary));
+  --gk-button-hover-bg: transparent;
+}
+
+.gk-button--link:hover:not(:disabled) {
+  color: var(--gk-button-link-hover-fg, var(--gk-color-primary-hover));
+}
+
+.gk-button--gradient {
+  --gk-button-bg: var(
+    --gk-button-gradient-bg,
+    linear-gradient(135deg, var(--gk-color-primary), var(--gk-color-primary-hover))
+  );
+  --gk-button-hover-bg: var(
+    --gk-button-gradient-hover-bg,
+    linear-gradient(135deg, var(--gk-color-primary-hover), var(--gk-color-primary))
+  );
+}
+
 .gk-input,
 .gk-select,
 .gk-textarea {

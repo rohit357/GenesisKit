@@ -13,6 +13,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "primary",
       size = "md",
       loading = false,
+      fullWidth = false,
       disabled,
       style,
       ...props
@@ -29,6 +30,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           `gk-button--${variant}`,
           `gk-button--${size}`,
           loading && "gk-button--loading",
+          fullWidth && "gk-button--full-width",
           className
         )}
         type="button"

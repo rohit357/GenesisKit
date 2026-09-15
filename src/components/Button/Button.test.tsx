@@ -40,4 +40,41 @@ describe("Button", () => {
     expect(button).toHaveAttribute("aria-busy", "true");
     expect(button.querySelector(".gk-button__spinner")).toBeInTheDocument();
   });
+
+  it.each(["outline", "soft", "link", "gradient"] as const)(
+    "supports the %s variant",
+    (variant) => {
+      render(<Button variant={variant}>Action</Button>);
+      expect(screen.getByRole("button")).toHaveClass(`gk-button--${variant}`);
+    }
+  );
+
+  it("supports fullWidth layout", () => {
+    render(<Button fullWidth>Continue</Button>);
+    expect(screen.getByRole("button")).toHaveClass("gk-button--full-width");
+  });
+
+  it("renders icon + label composition through normal children", () => {
+    render(
+      <Button>
+        <span data-testid="icon">+</span>
+        New project
+      </Button>
+    );
+    const button = screen.getByRole("button", { name: /New project/i });
+    expect(button).toContainElement(screen.getByTestId("icon"));
+    // Label is still a single accessible name — no aria duplication.
+    expect(button).toHaveAccessibleName("+ New project");
+  });
+
+  it("applies loading state alongside new variants", () => {
+    render(
+      <Button variant="gradient" loading>
+        Saving
+      </Button>
+    );
+    const button = screen.getByRole("button", { name: "Saving" });
+    expect(button).toHaveClass("gk-button--gradient", "gk-button--loading");
+    expect(button).toBeDisabled();
+  });
 });
