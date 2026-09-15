@@ -39,6 +39,7 @@
   --gk-radius-sm: 0.5rem;
   --gk-radius-md: 0.75rem;
   --gk-radius-lg: 0.875rem;
+  --gk-radius-xl: 1.25rem;
   --gk-radius-full: 999px;
 
   /* Dialog size scale. */
@@ -124,4 +125,40 @@
     --gk-motion-fast: 0.001ms;
     --gk-motion-enter: 0.001ms;
   }
+}
+
+/*
+ * Density system — CSS only, no JS.
+ *
+ * Default (comfortable): no selector, uses :root values.
+ * Compact: shift spacing + typography down one step across the whole library.
+ * Physical control dimensions (button min-height, avatar size, switch dims)
+ * remain unchanged — readability comes first.
+ *
+ * Apply on any container:
+ *   <html data-density="compact">…</html>
+ *   <section data-density="compact">…</section>
+ */
+[data-density="compact"] {
+  /* Spacing — shift each step down by one. */
+  --gk-space-2: 0.125rem;
+  --gk-space-3: 0.25rem;
+  --gk-space-4: 0.375rem;
+  --gk-space-5: 0.5rem;
+  --gk-space-6: 0.625rem;
+  --gk-space-7: 0.75rem;
+  --gk-space-8: 0.875rem;
+  --gk-space-9: 1rem;
+  --gk-space-10: 1.25rem;
+  --gk-space-11: 1.5rem;
+
+  /* Typography — shift each step down by one. */
+  --gk-font-size-2xs: 0.625rem;
+  --gk-font-size-xs: 0.6875rem;
+  --gk-font-size-sm: 0.75rem;
+  --gk-font-size-md: 0.8125rem;
+  --gk-font-size-lg: 0.875rem;
+  --gk-font-size-xl: 0.9375rem;
+  --gk-font-size-2xl: 1rem;
+  --gk-font-size-3xl: 1.125rem;
 }

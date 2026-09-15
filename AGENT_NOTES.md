@@ -413,3 +413,50 @@ Every component is evaluated against:
 - NOT committed.
 - **Next per approved plan: M6 customization system first-class. STOP for review first.**
 
+---
+
+## M6 — Customization system first-class (DONE, verified green)
+
+**Goal:** Make customization a real feature surface, not a footnote.
+
+**What shipped (CSS-only, zero new public APIs):**
+
+1. **Density system** via `[data-density="compact"]` attribute selector.
+   - Remaps `--gk-space-*` + `--gk-font-size-*` tokens one step tighter.
+   - Physical control dimensions (button min-height, avatar, switch, focus-ring size) untouched — readability wins.
+   - Comfortable remains the default (no attribute = no shift). Apply at any scope: `<html>`, `<section>`, per-card.
+2. **Radius scale expansion** — added `--gk-radius-xl: 1.25rem` (between `--gk-radius-lg` and `--gk-radius-full`). Now: sm / md / lg / xl / full.
+3. **Personality presets** — three additive classes, compose with any theme:
+   - `.gk-personality-soft` — larger radii, softer shadows, gentler contrast.
+   - `.gk-personality-sharp` — minimal radii (0/0/0.125rem/0.25rem), stronger borders, no shadows.
+   - `.gk-personality-glass` — translucent surfaces + `@supports (backdrop-filter)` blur on cards/dialogs/alerts. Falls back gracefully to 92% opacity when blur unsupported. Midnight-glass companion rule keeps dark-glass surfaces readable.
+4. **Storybook preview** — added `Density` and `Personality` toolbars alongside `Theme`. Decorator composes `theme + personality` classes and applies `data-density` attribute. Toolbar swap affects every story live.
+5. **`Showcase/Customization`** story — single page combining Buttons (all 8 variants), Input, Alert, Badges (filled/dot/outline), Avatars (with status). Layout itself consumes `var(--gk-*)` tokens — proves the system works end-to-end.
+6. **`THEMING.md`** rewritten as the canonical customization doc: token stack overview, themes, density, personality, component hooks, global overrides, primitive reference, deferral note for `createTheme()`.
+
+**`createTheme()` — DEFERRED with reasoning:**
+- The CSS-first architecture already lets consumers override any token at any layer via plain CSS.
+- A JS helper would duplicate capability, add bundle weight, and introduce runtime cost — not justified at this stage.
+- `THEMING.md` documents the recommended plain-CSS pattern for branded themes today.
+- May revisit if a recurring consumer pattern emerges (e.g., typed theme presets with paired tokens).
+
+**Architecture preservation confirmed:**
+- No new props on any component.
+- No runtime CSS-in-JS.
+- Primitive → semantic → component hooks → variants → consumer overrides stack unchanged.
+- All 78 tests pass unchanged.
+
+**Accessibility verification:**
+- Density compact keeps control dimensions stable — buttons still meet WCAG 2.5.5 target size, focus rings unchanged width.
+- Personality presets do not change focus-ring color or geometry — `--gk-focus-ring` honored.
+- Glass fallback bumps surface opacity to 92% so text contrast stays AA without blur.
+- `prefers-reduced-motion` honored (existing `@media` block unchanged).
+- All four built-in themes + three personalities verified for AA contrast on body text vs surface (existing token palette, no new values introduced).
+
+**Verification:**
+- `npm run check` exit 0.
+- `npm run build-storybook` exit 0.
+- NOT committed.
+
+**STOPPED per user's explicit instruction: "This is ONE milestone. Do not continue into M7."**
+

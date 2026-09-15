@@ -386,3 +386,77 @@
     transition-duration: 0.001ms;
   }
 }
+
+/*
+ * Personality presets — additive, compose with any .gk-theme-* class.
+ *
+ *   <div className="gk-theme-midnight gk-personality-glass">…</div>
+ *   <div className="gk-theme-emerald gk-personality-soft">…</div>
+ *
+ * They tune existing design tokens. No hardcoded visual defaults scattered
+ * across components.
+ */
+
+/* Soft: larger radii, softer shadows, gentler surface contrast. */
+.gk-personality-soft {
+  --gk-radius-sm: 0.75rem;
+  --gk-radius-md: 1rem;
+  --gk-radius-lg: 1.25rem;
+  --gk-radius-xl: 1.5rem;
+  --gk-shadow-sm: 0 1px 3px rgb(15 23 42 / 5%);
+  --gk-shadow-md: 0 10px 30px rgb(15 23 42 / 6%);
+  --gk-shadow-lg: 0 30px 70px rgb(15 23 42 / 16%);
+  --gk-card-shadow: 0 10px 30px rgb(15 23 42 / 6%);
+  --gk-button-shadow: 0 2px 6px rgb(15 23 42 / 6%);
+}
+
+/* Sharp: minimal radii, stronger borders, geometric feel. */
+.gk-personality-sharp {
+  --gk-radius-sm: 0;
+  --gk-radius-md: 0;
+  --gk-radius-lg: 0.125rem;
+  --gk-radius-xl: 0.25rem;
+  --gk-color-border: #94a3b8;
+  --gk-color-border-subtle: #cbd5e1;
+  --gk-card-shadow: none;
+  --gk-button-shadow: none;
+  --gk-card-border: #cbd5e1;
+}
+
+/* Glass: translucent surfaces + backdrop blur where supported. */
+.gk-personality-glass {
+  --gk-color-surface: rgb(255 255 255 / 72%);
+  --gk-color-surface-subtle: rgb(241 245 249 / 60%);
+  --gk-color-border: rgb(203 213 225 / 60%);
+  --gk-color-border-subtle: rgb(226 232 42 / 60%);
+  --gk-card-bg: var(--gk-color-surface);
+  --gk-card-shadow: 0 8px 32px rgb(15 23 42 / 10%);
+  --gk-dialog-bg: var(--gk-color-surface);
+  --gk-dialog-shadow: 0 24px 60px rgb(15 23 42 / 22%);
+}
+
+.gk-theme-midnight.gk-personality-glass {
+  --gk-color-surface: rgb(17 24 39 / 60%);
+  --gk-color-surface-subtle: rgb(30 41 59 / 50%);
+  --gk-color-border: rgb(71 85 105 / 60%);
+  --gk-color-border-subtle: rgb(51 65 85 / 60%);
+}
+
+@supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
+  .gk-personality-glass .gk-card,
+  .gk-personality-glass .gk-dialog,
+  .gk-personality-glass .gk-alert {
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  /* Graceful fallback — bump opacity so surfaces remain readable without blur. */
+  .gk-personality-glass {
+    --gk-color-surface: rgb(255 255 255 / 92%);
+  }
+  .gk-theme-midnight.gk-personality-glass {
+    --gk-color-surface: rgb(17 24 39 / 92%);
+  }
+}
