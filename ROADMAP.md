@@ -124,14 +124,9 @@ the rebrand (`oui-` CSS classes vs `gk-` tokens).
 
 ## 5. Execution order
 
-**Status (2026-07-20):** Milestones 1–3 substantially done — a11y audit closed
-(Dialog/RadioGroup/Select/Card/Tabs), component architecture stable, CI green,
-57 tests passing, package exports finalized (ESM/CJS + types, publint clean,
-package validated), theme system complete with tokens correctly bundled,
-Storybook foundation up with a working theme switcher, and `Button.stories`
-established as the reference-quality standard.
+**Status (2026-10-10):** Phase 2 complete through M6.1 — all 14 components tokenized and polished, 78 tests passing, Storybook coverage complete for all components, GitHub Pages deploy workflow live, density + personality customization system shipped (M6), CSS visual QA fixes applied (M6.1). Phase 3 (new components) has not started. No browser-based visual verification performed.
 
-### Phase 1 — Storybook coverage (CURRENT)
+### Phase 1 — Storybook coverage (DONE)
 
 Story for every existing component, matching `Button.stories` quality. Remaining:
 Input, Card, Checkbox, Textarea, Select, Badge, Alert, Spinner, Avatar, Switch,
@@ -139,7 +134,7 @@ RadioGroup, Tabs, Dialog. Each includes only what applies: Playground, Variants,
 Sizes, States (loading/disabled/error), Accessibility, Autodocs. **No redesign
 in this phase** — goal is complete docs + coverage. Then GitHub Pages deploy.
 
-### Phase 2 — Polish existing components
+### Phase 2 — Polish existing components (DONE through M6.1)
 
 After every component has Storybook coverage. Spacing, typography, hover/active
 states, focus rings, transitions, keyboard UX, responsive behavior, a11y

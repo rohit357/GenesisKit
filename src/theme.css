@@ -428,7 +428,7 @@
   --gk-color-surface: rgb(255 255 255 / 72%);
   --gk-color-surface-subtle: rgb(241 245 249 / 60%);
   --gk-color-border: rgb(203 213 225 / 60%);
-  --gk-color-border-subtle: rgb(226 232 42 / 60%);
+  --gk-color-border-subtle: rgb(226 232 240 / 60%);
   --gk-card-bg: var(--gk-color-surface);
   --gk-card-shadow: 0 8px 32px rgb(15 23 42 / 10%);
   --gk-dialog-bg: var(--gk-color-surface);
@@ -455,8 +455,10 @@
   /* Graceful fallback — bump opacity so surfaces remain readable without blur. */
   .gk-personality-glass {
     --gk-color-surface: rgb(255 255 255 / 92%);
+    --gk-color-surface-subtle: rgb(241 245 249 / 88%);
   }
   .gk-theme-midnight.gk-personality-glass {
     --gk-color-surface: rgb(17 24 39 / 92%);
+    --gk-color-surface-subtle: rgb(30 41 59 / 88%);
   }
 }

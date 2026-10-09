@@ -460,3 +460,28 @@ Every component is evaluated against:
 
 **STOPPED per user's explicit instruction: "This is ONE milestone. Do not continue into M7."**
 
+
+### 2026-10-10 — M6.1 Visual QA (CSS bug fixes + doc sync)
+
+**Branch:** main, clean at `7bf3a26` (M6 committed).
+
+**Findings:**
+
+1. **Glass border typo — CONFIRMED + FIXED** (`src/theme.css` line 431).
+   - Was: `rgb(226 232 **42** / 60%)` — vivid yellow-green, clearly wrong.
+   - Fixed: `rgb(226 232 **240** / 60%)` — slate-200 (#e2e8f0), matches the light glass border family.
+   - Minimal one-token fix.
+
+2. **Glass fallback gap — CONFIRMED + FIXED** (`src/theme.css` `@supports not` block).
+   - `--gk-color-surface-subtle` was 60% (light) / 50% (midnight) in both base and fallback — never bumped.
+   - Components using `--gk-color-surface-subtle` (disabled fields, Badge, Card `soft`, tab hover) were too transparent without blur.
+   - Fixed: fallback now sets `--gk-color-surface-subtle: rgb(241 245 249 / 88%)` (light) and `rgb(30 41 59 / 88%)` (midnight).
+   - Hierarchy preserved: subtle (88%) < surface (92%). No other tokens touched.
+
+3. **ROADMAP.md — UPDATED.** Status line was stale (2026-07-20, Phase 1 shown as CURRENT). Updated to 2026-10-10, Phase 1 DONE, Phase 2 DONE through M6.
+
+4. **Tarball (`genesiskit-0.1.0.tgz`) — NOTED, NOT removed.** Still tracked in git (accidental from M3 `npm pack` verification step). Keep cleanup separate — not M6.1 scope.
+
+**Verification:** `npm run check` exit 0 (typecheck + lint + format + 78/78 tests + build). `npm run build-storybook` exit 0. Zero regressions. No browser-based visual verification performed.
+
+**Status: COMMITTED (M6.1 complete). Stop — do not start M7 without authorization.**
